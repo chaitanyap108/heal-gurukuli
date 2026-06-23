@@ -9,15 +9,14 @@ export default function Home() {
       <section className="py-20 md:py-32 px-6">
         <div className="max-w-3xl mx-auto text-center">
 
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-10">
             <Image
-              src="/heal-gurukuli-logo.png"
+              src="/heal-gurukuli-logo-transparent.png"
               alt="Heal Gurukuli — Clinical Sanctuary Initiative"
-              width={340}
-              height={340}
+              width={447}
+              height={559}
               priority
-              className="w-80 sm:w-96 md:w-[420px] h-auto object-contain mix-blend-multiply"
-              style={{ filter: "brightness(1.1) contrast(1.5)" }}
+              className="w-56 sm:w-64 md:w-72 h-auto"
             />
           </div>
 

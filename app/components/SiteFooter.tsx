@@ -11,12 +11,11 @@ export default function SiteFooter() {
         <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/heal-gurukuli-logo.png"
+              src="/heal-gurukuli-logo-transparent.png"
               alt="Heal Gurukuli"
-              width={160}
-              height={44}
-              className="h-11 w-auto object-contain mix-blend-multiply"
-              style={{ filter: "brightness(1.05) contrast(1.3)" }}
+              width={447}
+              height={559}
+              className="h-11 w-auto"
             />
           </Link>
 
