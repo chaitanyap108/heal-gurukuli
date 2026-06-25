@@ -27,10 +27,9 @@ export default function Home() {
           <div className="w-12 h-px bg-blue mx-auto mb-8" />
 
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed max-w-xl mx-auto mb-10 italic">
-            A dedicated clinical sanctuary providing specialised, trauma-informed
-            care for adult survivors of historic institutional abuse — led by a
-            UKCP-registered psychotherapist, and grounded in the belief that
-            every survivor deserves a dignified path toward healing.
+            A dedicated therapeutic sanctuary providing specialised, trauma-informed care
+            for adult survivors of ISKCON Gurukula abuse — grounded in the belief that
+            every survivor deserves trusted trauma treatment & a dignified path toward healing.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -57,7 +56,7 @@ export default function Home() {
             About the Initiative
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold mb-6 leading-tight">
-            Clinical Sanctuary for Survivors
+            Therapeutic Sanctuary for Survivors
           </h2>
           <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl italic mb-6">
             Heal Gurukuli is a dedicated clinical sanctuary providing
@@ -103,8 +102,7 @@ export default function Home() {
               <p className="font-sans text-sm text-slate-mid leading-relaxed flex-1 italic">
                 We provide secure, confidential one-on-one psychotherapy
                 tailored to the complex needs of survivors. Utilising
-                evidence-based, trauma-focused modalities, our UKCP-registered
-                clinicians offer a structured and compassionate environment to
+                evidence-based, trauma-focused modalities, our <Link href="/#faq-credentials" className="text-blue hover:underline">BACP or UKCP-registered</Link> clinicians offer a structured and compassionate environment to
                 process deeply rooted pain and rebuild emotional sovereignty.
               </p>
             </div>
@@ -114,15 +112,23 @@ export default function Home() {
               <span className="font-sans text-xs text-slate-light tracking-[0.3em]">02</span>
               <div className="w-8 h-px bg-blue" />
               <h3 className="font-serif text-2xl text-navy font-semibold">
-                Crisis Support Lines
+                Therapeutic Resources
               </h3>
               <p className="font-sans text-sm text-slate-mid leading-relaxed flex-1 italic">
-                Healing is not confined to scheduled sessions. Our dedicated
-                crisis support line provides immediate, compassionate
-                intervention during moments of acute distress. Operated under
-                strict clinical confidentiality standards, it serves as a vital
-                safety net for survivors navigating overwhelming triggers.
+                Healing is not confined to scheduled sessions. We offer a curated
+                selection of self-guided tools, grounding exercises, and educational
+                materials designed to support your nervous system and promote recovery
+                outside of clinical hours.
               </p>
+              <div>
+                <Link
+                  href="/resources"
+                  className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors w-fit"
+                >
+                  Explore Resources
+                  <span aria-hidden="true">→</span>
+                </Link>
+              </div>
             </div>
 
             {/* 03 */}
@@ -136,9 +142,8 @@ export default function Home() {
                 Isolation is one of the deepest wounds of institutional trauma.
                 Our facilitated community groups offer a secure, professionally
                 guided container for survivors to connect, share experiences,
-                and break the silence together. These sessions are carefully
-                structured to foster mutual support, nervous system regulation,
-                and collective resilience.
+                and break the silence together. These forums are available to
+                foster mutual support, resource sharing and ultimately collective resilience.
               </p>
             </div>
 

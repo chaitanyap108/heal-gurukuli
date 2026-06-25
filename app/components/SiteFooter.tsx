@@ -29,6 +29,7 @@ export default function SiteFooter() {
                   { label: "Mission", href: "/mission" },
                   { label: "Clinical Team", href: "/mission#team" },
                   { label: "For Survivors", href: "/support" },
+                  { label: "Resources", href: "/resources" },
                   { label: "FAQs", href: "#" },
                 ].map(({ label, href }) => (
                   <li key={label}>
