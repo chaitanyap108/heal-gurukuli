@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const navLinks = [
-  { href: "/mission", label: "Mission" },
+  { href: "/", label: "Home" },
+  { href: "/mission", label: "About Our Mission" },
   { href: "/resources", label: "Resources" },
   { href: "/support", label: "Support" },
   { href: "/contribute", label: "Contribute" },
@@ -24,12 +25,12 @@ export default function SiteNav() {
         {/* Logo */}
         <Link href="/" className="shrink-0 flex items-center" aria-label="Heal Gurukuli — home">
           <Image
-            src="/heal-gurukuli-logo-transparent.png"
-            alt="Heal Gurukuli"
-            width={447}
-            height={559}
+            src="/ConchCircle-Photoroom.png"
+            alt="Heal Gurukuli Logo"
+            width={240}
+            height={240}
             priority
-            className="h-12 w-auto"
+            className="h-24 w-auto hover:opacity-90 transition-opacity duration-150 -my-4"
           />
         </Link>
 

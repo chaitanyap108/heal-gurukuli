@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ConchDivider from "../components/ConchDivider";
 
 export const metadata: Metadata = {
   title: "Begin Your Healing Journey — Heal Gurukuli",
@@ -88,8 +89,62 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* ─── BOOKING INTERFACE ──────────────────────────────────────── */}
+      <ConchDivider />
+
+      {/* ─── WHAT WE OFFER ──────────────────────────────────────────── */}
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+        <div className="max-w-3xl mx-auto">
+
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            Areas of Support
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-8">
+            What We Offer
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                num: "01",
+                title: "Individual Psychotherapy",
+                body: "Weekly one-on-one sessions with a UKCP-registered therapist, structured around a co-created treatment plan using trauma-focused, evidence-based modalities.",
+                linkText: "Meet the Team",
+                linkHref: "/clinicians",
+              },
+              {
+                num: "02",
+                title: "Therapeutic Resources",
+                body: "Self-guided tools, grounding techniques, and educational materials to support your nervous system and recovery outside of clinical hours.",
+                linkText: "Explore Resources",
+                linkHref: "/resources",
+              },
+              {
+                num: "03",
+                title: "Facilitated Community Groups",
+                body: "Clinically supervised peer groups providing a secure container for shared experience, mutual support, and collective resilience.",
+                linkText: "Visit Community Forum",
+                linkHref: "/forum",
+              },
+            ].map(({ num, title, body, linkText, linkHref }) => (
+              <div key={num} className="flex gap-6 bg-canvas border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-sm transition-all duration-200">
+                <span className="font-sans text-xs text-slate-light tracking-[0.3em] pt-1 shrink-0">{num}</span>
+                <div className="flex-1">
+                  <h3 className="font-serif text-xl text-navy font-semibold mb-2">{title}</h3>
+                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic mb-3">{body}</p>
+                  <Link href={linkHref} className="inline-flex items-center gap-1.5 text-xs text-blue font-semibold hover:underline">
+                    {linkText}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── BOOKING INTERFACE ──────────────────────────────────────── */}
+      <section className="py-16 md:py-20 px-6">
         <div className="max-w-3xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
@@ -104,7 +159,7 @@ export default function SupportPage() {
           </p>
 
           {/* Acuity booking container */}
-          <div className="border-2 border-dashed border-border rounded-2xl bg-canvas min-h-[480px] flex flex-col items-center justify-center gap-5 p-10">
+          <div className="border-2 border-dashed border-border rounded-2xl bg-canvas-white min-h-[480px] flex flex-col items-center justify-center gap-5 p-10">
             <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/20 flex items-center justify-center">
               <svg
                 className="w-5 h-5 text-blue"
@@ -144,145 +199,72 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* ─── THREE PILLARS (summary) ────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
+      <ConchDivider />
 
+      {/* ─── MEET THE THERAPISTS ────────────────────────────────────── */}
+      <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Areas of Support
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-8">
-            What We Offer
-          </h2>
-
-          <div className="space-y-4">
-            {[
-              {
-                num: "01",
-                title: "Individual Psychotherapy",
-                body: "Weekly one-on-one sessions with a UKCP-registered therapist, structured around a co-created treatment plan using trauma-focused, evidence-based modalities.",
-              },
-              {
-                num: "02",
-                title: "Crisis Support Lines",
-                body: "Between-session support for active clients during acute distress. Operated under strict clinical confidentiality and safeguarding protocols.",
-              },
-              {
-                num: "03",
-                title: "Facilitated Community Groups",
-                body: "Clinically supervised peer groups providing a secure container for shared experience, mutual support, and collective resilience.",
-              },
-            ].map(({ num, title, body }) => (
-              <div key={num} className="flex gap-6 bg-canvas-white border border-border rounded-xl p-6">
-                <span className="font-sans text-xs text-slate-light tracking-[0.3em] pt-1 shrink-0">{num}</span>
-                <div>
-                  <h3 className="font-serif text-xl text-navy font-semibold mb-2">{title}</h3>
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">{body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─── CRISIS LINE PARAMETERS ─────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-canvas-white border-t border-border">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Active Clients Only
+            Our Clinicians
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Crisis Support Line
+            Meet the Therapists
           </h2>
-
-          <div className="space-y-4 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
-            <p>
-              The crisis support line is available exclusively to clients who
-              are currently engaged in active treatment with the Heal Gurukuli
-              Initiative. It is not an emergency service and is not available
-              to the general public.
-            </p>
+          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto mb-8 italic">
+            Our clinical team consists of certified, registered psychotherapists and clinical psychologists who bring a deep understanding of complex trauma, spiritual abuse, and gurukuli institutional dynamics.
+          </p>
+          <div>
+            <Link
+              href="/clinicians"
+              className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+            >
+              View Clinical Team
+              <span aria-hidden="true">→</span>
+            </Link>
           </div>
-
-          <div className="bg-canvas border border-border rounded-xl overflow-hidden">
-            <div className="px-6 py-4 border-b border-border bg-canvas-white">
-              <p className="font-sans text-xs text-slate-light uppercase tracking-[0.3em]">
-                Operating Parameters
-              </p>
-            </div>
-            <div className="divide-y divide-border">
-              {[
-                {
-                  label: "Eligibility",
-                  value:
-                    "Active clients enrolled in individual psychotherapy or facilitated group work.",
-                },
-                {
-                  label: "Availability",
-                  value:
-                    "Monday to Friday, 09:00–18:00 GMT. Response within 2 hours during operating hours.",
-                },
-                {
-                  label: "Contact Method",
-                  value:
-                    "Secure encrypted messaging via the client portal. Details provided upon commencement of treatment.",
-                },
-                {
-                  label: "Scope",
-                  value:
-                    "Acute distress, trauma activation, and safety planning. Does not replace scheduled sessions.",
-                },
-                {
-                  label: "Confidentiality",
-                  value:
-                    "All crisis communications are held under the same strict UKCP confidentiality standards as clinical sessions.",
-                },
-                {
-                  label: "Safeguarding",
-                  value:
-                    "Where there is immediate risk to life, the clinician will always follow mandated safeguarding protocols and may involve emergency services.",
-                },
-              ].map(({ label, value }) => (
-                <div key={label} className="px-6 py-4 flex flex-col sm:flex-row sm:gap-8">
-                  <p className="font-sans text-xs text-slate-light uppercase tracking-[0.2em] sm:w-36 shrink-0 mb-1 sm:mb-0 pt-0.5">
-                    {label}
-                  </p>
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed">{value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-6 bg-blue-soft border border-blue/15 rounded-xl px-6 py-4">
-            <p className="font-sans text-xs text-blue uppercase tracking-[0.2em] mb-2">
-              Emergency Services
-            </p>
-            <p className="font-sans text-sm text-slate-mid leading-relaxed">
-              If you or someone else is in immediate danger, please contact{" "}
-              <strong className="text-navy font-medium">999</strong> (UK
-              emergency services) or the{" "}
-              <strong className="text-navy font-medium">
-                Samaritans on 116 123
-              </strong>{" "}
-              (free, 24 hours). The crisis line is not a substitute for
-              emergency intervention.
-            </p>
-          </div>
-
         </div>
       </section>
 
+      {/* ─── THERAPEUTIC RESOURCES ──────────────────────────────────── */}
+      <section className="py-16 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            Self-Guided Support
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            Therapeutic Resources
+          </h2>
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
+            <p>
+              In addition to clinical therapy, we believe in equipping survivors with self-guided tools to support their healing in daily life. Our curated library offers grounding exercises, nervous system regulation techniques, and educational worksheets that help you navigate trigger activations, anxiety, and complex trauma states.
+            </p>
+            <p>
+              These tools are free, accessible, and designed specifically with the unique cultic and institutional traumas of the gurukuli experience in mind.
+            </p>
+          </div>
+          <div>
+            <Link
+              href="/resources"
+              className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+            >
+              Explore Our Resources
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <ConchDivider />
+
       {/* ─── CTA ────────────────────────────────────────────────────── */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 bg-canvas-white border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-sm text-slate-mid mb-6 italic">
             Want to understand more about our clinical framework before booking?
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/mission"
+              href="/mission#clinical-framework"
               className="border border-navy/30 text-navy font-sans font-medium px-7 py-3.5 rounded-lg text-sm hover:bg-blue-soft active:scale-[0.98] transition-all duration-150"
             >
               Read Our Mission

@@ -9,13 +9,13 @@ export default function SiteFooter() {
       <div className="max-w-6xl mx-auto">
 
         <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 -my-6">
             <Image
-              src="/heal-gurukuli-logo-transparent.png"
-              alt="Heal Gurukuli"
-              width={447}
-              height={559}
-              className="h-11 w-auto"
+              src="/LogoNoBackgd-Photoroom.png"
+              alt="Heal Gurukuli Logo"
+              width={600}
+              height={150}
+              className="h-28 w-auto hover:opacity-90 transition-opacity duration-150"
             />
           </Link>
 
@@ -26,8 +26,8 @@ export default function SiteFooter() {
               </p>
               <ul className="space-y-2 font-sans text-slate-mid">
                 {[
-                  { label: "Mission", href: "/mission" },
-                  { label: "Clinical Team", href: "/mission#team" },
+                  { label: "About Our Mission", href: "/mission" },
+                  { label: "Clinical Team", href: "/clinicians" },
                   { label: "For Survivors", href: "/support" },
                   { label: "Resources", href: "/resources" },
                   { label: "FAQs", href: "#" },
@@ -65,14 +65,14 @@ export default function SiteFooter() {
               </p>
               <ul className="space-y-2 font-sans text-slate-mid">
                 {[
-                  "Get in Touch",
-                  "Crisis Support",
-                  "Media",
-                  "Volunteer",
-                ].map((l) => (
-                  <li key={l}>
-                    <Link href="#" className="hover:text-navy transition-colors">
-                      {l}
+                  { label: "Get in Touch", href: "/contact/get-in-touch" },
+                  { label: "Crisis Support", href: "/contact/crisis-support" },
+                  { label: "Media", href: "/contact/media" },
+                  { label: "Volunteer", href: "/contact/volunteer" },
+                ].map(({ label, href }) => (
+                  <li key={label}>
+                    <Link href={href} className="hover:text-navy transition-colors">
+                      {label}
                     </Link>
                   </li>
                 ))}

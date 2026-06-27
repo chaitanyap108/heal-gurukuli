@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ClinicalImpactCharts from "../components/ClinicalImpactCharts";
 
 export const metadata: Metadata = {
   title: "Support the Sanctuary — Heal Gurukuli",
@@ -240,6 +241,31 @@ export default function ContributePage() {
             ))}
           </div>
 
+        </div>
+      </section>
+
+      {/* ─── CLINICAL IMPACT ────────────────────────────────────────── */}
+      <section className="py-16 md:py-24 px-6 bg-canvas border-t border-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              Our Clinical Impact
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
+              Real Data, Real Healing
+            </h2>
+            <p className="font-sans text-sm text-slate-mid mb-6 max-w-xl mx-auto italic">
+              See the transparent, measurable outcomes of your generosity
+            </p>
+            <p className="font-sans text-sm sm:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto">
+              Community donations directly fund evidence-based therapeutic care. Through our clinical partnerships, 
+              we track standardized metrics to ensure every session delivered translates into tangible, life-changing 
+              progress. The dashboard below illustrates the average reduction in symptoms for gurukuli survivors 
+              after receiving care.
+            </p>
+          </div>
+
+          <ClinicalImpactCharts />
         </div>
       </section>
 

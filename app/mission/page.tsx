@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ConchDivider from "../components/ConchDivider";
 
 export const metadata: Metadata = {
   title: "Our Mission — Heal Gurukuli",
@@ -67,8 +68,65 @@ export default function MissionPage() {
         </div>
       </section>
 
+      <ConchDivider />
+
+      {/* ─── FOUNDER ────────────────────────────────────────────────── */}
+      <section id="team" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+        <div className="max-w-3xl mx-auto">
+
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            The Clinician
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            Caitanya Lila
+          </h2>
+          <h3 className="font-sans text-sm text-slate-mid uppercase tracking-[0.2em] mb-8">
+            UKCP-Registered Psychotherapist · Founder
+          </h3>
+
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
+            <p>
+              Caitanya Lila is a UKCP-registered psychotherapist and the founder
+              of the Heal Gurukuli Initiative. Born into the gurukuli system,
+              she brings both lived experience and rigorous clinical training to
+              this work — a combination that enables a rare quality of attunement
+              with survivors who have often felt unseen and misunderstood by
+              conventional therapeutic settings.
+            </p>
+            <p>
+              Her clinical background spans more than a decade of practice in
+              trauma, complex PTSD, and relational therapy. She trained in
+              integrative psychotherapy and has pursued advanced specialist
+              study in trauma-focused modalities, group facilitation, and the
+              psychosocial dimensions of institutional abuse.
+            </p>
+            <p>
+              Caitanya founded the Heal Gurukuli Initiative from a conviction
+              that the gurukuli community deserves a clinical sanctuary built
+              specifically for them — one that does not require survivors to
+              translate their experience or educate their therapist. She brings
+              to every aspect of this work an equal measure of professional
+              discipline and personal dedication.
+            </p>
+          </div>
+
+          <div>
+            <Link
+              href="/clinicians"
+              className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-medium px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+            >
+              Meet the clinicians
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      <ConchDivider />
+
       {/* ─── THE FRAMEWORK ──────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+      <section id="clinical-framework" className="py-16 md:py-20 px-6">
         <div className="max-w-3xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
@@ -125,7 +183,7 @@ export default function MissionPage() {
                   "Dedicated support lines for active clients during periods of acute distress, operated under strict clinical confidentiality and safeguarding protocols.",
               },
             ].map(({ num, title, body }) => (
-              <div key={num} className="bg-canvas border border-border rounded-xl p-6 flex flex-col gap-4">
+              <div key={num} className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-4">
                 <span className="font-sans text-xs text-slate-light tracking-[0.3em]">{num}</span>
                 <div className="w-6 h-px bg-blue" />
                 <h3 className="font-serif text-lg text-navy font-semibold">{title}</h3>
@@ -136,48 +194,7 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* ─── FOUNDER ────────────────────────────────────────────────── */}
-      <section id="team" className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            The Clinician
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Caitanya Lila
-          </h2>
-          <h3 className="font-sans text-sm text-slate-mid uppercase tracking-[0.2em] mb-8">
-            UKCP-Registered Psychotherapist · Founder
-          </h3>
-
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10">
-            <p>
-              Caitanya Lila is a UKCP-registered psychotherapist and the founder
-              of the Heal Gurukuli Initiative. Born into the gurukuli system,
-              she brings both lived experience and rigorous clinical training to
-              this work — a combination that enables a rare quality of attunement
-              with survivors who have often felt unseen and misunderstood by
-              conventional therapeutic settings.
-            </p>
-            <p>
-              Her clinical background spans more than a decade of practice in
-              trauma, complex PTSD, and relational therapy. She trained in
-              integrative psychotherapy and has pursued advanced specialist
-              study in trauma-focused modalities, group facilitation, and the
-              psychosocial dimensions of institutional abuse.
-            </p>
-            <p>
-              Caitanya founded the Heal Gurukuli Initiative from a conviction
-              that the gurukuli community deserves a clinical sanctuary built
-              specifically for them — one that does not require survivors to
-              translate their experience or educate their therapist. She brings
-              to every aspect of this work an equal measure of professional
-              discipline and personal dedication.
-            </p>
-          </div>
-
-        </div>
-      </section>
+      <ConchDivider />
 
       {/* ─── ETHICS & CONFIDENTIALITY ───────────────────────────────── */}
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-t border-border">
@@ -238,6 +255,8 @@ export default function MissionPage() {
 
         </div>
       </section>
+
+      <ConchDivider />
 
       {/* ─── CTA ────────────────────────────────────────────────────── */}
       <section className="py-16 px-6">

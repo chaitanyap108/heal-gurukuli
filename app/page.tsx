@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ConchDivider from "./components/ConchDivider";
 
 export default function Home() {
   return (
@@ -9,14 +10,14 @@ export default function Home() {
       <section className="py-20 md:py-32 px-6">
         <div className="max-w-3xl mx-auto text-center">
 
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center -mb-4 -mt-8">
             <Image
-              src="/heal-gurukuli-logo-transparent.png"
+              src="/LogoNoBackgd-Photoroom.png"
               alt="Heal Gurukuli — Clinical Sanctuary Initiative"
-              width={447}
-              height={559}
+              width={1200}
+              height={400}
               priority
-              className="w-56 sm:w-64 md:w-72 h-auto"
+              className="w-96 sm:w-[500px] md:w-[680px] lg:w-[800px] h-auto"
             />
           </div>
 
@@ -49,6 +50,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ConchDivider />
+
       {/* ─── MISSION TEASER ─────────────────────────────────────────── */}
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-4xl mx-auto">
@@ -59,16 +62,12 @@ export default function Home() {
             Therapeutic Sanctuary for Survivors
           </h2>
           <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl italic mb-6">
-            Heal Gurukuli is a dedicated clinical sanctuary providing
-            specialised, trauma-informed care for adult survivors of historic
-            institutional abuse. Led by a UKCP-registered psychotherapist, our
-            framework bridges evidence-based psychological treatment with a deep
-            understanding of unique cultural and systemic traumas. We offer a
-            safe, confidential space where survivors can reclaim their agency
-            and begin the profound work of healing.
+            A dedicated therapeutic sanctuary providing specialised, trauma-informed care
+            for adult survivors of ISKCON Gurukula abuse — grounded in the belief that
+            every survivor deserves trusted trauma treatment & a dignified path toward healing.
           </p>
           <Link
-            href="/mission"
+            href="/mission#clinical-framework"
             className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors"
           >
             Read the Full Clinical Framework
@@ -76,6 +75,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <ConchDivider />
 
       {/* ─── THREE PILLARS OF CARE ──────────────────────────────────── */}
       <section className="py-16 md:py-24 px-6">
@@ -161,6 +162,8 @@ export default function Home() {
 
         </div>
       </section>
+
+      <ConchDivider />
 
       {/* ─── CONTRIBUTION TEASER ────────────────────────────────────── */}
       <section className="py-16 md:py-24 px-6 bg-canvas-white border-t border-border">
