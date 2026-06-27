@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import GovernanceBlock from "../components/GovernanceBlock";
 
 export const metadata: Metadata = {
   title: "Our Clinical Team — Heal Gurukuli",
@@ -140,36 +140,7 @@ export default function CliniciansPage() {
           </div>
 
           {/* Clinical Governance Section */}
-          <div className="bg-blue-soft border border-blue/15 rounded-2xl p-8 md:p-10 max-w-4xl mx-auto">
-            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-              Governance & Safety
-            </p>
-            <h2 className="font-serif text-2xl md:text-3xl text-navy font-semibold mb-6">
-              Clinical Standards & Supervision
-            </h2>
-            <div className="space-y-4 font-sans text-sm text-slate-mid leading-relaxed mb-6">
-              <p>
-                All clinical work overseen by the Heal Gurukuli Initiative complies with the strict guidelines and ethical standards of the <strong className="text-navy font-medium">United Kingdom Council for Psychotherapy (UKCP)</strong> and the <strong className="text-navy font-medium">British Association for Counselling and Psychotherapy (BACP)</strong>.
-              </p>
-              <p>
-                To maintain the highest levels of safety and efficacy, our clinicians receive regular clinical supervision from senior specialists in complex institutional abuse and cultic trauma. All records, treatment histories, and communication portals are stored under GDPR-compliant, clinically secure, and fully encrypted systems.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/support"
-                className="bg-navy text-white font-sans text-xs font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-95 transition-all duration-150"
-              >
-                Access Support Services
-              </Link>
-              <Link
-                href="/contact/get-in-touch"
-                className="border border-navy/30 text-navy font-sans text-xs font-semibold px-6 py-3 rounded-lg hover:bg-white/40 active:scale-95 transition-all duration-150"
-              >
-                Contact the Clinical Lead
-              </Link>
-            </div>
-          </div>
+          <GovernanceBlock variant="card" />
 
         </div>
       </section>

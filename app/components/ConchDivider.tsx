@@ -7,7 +7,7 @@ interface ConchDividerProps {
 export default function ConchDivider({ className = "" }: ConchDividerProps) {
   return (
     <div
-      className={`flex items-center justify-center py-20 md:py-28 max-w-2xl mx-auto px-6 ${className}`}
+      className={`flex items-center justify-center py-6 md:py-8 max-w-2xl mx-auto px-6 ${className}`}
       aria-hidden="true"
     >
       {/* Left Line & Accent Pattern */}

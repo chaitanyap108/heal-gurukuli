@@ -60,6 +60,12 @@ export default function ResourcesPage() {
                   >
                     3. External Support & Reading
                   </a>
+                  <a
+                    href="#understanding-therapy"
+                    className="hover:text-navy hover:translate-x-1 transition-all duration-150"
+                  >
+                    4. Understanding Therapy
+                  </a>
                 </nav>
                 <div className="bg-blue-soft border border-blue/10 rounded-xl p-5 mt-6">
                   <h4 className="font-serif text-sm text-navy font-semibold mb-2">Need Clinical Support?</h4>
@@ -221,6 +227,62 @@ export default function ResourcesPage() {
                     </div>
                     <span className="text-xs text-slate-light font-medium mt-2">Emergency numbers</span>
                   </div>
+                </div>
+              </section>
+
+              {/* Category 4 — Understanding Therapy */}
+              <section id="understanding-therapy" className="scroll-mt-24 space-y-6">
+                <div>
+                  <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
+                    Category 04
+                  </p>
+                  <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
+                    4. Understanding Therapy
+                  </h2>
+                  <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
+                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
+                    Plain-language guides to the therapeutic modalities used at Heal Gurukuli — so you can make informed, empowered decisions about your care.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[
+                    {
+                      tag: "Psychotherapy",
+                      title: "What Is Integrative Psychotherapy?",
+                      body: "An overview of the pluralistic, person-centred approach used by our clinical team — how it draws on multiple modalities and why it suits complex trauma presentations.",
+                    },
+                    {
+                      tag: "EMDR",
+                      title: "How EMDR Works",
+                      body: "A plain-language explainer on Eye Movement Desensitisation and Reprocessing — what happens in a session, why it works for PTSD, and what to expect from the process.",
+                    },
+                    {
+                      tag: "Somatic Therapy",
+                      title: "The Body Keeps the Score: Somatic Approaches",
+                      body: "Why trauma is held in the body and how somatic experiencing, body scanning, and movement-based practices help restore nervous system safety.",
+                    },
+                    {
+                      tag: "TF-CBT",
+                      title: "Trauma-Focused CBT Explained",
+                      body: "How Trauma-Focused Cognitive Behavioural Therapy differs from standard CBT, and why it is effective for the avoidance, hypervigilance, and distorted beliefs that follow institutional abuse.",
+                    },
+                  ].map(({ tag, title, body }) => (
+                    <div key={title} className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                      <div>
+                        <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
+                          {tag}
+                        </span>
+                        <h3 className="font-serif text-lg text-navy font-semibold mb-2">
+                          {title}
+                        </h3>
+                        <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
+                          {body}
+                        </p>
+                      </div>
+                      <span className="text-xs text-slate-light font-medium mt-2">Guide — coming soon</span>
+                    </div>
+                  ))}
                 </div>
               </section>
 

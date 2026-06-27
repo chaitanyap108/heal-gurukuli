@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import ClinicalImpactCharts from "../components/ClinicalImpactCharts";
+import ClinicalImpact from "../components/ClinicalImpact";
+import TestimonialCarousel from "../components/TestimonialCarousel";
 
 export const metadata: Metadata = {
   title: "Support the Sanctuary — Heal Gurukuli",
   description:
-    "Fund trauma-informed clinical care for adult gurukuli survivors. Sponsor a therapy session, fund a community group, or make an open contribution.",
+    "Fund trauma-informed clinical care for adult gurukuli survivors. Sponsor a therapy session, sponsor a full course of therapy, or make an open contribution.",
 };
 
 export default function ContributePage() {
@@ -95,36 +96,36 @@ export default function ContributePage() {
                   Tier Two
                 </p>
                 <div className="flex items-baseline gap-1">
-                  <span className="font-serif text-4xl text-white font-semibold">£120</span>
+                  <span className="font-serif text-4xl text-white font-semibold">£540</span>
                 </div>
                 <p className="font-sans text-sm text-blue-pale/80 mt-1 font-medium">
-                  Fund a Support Group
+                  Sponsor a Course of Therapy
                 </p>
               </div>
               <div className="w-full h-px bg-white/10 mb-6" />
               <ul className="space-y-3 text-sm text-blue-pale/80 font-sans mb-8 flex-1">
                 <li className="flex items-start gap-2.5">
                   <span className="text-blue-mid mt-0.5 text-xs shrink-0">—</span>
-                  One facilitated group session
+                  Full 12-session therapeutic programme
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-blue-mid mt-0.5 text-xs shrink-0">—</span>
-                  Group workbooks and materials
+                  One survivor&rsquo;s complete initial treatment
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-blue-mid mt-0.5 text-xs shrink-0">—</span>
-                  Covers up to 8 participants
+                  UKCP-registered therapist throughout
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-blue-mid mt-0.5 text-xs shrink-0">—</span>
-                  Monthly impact summary
+                  Quarterly impact report with anonymised outcomes
                 </li>
               </ul>
               <a
                 href="#"
                 className="block w-full bg-white text-navy font-sans font-medium text-center py-3 rounded-lg text-sm hover:bg-blue-pale active:scale-[0.98] transition-all duration-150"
               >
-                Select Tier Two
+                Sponsor a Course
               </a>
             </div>
 
@@ -211,11 +212,6 @@ export default function ContributePage() {
                 weight: "Primary",
               },
               {
-                label: "Crisis Infrastructure",
-                desc: "Secure encrypted messaging platform, out-of-hours clinician availability, and safeguarding support.",
-                weight: "Secondary",
-              },
-              {
                 label: "Sanctuary Operations",
                 desc: "Secure client portal, administration, clinical supervision, and CPD to maintain UKCP registration standards.",
                 weight: "Secondary",
@@ -245,32 +241,17 @@ export default function ContributePage() {
       </section>
 
       {/* ─── CLINICAL IMPACT ────────────────────────────────────────── */}
-      <section className="py-16 md:py-24 px-6 bg-canvas border-t border-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-              Our Clinical Impact
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
-              Real Data, Real Healing
-            </h2>
-            <p className="font-sans text-sm text-slate-mid mb-6 max-w-xl mx-auto italic">
-              See the transparent, measurable outcomes of your generosity
-            </p>
-            <p className="font-sans text-sm sm:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto">
-              Community donations directly fund evidence-based therapeutic care. Through our clinical partnerships, 
-              we track standardized metrics to ensure every session delivered translates into tangible, life-changing 
-              progress. The dashboard below illustrates the average reduction in symptoms for gurukuli survivors 
-              after receiving care.
-            </p>
-          </div>
+      <ClinicalImpact />
 
-          <ClinicalImpactCharts />
-        </div>
-      </section>
+      {/* ─── TESTIMONIALS ───────────────────────────────────────────── */}
+      <TestimonialCarousel
+        eyebrow="What Donors Make Possible"
+        heading="Healing, in Their Own Words"
+        subtitle="Anonymous accounts from survivors whose care was funded by community donations."
+      />
 
       {/* ─── CTA ────────────────────────────────────────────────────── */}
-      <section className="py-16 px-6">
+      <section className="py-16 px-6 bg-canvas border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-sm text-slate-mid mb-6 italic">
             Are you a survivor seeking clinical support rather than a donor?
@@ -280,7 +261,7 @@ export default function ContributePage() {
               href="/support"
               className="bg-navy text-white font-sans font-medium px-7 py-3.5 rounded-lg text-sm hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
             >
-              Begin Your Healing Journey
+              Start the Therapeutic Process
             </Link>
             <Link
               href="/mission"

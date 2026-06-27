@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ConchDivider from "../components/ConchDivider";
+import GovernanceBlock from "../components/GovernanceBlock";
+import ThreePillars from "../components/ThreePillars";
 
 export const metadata: Metadata = {
   title: "Our Mission — Heal Gurukuli",
@@ -31,15 +33,15 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* ─── CLINICAL MANDATE ───────────────────────────────────────── */}
+      {/* ─── WHY WE EXIST — TO SERVE GURUKULIS ─────────────────────── */}
       <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto prose-like">
+        <div className="max-w-3xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Why We Exist
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            The Clinical Mandate
+            To Serve Gurukulis
           </h2>
 
           <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed">
@@ -58,9 +60,17 @@ export default function MissionPage() {
               unwavering ethical accountability.
             </p>
             <p>
+              Gurukuli survivors carry a layered burden that is distinct from
+              general childhood trauma. The intersection of spiritual betrayal,
+              cultural isolation, institutional silencing, and complex family
+              enmeshment creates a particular clinical profile that demands
+              specialist understanding — not a generic therapeutic approach
+              adapted on the fly.
+            </p>
+            <p>
               We operate from a position that survivors are not defined by their
               trauma. Our work is oriented toward agency, integration, and the
-              recovery of each individual's innate capacity for wellbeing. The
+              recovery of each individual&rsquo;s innate capacity for wellbeing. The
               therapeutic relationship is not a transaction — it is a secure
               container built on trust, consistency, and clinical rigour.
             </p>
@@ -70,12 +80,77 @@ export default function MissionPage() {
 
       <ConchDivider />
 
-      {/* ─── FOUNDER ────────────────────────────────────────────────── */}
+      {/* ─── THE THERAPEUTIC FRAMEWORK ──────────────────────────────── */}
+      <section id="clinical-framework" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+        <div className="max-w-3xl mx-auto">
+
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            Clinical Approach
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            The Therapeutic Framework
+          </h2>
+
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-6">
+            <p>
+              Our work draws from a pluralistic, integrative model applying
+              Trauma-Focused CBT, EMDR, and somatic-aware relational approaches
+              through the specific lens of the gurukuli experience — recognising
+              the systemic, institutional nature of the harm and working with
+              complex PTSD, betrayal trauma, and spiritual injury accordingly.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── THREE PILLARS ──────────────────────────────────────────── */}
+      <ThreePillars />
+
+      <ConchDivider />
+
+      {/* ─── MEET OUR TEAM ──────────────────────────────────────────── */}
       <section id="team" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-3xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            The Clinician
+            The Clinicians
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            Meet Our Team
+          </h2>
+          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
+            Our clinical team is composed of UKCP and BACP-registered
+            psychotherapists and clinical psychologists, each bringing deep
+            specialist expertise in complex trauma, EMDR, somatic therapy, and
+            the particular institutional dynamics of the gurukuli experience.
+            All practitioners operate under regular clinical supervision and are
+            fully compliant with UK professional registration requirements.
+          </p>
+          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10 italic">
+            Every member of the clinical team has been selected not only for
+            their professional credentials, but for their capacity to hold this
+            work with the cultural sensitivity and relational warmth it demands.
+          </p>
+
+          <Link
+            href="/clinicians"
+            className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+          >
+            Meet the Full Clinical Team
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </section>
+
+      <ConchDivider />
+
+      {/* ─── THE FOUNDER ────────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto">
+
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            The Founder
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
             Caitanya Lila
@@ -110,151 +185,20 @@ export default function MissionPage() {
             </p>
           </div>
 
-          <div>
-            <Link
-              href="/clinicians"
-              className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-medium px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
-            >
-              Meet the clinicians
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
+          <Link
+            href="/clinicians"
+            className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-medium px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+          >
+            Meet the full clinical team
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
       <ConchDivider />
 
-      {/* ─── THE FRAMEWORK ──────────────────────────────────────────── */}
-      <section id="clinical-framework" className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Clinical Approach
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            The Therapeutic Framework
-          </h2>
-
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10">
-            <p>
-              Our work draws from a pluralistic, integrative model that holds
-              several evidence-based approaches in coherent relationship with
-              one another. These include, but are not limited to, Trauma-Focused
-              Cognitive Behavioural Therapy (TF-CBT), Eye Movement
-              Desensitisation and Reprocessing (EMDR), and relational,
-              somatic-aware approaches informed by attachment theory and
-              polyvagal science.
-            </p>
-            <p>
-              Crucially, this clinical framework is applied through the lens of
-              the gurukuli experience. This means a sustained recognition that
-              the abuse inflicted within institutional settings was systemic —
-              not merely interpersonal. Survivors have often had their reality
-              denied, their grief invalidated, and their complaints suppressed by
-              the very communities meant to protect them.
-            </p>
-            <p>
-              Our clinicians are trained to work with complex post-traumatic
-              stress, betrayal trauma, spiritual injury, and the profound
-              identity disruption that can emerge when one's formative community
-              is simultaneously the site of harm.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[
-              {
-                num: "01",
-                title: "Individual Psychotherapy",
-                body:
-                  "One-on-one sessions with a UKCP-registered therapist, structured around a personal treatment plan developed collaboratively with the client.",
-              },
-              {
-                num: "02",
-                title: "Facilitated Group Work",
-                body:
-                  "Clinically supervised peer groups that provide a secure environment for shared experience, mutual support, and collective nervous system regulation.",
-              },
-              {
-                num: "03",
-                title: "Crisis Intervention",
-                body:
-                  "Dedicated support lines for active clients during periods of acute distress, operated under strict clinical confidentiality and safeguarding protocols.",
-              },
-            ].map(({ num, title, body }) => (
-              <div key={num} className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-4">
-                <span className="font-sans text-xs text-slate-light tracking-[0.3em]">{num}</span>
-                <div className="w-6 h-px bg-blue" />
-                <h3 className="font-serif text-lg text-navy font-semibold">{title}</h3>
-                <p className="font-sans text-sm text-slate-mid leading-relaxed italic flex-1">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ConchDivider />
-
-      {/* ─── ETHICS & CONFIDENTIALITY ───────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-canvas-white border-t border-border">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Governance
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Clinical Ethics &amp; Confidentiality
-          </h2>
-
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10">
-            <p>
-              All clinical work undertaken by the Heal Gurukuli Initiative is
-              conducted in strict accordance with the ethical framework and
-              professional conduct standards set by the{" "}
-              <strong className="text-navy font-medium">
-                United Kingdom Council for Psychotherapy (UKCP)
-              </strong>
-              . Every practitioner operating within the Initiative is a
-              registered member of the UKCP and is bound by its Code of Ethics
-              and Professional Practice.
-            </p>
-            <p>
-              Confidentiality is not a procedural formality here — it is a
-              clinical and ethical cornerstone. Survivors are entitled to know
-              that what they share within a therapeutic relationship is held with
-              absolute discretion. The only exceptions are the mandated
-              safeguarding disclosures required by law, each of which would be
-              discussed transparently with the client wherever safe to do so.
-            </p>
-            <p>
-              All clinical records are securely maintained, encrypted, and
-              accessible only to the treating clinician. No data is shared with
-              third parties, funders, or community organisations without
-              explicit, informed written consent.
-            </p>
-          </div>
-
-          <div className="bg-canvas border border-border rounded-xl p-6 flex flex-col sm:flex-row gap-6 items-start">
-            <div className="flex-1">
-              <p className="font-sans text-xs text-slate-light uppercase tracking-[0.3em] mb-2">
-                Registered Body
-              </p>
-              <p className="font-serif text-lg text-navy font-semibold">United Kingdom Council for Psychotherapy</p>
-              <p className="font-sans text-xs text-slate-mid mt-1">UKCP Registration confirmed</p>
-            </div>
-            <div className="w-px bg-border hidden sm:block self-stretch" />
-            <div className="flex-1">
-              <p className="font-sans text-xs text-slate-light uppercase tracking-[0.3em] mb-2">
-                Ethical Standard
-              </p>
-              <p className="font-serif text-lg text-navy font-semibold">UKCP Code of Ethics</p>
-              <p className="font-sans text-xs text-slate-mid mt-1">Full professional conduct compliance</p>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      {/* ─── GOVERNANCE ─────────────────────────────────────────────── */}
+      <GovernanceBlock />
 
       <ConchDivider />
 
@@ -270,7 +214,7 @@ export default function MissionPage() {
               href="/support"
               className="bg-navy text-white font-sans font-medium px-7 py-3.5 rounded-lg text-sm hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
             >
-              Begin Your Healing Journey
+              Start the Therapeutic Process
             </Link>
             <Link
               href="/contribute"
