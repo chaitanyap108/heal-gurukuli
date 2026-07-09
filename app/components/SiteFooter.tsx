@@ -28,7 +28,7 @@ export default function SiteFooter() {
                 {[
                   { label: "About Our Mission", href: "/mission" },
                   { label: "Clinical Team", href: "/clinicians" },
-                  { label: "For Survivors", href: "/support" },
+                  { label: "Therapy", href: "/support" },
                   { label: "Resources", href: "/resources" },
                   { label: "FAQs", href: "#" },
                 ].map(({ label, href }) => (
@@ -46,14 +46,13 @@ export default function SiteFooter() {
               </p>
               <ul className="space-y-2 font-sans text-slate-mid">
                 {[
-                  "Privacy Policy",
-                  "Financial Reports",
-                  "Clinical Ethics",
-                  "UKCP Register",
-                ].map((l) => (
-                  <li key={l}>
-                    <Link href="#" className="hover:text-navy transition-colors">
-                      {l}
+                  { label: "Privacy Policy", href: "/privacy" },
+                  { label: "Financials", href: "/contribute#financials" },
+                  { label: "Clinical Ethics", href: "/mission#governance" },
+                ].map(({ label, href }) => (
+                  <li key={label}>
+                    <Link href={href} className="hover:text-navy transition-colors">
+                      {label}
                     </Link>
                   </li>
                 ))}
@@ -87,7 +86,6 @@ export default function SiteFooter() {
           </p>
           <div className="flex gap-5 font-sans text-xs text-slate-light">
             <span>SSL Encrypted</span>
-            <span>UKCP Registered</span>
             <span>Clinically Governed</span>
           </div>
         </div>

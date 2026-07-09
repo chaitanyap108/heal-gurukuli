@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ConchDivider from "../components/ConchDivider";
 import GovernanceBlock from "../components/GovernanceBlock";
+import TeamCarousel from "../components/TeamCarousel";
 import ThreePillars from "../components/ThreePillars";
 
 export const metadata: Metadata = {
@@ -14,16 +15,15 @@ export default function MissionPage() {
   return (
     <div className="bg-canvas font-sans text-slate">
 
-      {/* ─── PAGE HERO ──────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
             The Clinical Framework
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
             Our Mission
           </h1>
-          <div className="w-12 h-px bg-blue mb-8" />
+          <div className="w-12 h-px bg-blue mx-auto mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
             Bridging evidence-based psychological treatment with a deep
             understanding of the unique cultural and systemic traumas endured by
@@ -33,10 +33,8 @@ export default function MissionPage() {
         </div>
       </section>
 
-      {/* ─── WHY WE EXIST — TO SERVE GURUKULIS ─────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
+      <section id="why-we-exist" className="py-16 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Why We Exist
           </p>
@@ -44,7 +42,7 @@ export default function MissionPage() {
             To Serve Gurukulis
           </h2>
 
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed">
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed text-left sm:text-center">
             <p>
               For decades, adult survivors of gurukuli institutions have lived
               with the compounding weight of complex trauma — trauma that is
@@ -80,10 +78,8 @@ export default function MissionPage() {
 
       <ConchDivider />
 
-      {/* ─── THE THERAPEUTIC FRAMEWORK ──────────────────────────────── */}
       <section id="clinical-framework" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
-        <div className="max-w-3xl mx-auto">
-
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Clinical Approach
           </p>
@@ -91,7 +87,7 @@ export default function MissionPage() {
             The Therapeutic Framework
           </h2>
 
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-6">
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-6 text-left sm:text-center">
             <p>
               Our work draws from a pluralistic, integrative model applying
               Trauma-Focused CBT, EMDR, and somatic-aware relational approaches
@@ -100,55 +96,41 @@ export default function MissionPage() {
               complex PTSD, betrayal trauma, and spiritual injury accordingly.
             </p>
           </div>
-
         </div>
       </section>
 
-      {/* ─── THREE PILLARS ──────────────────────────────────────────── */}
       <ThreePillars />
 
       <ConchDivider />
 
-      {/* ─── MEET OUR TEAM ──────────────────────────────────────────── */}
       <section id="team" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              The Clinicians
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+              Meet Our Team
+            </h2>
+            <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto mb-4">
+              Our clinical team is composed of UKCP and BACP-registered
+              psychotherapists and clinical psychologists, each bringing deep
+              specialist expertise in complex trauma, EMDR, somatic therapy, and
+              the particular institutional dynamics of the gurukuli experience.
+            </p>
+            <p className="font-sans text-sm text-slate-mid leading-relaxed max-w-2xl mx-auto italic">
+              Browse brief profiles below, then open a full profile for credentials and specialties.
+            </p>
+          </div>
 
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            The Clinicians
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Meet Our Team
-          </h2>
-          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
-            Our clinical team is composed of UKCP and BACP-registered
-            psychotherapists and clinical psychologists, each bringing deep
-            specialist expertise in complex trauma, EMDR, somatic therapy, and
-            the particular institutional dynamics of the gurukuli experience.
-            All practitioners operate under regular clinical supervision and are
-            fully compliant with UK professional registration requirements.
-          </p>
-          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10 italic">
-            Every member of the clinical team has been selected not only for
-            their professional credentials, but for their capacity to hold this
-            work with the cultural sensitivity and relational warmth it demands.
-          </p>
-
-          <Link
-            href="/clinicians"
-            className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
-          >
-            Meet the Full Clinical Team
-            <span aria-hidden="true">→</span>
-          </Link>
+          <TeamCarousel />
         </div>
       </section>
 
       <ConchDivider />
 
-      {/* ─── THE FOUNDER ────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
+      <section id="founder" className="py-16 md:py-20 px-6">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             The Founder
           </p>
@@ -159,7 +141,7 @@ export default function MissionPage() {
             UKCP-Registered Psychotherapist · Founder
           </h3>
 
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8 text-left sm:text-center">
             <p>
               Caitanya Lila is a UKCP-registered psychotherapist and the founder
               of the Heal Gurukuli Initiative. Born into the gurukuli system,
@@ -186,10 +168,10 @@ export default function MissionPage() {
           </div>
 
           <Link
-            href="/clinicians"
+            href="/clinicians/caitanya-lila"
             className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-medium px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
           >
-            Meet the full clinical team
+            View full profile
             <span aria-hidden="true">→</span>
           </Link>
         </div>
@@ -197,12 +179,10 @@ export default function MissionPage() {
 
       <ConchDivider />
 
-      {/* ─── GOVERNANCE ─────────────────────────────────────────────── */}
       <GovernanceBlock />
 
       <ConchDivider />
 
-      {/* ─── CTA ────────────────────────────────────────────────────── */}
       <section className="py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-sm text-slate-mid mb-6 italic">

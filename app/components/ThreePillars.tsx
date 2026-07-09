@@ -5,7 +5,7 @@ export default function ThreePillars() {
     <section className="py-16 md:py-24 px-6">
       <div className="max-w-6xl mx-auto">
 
-        <div className="mb-12">
+        <div className="mb-12 text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Core Areas of Support
           </p>
@@ -35,10 +35,10 @@ export default function ThreePillars() {
             </p>
             <div>
               <Link
-                href="/support#booking"
+                href="/support#intake"
                 className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors w-fit"
               >
-                Book a Session
+                Start Intake
                 <span aria-hidden="true">→</span>
               </Link>
             </div>

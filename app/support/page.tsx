@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import ConchDivider from "../components/ConchDivider";
 import GovernanceBlock from "../components/GovernanceBlock";
-import ThreePillars from "../components/ThreePillars";
+import TherapyIntakeForm from "../components/TherapyIntakeForm";
 
 export const metadata: Metadata = {
-  title: "Clinical Support — Heal Gurukuli",
+  title: "Therapy — Heal Gurukuli",
   description:
-    "Specialised, trauma-informed psychotherapy for adult gurukuli survivors. Book a free initial consultation with a UKCP-registered therapist.",
+    "Specialised, trauma-informed psychotherapy for adult gurukuli survivors. Complete the intake form to begin — the clinical team will reply to arrange next steps.",
 };
 
 const therapies = [
@@ -41,17 +41,16 @@ export default function SupportPage() {
   return (
     <div className="bg-canvas font-sans text-slate">
 
-      {/* ─── PAGE HERO ──────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            Clinical Support
+            Clinical Therapy
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            Begin Clinical Support
+            Begin Therapy
           </h1>
-          <div className="w-12 h-px bg-blue mb-8" />
-          <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic max-w-2xl">
+          <div className="w-12 h-px bg-blue mx-auto mb-8" />
+          <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic max-w-2xl mx-auto">
             Specialised, trauma-informed clinical care designed specifically for
             adult survivors of ISKCON Gurukula abuse. You don&rsquo;t need to explain
             yourself here — we already understand the landscape.
@@ -59,57 +58,88 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* ─── PRELUDE ────────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
+      {/* ─── 3-STEP PROCESS (replaces Three Pillars on this page) ───── */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-12 text-center">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              How It Works
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight">
+              Three Steps to Begin
+            </h2>
+          </div>
 
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Why Support Structures Matter
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Healing Rarely Happens in Isolation
-          </h2>
-
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed">
-            <p>
-              Survivors of institutional abuse often carry their wounds in
-              profound isolation — conditioned by years of silencing,
-              community pressure, and the gaslighting of collective denial.
-              Research consistently shows that recovery from complex trauma
-              is significantly more effective when it occurs within a structured
-              framework of support: individual therapy, peer community, and
-              access to self-guided resources.
-            </p>
-            <p>
-              Each element reinforces the others. Individual therapy provides the
-              secure, personalised clinical container. Community groups break
-              the isolation and offer the powerful medicine of shared
-              recognition. Resources extend the healing into daily life.
-              Together, these three pillars form a comprehensive support
-              ecosystem that addresses the full complexity of institutional
-              trauma recovery.
-            </p>
-            <p>
-              The Heal Gurukuli Initiative has been designed with this
-              integrated model at its core — because a single session a week
-              is never the whole story. Recovery is a life lived differently,
-              supported at every level.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                step: "01",
+                title: "Fill out the intake form",
+                body: "Share a brief overview of what brings you here. This helps us understand your needs and ensure the sanctuary is the right fit — without requiring a detailed trauma history at this stage.",
+                href: "#intake",
+                cta: "Go to Intake Form",
+              },
+              {
+                step: "02",
+                title: "We review and reply",
+                body: "A member of the clinical team reviews your submission and responds within 1–2 business days to arrange a free initial consultation if appropriate.",
+              },
+              {
+                step: "03",
+                title: "Begin the work",
+                body: "If the therapeutic fit is right, we agree a structured treatment plan together and begin sessions at a pace that feels safe and manageable for you.",
+                href: "#therapy-overview",
+                cta: "About Our Therapy",
+              },
+            ].map(({ step, title, body, href, cta }) => (
+              <div key={step} className="bg-canvas-white border border-border rounded-xl p-8 flex flex-col gap-5">
+                <span className="font-sans text-xs text-slate-light tracking-[0.3em]">{step}</span>
+                <div className="w-8 h-px bg-blue" />
+                <h3 className="font-serif text-2xl text-navy font-semibold">{title}</h3>
+                <p className="font-sans text-sm text-slate-mid leading-relaxed flex-1 italic">{body}</p>
+                {href && cta ? (
+                  <div>
+                    <a
+                      href={href}
+                      className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors w-fit"
+                    >
+                      {cta}
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                ) : null}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <ConchDivider />
 
-      {/* ─── THREE PILLARS ──────────────────────────────────────────── */}
-      <ThreePillars />
+      {/* ─── INTAKE FORM ────────────────────────────────────────────── */}
+      <section id="intake" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border scroll-mt-28">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              Step 1
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-4">
+              Therapy Intake Form
+            </h2>
+            <p className="font-sans text-sm text-slate-mid italic max-w-xl mx-auto">
+              Complete this form to begin. After submission you will be guided to
+              next steps while your request is reviewed.
+            </p>
+          </div>
+          <TherapyIntakeForm />
+        </div>
+      </section>
 
       <ConchDivider />
 
       {/* ─── ONE-TO-ONE PSYCHOTHERAPY ───────────────────────────────── */}
-      <section id="booking" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
-        <div className="max-w-3xl mx-auto">
-
+      <section id="therapy-overview" className="py-16 md:py-20 px-6 scroll-mt-28">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Individual Therapy
           </p>
@@ -117,7 +147,7 @@ export default function SupportPage() {
             One-to-One Psychotherapy
           </h2>
 
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10">
+          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-10 text-left sm:text-center">
             <p>
               Our one-to-one psychotherapy service is the foundation of the
               clinical sanctuary. Each survivor receives a confidential, weekly
@@ -131,65 +161,32 @@ export default function SupportPage() {
               UK, Europe, North America, and beyond.
             </p>
             <p>
-              The first step is a free 30-minute initial consultation — a quiet,
-              unhurried conversation to understand your situation and ensure
-              this is the right therapeutic fit. There is no obligation to
-              proceed, and no clinical assessment takes place in this session.
+              After you submit the intake form, the clinical team reviews your
+              request and replies to arrange a free 30-minute initial consultation
+              if appropriate — a quiet conversation to ensure this is the right
+              therapeutic fit. There is no self-serve booking calendar.
             </p>
           </div>
 
-          <div className="bg-blue-soft border border-blue/15 rounded-xl p-6 flex flex-col sm:flex-row gap-5 items-start">
-            <div className="flex-1">
-              <p className="font-sans text-xs text-blue uppercase tracking-wider font-semibold mb-1">
-                Free Initial Consultation
-              </p>
-              <p className="font-serif text-lg text-navy font-semibold">
-                30-minute initial consultation
-              </p>
-              <p className="font-sans text-xs text-slate-mid mt-1">
-                Confidential · No obligation · Encrypted platform
-              </p>
-            </div>
+          <div className="bg-blue-soft border border-blue/15 rounded-xl p-6 text-left">
+            <p className="font-sans text-xs text-blue uppercase tracking-wider font-semibold mb-1">
+              How consultations are arranged
+            </p>
+            <p className="font-serif text-lg text-navy font-semibold mb-2">
+              Intake first — then we get in touch
+            </p>
+            <p className="font-sans text-sm text-slate-mid leading-relaxed">
+              Complete the intake form above. Once reviewed, we will contact you
+              to schedule your free initial consultation. Typical reply time is
+              1–2 business days.
+            </p>
             <a
-              href="#booking-portal"
-              className="bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-95 transition-all duration-150 whitespace-nowrap"
+              href="#intake"
+              className="inline-flex items-center gap-2 mt-5 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-95 transition-all duration-150"
             >
-              Book Now
+              Go to Intake Form
+              <span aria-hidden="true">→</span>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── WHAT TO EXPECT ─────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            The Process
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            What to Expect
-          </h2>
-
-          <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed">
-            <p>
-              Beginning therapy is a significant step, and we understand that
-              reaching out can itself feel like a barrier. We have designed this
-              intake process to be as clear and low-pressure as possible.
-            </p>
-            <p>
-              The initial 30-minute consultation is not a clinical assessment —
-              it is a quiet conversation to ensure that you feel comfortable and
-              that the sanctuary is the right environment for the work you wish
-              to undertake. There is no pressure to disclose details of your
-              experience at this stage.
-            </p>
-            <p>
-              If you wish to continue, we will agree a structured treatment
-              plan together — including session frequency, modality, and any
-              relevant safeguarding considerations — before your first formal
-              session begins. Everything proceeds at a pace that is right for you.
-            </p>
           </div>
         </div>
       </section>
@@ -199,20 +196,20 @@ export default function SupportPage() {
       {/* ─── THERAPIES OFFERED ──────────────────────────────────────── */}
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Clinical Modalities
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
-            Therapies We Offer
-          </h2>
-          <p className="font-sans text-sm text-slate-mid mb-10 italic">
-            Our clinicians draw on a range of evidence-based modalities — selected
-            collaboratively with each client based on their needs and preferences.{" "}
-            <Link href="/resources#understanding-therapy" className="text-blue hover:underline">
-              Learn more about each approach →
-            </Link>
-          </p>
+          <div className="text-center mb-10">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              Clinical Modalities
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
+              Therapies We Offer
+            </h2>
+            <p className="font-sans text-sm text-slate-mid italic">
+              Our clinicians draw on a range of evidence-based modalities.{" "}
+              <Link href="/resources#understanding-therapy" className="text-blue hover:underline">
+                Learn more about each approach →
+              </Link>
+            </p>
+          </div>
 
           <div className="space-y-4">
             {therapies.map(({ name, abbr, desc, anchor }) => (
@@ -238,103 +235,10 @@ export default function SupportPage() {
         </div>
       </section>
 
-      {/* ─── THE 3 STEPS ────────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            How It Works
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-8">
-            Three Steps to Begin
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[
-              {
-                step: "Step 1",
-                title: "Book a Free Consultation",
-                body: "Use the secure booking form below to schedule your free 30-minute initial consultation. No assessment, no pressure — just a conversation.",
-              },
-              {
-                step: "Step 2",
-                title: "Confidential Conversation",
-                body: "Speak openly with Caitanya Lila about your background, your needs, and what you are hoping to work toward. Everything shared remains fully confidential.",
-              },
-              {
-                step: "Step 3",
-                title: "Begin the Work",
-                body: "If the therapeutic fit is right, we agree a structured treatment plan together and begin sessions at a pace that feels safe and manageable for you.",
-              },
-            ].map(({ step, title, body }) => (
-              <div key={step} className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-3">
-                <p className="font-sans text-xs text-blue uppercase tracking-[0.3em]">{step}</p>
-                <div className="w-6 h-px bg-blue/40" />
-                <h3 className="font-serif text-lg text-navy font-semibold">{title}</h3>
-                <p className="font-sans text-sm text-slate-mid leading-relaxed italic flex-1">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <ConchDivider />
 
-      {/* ─── BOOKING PORTAL ─────────────────────────────────────────── */}
-      <section id="booking-portal" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
-        <div className="max-w-3xl mx-auto">
-
-          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Secure Booking
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
-            Book Your Initial Consultation
-          </h2>
-          <p className="font-sans text-sm text-slate-mid mb-8 italic">
-            Caitanya Lila — 30-Minute Initial Consultation. Confidential and
-            encrypted end-to-end.
-          </p>
-
-          <div className="border-2 border-dashed border-border rounded-2xl bg-canvas min-h-[480px] flex flex-col items-center justify-center gap-5 p-10">
-            <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/20 flex items-center justify-center">
-              <svg
-                className="w-5 h-5 text-blue"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                />
-              </svg>
-            </div>
-            <p className="font-sans text-sm text-slate-mid text-center max-w-sm leading-relaxed">
-              <span className="font-medium text-slate block mb-1">
-                [Embed Caitanya Lila 30-Min Initial Consultation — Acuity Scheduling Iframe]
-              </span>
-              The Acuity Scheduling iframe will be embedded in this container.
-              All bookings are processed securely through Acuity&rsquo;s encrypted platform.
-            </p>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="inline-flex items-center gap-1.5 bg-blue-soft text-blue font-sans text-xs px-3 py-1.5 rounded-full">
-                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                </svg>
-                SSL Encrypted
-              </span>
-              <span className="font-sans text-xs text-slate-light">·</span>
-              <span className="font-sans text-xs text-slate-mid">UKCP Confidentiality Standards</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ─── MEET THE TEAM ──────────────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6">
+      <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Our Clinicians
@@ -346,8 +250,7 @@ export default function SupportPage() {
             Our clinical team consists of UKCP and BACP-registered psychotherapists
             and clinical psychologists who bring specialist understanding of complex
             trauma, spiritual abuse, and the particular institutional dynamics of
-            the gurukuli experience. All clinicians operate under regular
-            professional supervision.
+            the gurukuli experience.
           </p>
           <Link
             href="/clinicians"
@@ -361,15 +264,41 @@ export default function SupportPage() {
 
       <ConchDivider />
 
-      {/* ─── GOVERNANCE ─────────────────────────────────────────────── */}
       <GovernanceBlock />
 
       <ConchDivider />
 
-      {/* ─── SUPPORT LINES AROUND THE WORLD ────────────────────────── */}
-      <section id="crisis" className="py-16 md:py-20 px-6">
-        <div className="max-w-3xl mx-auto">
+      {/* ─── COMPLAINTS ──────────────────────────────────────────────── */}
+      <section id="complaints" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border scroll-mt-28">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            Accountability
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            Complaints
+          </h2>
+          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8 max-w-2xl mx-auto">
+            If you have a concern about any aspect of our clinical or organisational
+            practice, you are entitled to raise it. Our complaints process is designed
+            to be clear, confidential, and fair — in line with UKCP and BACP professional
+            standards.
+          </p>
+          <a
+            href="/complaints-process.pdf"
+            download
+            className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            Download Complaints Process (PDF)
+          </a>
+        </div>
+      </section>
 
+      {/* ─── CRISIS SUPPORT (kept for Resources nav deep-link) ─────── */}
+      <section id="crisis" className="py-16 md:py-20 px-6 scroll-mt-28">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Immediate Help
           </p>
@@ -382,36 +311,20 @@ export default function SupportPage() {
             around the clock.
           </p>
 
-          <div className="space-y-3">
+          <div className="space-y-3 text-left">
             {[
               {
                 region: "United Kingdom",
                 lines: [
-                  { name: "Samaritans", detail: "Free, 24/7 emotional support", contact: "116 123", type: "phone" },
-                  { name: "Shout Crisis Text Line", detail: "Text-based crisis support", contact: "Text SHOUT to 85258", type: "text" },
-                  { name: "Mind Infoline", detail: "Mental health information & support", contact: "0300 123 3393", type: "phone" },
+                  { name: "Samaritans", detail: "Free, 24/7 emotional support", contact: "116 123" },
+                  { name: "Shout Crisis Text Line", detail: "Text-based crisis support", contact: "Text SHOUT to 85258" },
                 ],
               },
               {
                 region: "United States & Canada",
                 lines: [
-                  { name: "988 Suicide & Crisis Lifeline", detail: "Free, 24/7 crisis support", contact: "Call or text 988", type: "phone" },
-                  { name: "Crisis Text Line", detail: "Text-based support", contact: "Text HOME to 741741", type: "text" },
-                  { name: "RAINN", detail: "Sexual assault support", contact: "1-800-656-4673", type: "phone" },
-                ],
-              },
-              {
-                region: "Australia & New Zealand",
-                lines: [
-                  { name: "Lifeline Australia", detail: "24/7 crisis support", contact: "13 11 14", type: "phone" },
-                  { name: "Beyond Blue", detail: "Anxiety, depression, mental health", contact: "1300 22 4636", type: "phone" },
-                  { name: "Lifeline New Zealand", detail: "Crisis support", contact: "0800 543 354", type: "phone" },
-                ],
-              },
-              {
-                region: "Europe",
-                lines: [
-                  { name: "European Helpline Directory", detail: "Find a crisis line in your country", contact: "www.befrienders.org", type: "web" },
+                  { name: "988 Suicide & Crisis Lifeline", detail: "Free, 24/7 crisis support", contact: "Call or text 988" },
+                  { name: "Crisis Text Line", detail: "Text-based support", contact: "Text HOME to 741741" },
                 ],
               },
             ].map(({ region, lines }) => (
@@ -422,19 +335,13 @@ export default function SupportPage() {
                   </p>
                 </div>
                 <div className="divide-y divide-border">
-                  {lines.map(({ name, detail, contact, type }) => (
+                  {lines.map(({ name, detail, contact }) => (
                     <div key={name} className="px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                       <div>
                         <p className="font-sans text-sm text-navy font-medium">{name}</p>
                         <p className="font-sans text-xs text-slate-mid italic">{detail}</p>
                       </div>
-                      <span
-                        className={`font-sans text-sm font-semibold shrink-0 ${
-                          type === "web" ? "text-blue" : "text-navy"
-                        }`}
-                      >
-                        {contact}
-                      </span>
+                      <span className="font-sans text-sm font-semibold text-navy shrink-0">{contact}</span>
                     </div>
                   ))}
                 </div>
@@ -442,23 +349,28 @@ export default function SupportPage() {
             ))}
           </div>
 
-          <div className="mt-8 bg-canvas border border-border rounded-xl p-6">
-            <p className="font-sans text-xs text-slate-light uppercase tracking-wider mb-2">
-              Gurukuli-Specific Support
-            </p>
-            <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4">
-              For concerns specific to abuse within ISKCON institutions, you may
-              also contact ISKCON Resolve — an independent resource for community
-              members affected by institutional harm.
-            </p>
-            <Link
-              href="/contact/crisis-support"
-              className="inline-flex items-center gap-1.5 text-xs text-blue font-semibold hover:underline"
-            >
-              View all crisis resources →
-            </Link>
-          </div>
+          <Link
+            href="/contact/crisis-support"
+            className="inline-flex items-center gap-1.5 text-xs text-blue font-semibold hover:underline mt-8"
+          >
+            View all crisis resources →
+          </Link>
+        </div>
+      </section>
 
+      {/* ─── PRIVACY POLICY LINK ────────────────────────────────────── */}
+      <section className="py-12 px-6 bg-canvas-white border-t border-border">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-sans text-sm text-slate-mid mb-3">
+            How we handle your information
+          </p>
+          <Link
+            href="/privacy"
+            className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors"
+          >
+            Privacy Policy
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 

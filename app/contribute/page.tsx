@@ -9,21 +9,27 @@ export const metadata: Metadata = {
     "Fund trauma-informed clinical care for adult gurukuli survivors. Sponsor a therapy session, sponsor a full course of therapy, or make an open contribution.",
 };
 
+const GOFUNDME_URL = "https://www.gofundme.com/";
+
+/** Temporary fundraising progress — update as donations come in */
+const FUNDRAISING_RAISED = 1250;
+const FUNDRAISING_GOAL = 5000;
+const FUNDRAISING_PCT = Math.min(100, Math.round((FUNDRAISING_RAISED / FUNDRAISING_GOAL) * 100));
+
 export default function ContributePage() {
   return (
     <div className="bg-canvas font-sans text-slate">
 
-      {/* ─── PAGE HERO ──────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
             Donation
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
             Support the Sanctuary
           </h1>
-          <div className="w-12 h-px bg-blue mb-8" />
-          <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic max-w-2xl">
+          <div className="w-12 h-px bg-blue mx-auto mb-8" />
+          <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic max-w-2xl mx-auto">
             Every contribution goes directly to clinical session provision and
             sanctuary infrastructure — enabling survivors to access the
             specialised, trauma-informed care they deserve.
@@ -31,11 +37,34 @@ export default function ContributePage() {
         </div>
       </section>
 
-      {/* ─── CONTRIBUTION TIERS ─────────────────────────────────────── */}
+      {/* ─── FUNDRAISING PROGRESS ───────────────────────────────────── */}
+      <section className="py-10 px-6 bg-canvas border-b border-border">
+        <div className="max-w-2xl mx-auto text-center">
+          <p className="font-serif text-xl md:text-2xl text-navy font-semibold mb-4">
+            Help us reach our first £5,000
+          </p>
+          <div className="w-full h-3 bg-border rounded-full overflow-hidden mb-3">
+            <div
+              className="h-full bg-navy rounded-full transition-all duration-700 ease-out"
+              style={{ width: `${FUNDRAISING_PCT}%` }}
+              role="progressbar"
+              aria-valuenow={FUNDRAISING_RAISED}
+              aria-valuemin={0}
+              aria-valuemax={FUNDRAISING_GOAL}
+              aria-label={`£${FUNDRAISING_RAISED.toLocaleString()} raised of £${FUNDRAISING_GOAL.toLocaleString()} goal`}
+            />
+          </div>
+          <p className="font-sans text-sm text-slate-mid">
+            <span className="font-semibold text-navy">£{FUNDRAISING_RAISED.toLocaleString()}</span>
+            {" "}raised of £{FUNDRAISING_GOAL.toLocaleString()} · {FUNDRAISING_PCT}%
+          </p>
+        </div>
+      </section>
+
       <section className="py-16 md:py-24 px-6">
         <div className="max-w-6xl mx-auto">
 
-          <div className="mb-12">
+          <div className="mb-12 text-center">
             <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
               Choose Your Level of Support
             </p>
@@ -50,7 +79,6 @@ export default function ContributePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* ── Tier One ── */}
             <div className="border border-border rounded-xl p-8 flex flex-col bg-canvas">
               <div className="mb-6">
                 <p className="font-sans text-xs text-slate-light uppercase tracking-[0.3em] mb-3">
@@ -79,14 +107,15 @@ export default function ContributePage() {
                 </li>
               </ul>
               <a
-                href="#"
+                href={GOFUNDME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full border border-navy text-navy font-sans font-medium text-center py-3 rounded-lg text-sm hover:bg-navy hover:text-white active:scale-[0.98] transition-all duration-150"
               >
                 Select Tier One
               </a>
             </div>
 
-            {/* ── Tier Two (Recommended) ── */}
             <div className="border-2 border-navy rounded-xl p-8 flex flex-col bg-navy relative">
               <div className="absolute top-4 right-4 bg-blue text-white font-sans text-xs px-2.5 py-1 rounded tracking-wide">
                 Recommended
@@ -122,14 +151,15 @@ export default function ContributePage() {
                 </li>
               </ul>
               <a
-                href="#"
+                href={GOFUNDME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full bg-white text-navy font-sans font-medium text-center py-3 rounded-lg text-sm hover:bg-blue-pale active:scale-[0.98] transition-all duration-150"
               >
                 Sponsor a Course
               </a>
             </div>
 
-            {/* ── Custom ── */}
             <div className="border border-border rounded-xl p-8 flex flex-col bg-canvas">
               <div className="mb-6">
                 <p className="font-sans text-xs text-slate-light uppercase tracking-[0.3em] mb-3">
@@ -169,7 +199,9 @@ export default function ContributePage() {
                 </div>
               </div>
               <a
-                href="#"
+                href={GOFUNDME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full border border-navy text-navy font-sans font-medium text-center py-3 rounded-lg text-sm hover:bg-navy hover:text-white active:scale-[0.98] transition-all duration-150"
               >
                 Donate
@@ -180,10 +212,8 @@ export default function ContributePage() {
         </div>
       </section>
 
-      {/* ─── FUND ALLOCATION ────────────────────────────────────────── */}
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-t border-border">
-        <div className="max-w-3xl mx-auto">
-
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
             Transparency
           </p>
@@ -191,7 +221,7 @@ export default function ContributePage() {
             How Funds Are Used
           </h2>
 
-          <div className="space-y-4 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8">
+          <div className="space-y-4 font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8 text-left sm:text-center">
             <p>
               The Heal Gurukuli Initiative operates with complete financial
               transparency. Every contribution is applied directly to clinical
@@ -199,7 +229,7 @@ export default function ContributePage() {
             </p>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 text-left">
             {[
               {
                 label: "Clinical Sessions",
@@ -240,17 +270,55 @@ export default function ContributePage() {
         </div>
       </section>
 
-      {/* ─── CLINICAL IMPACT ────────────────────────────────────────── */}
       <ClinicalImpact />
 
-      {/* ─── TESTIMONIALS ───────────────────────────────────────────── */}
       <TestimonialCarousel
         eyebrow="What Donors Make Possible"
         heading="Healing, in Their Own Words"
         subtitle="Anonymous accounts from survivors whose care was funded by community donations."
       />
 
-      {/* ─── CTA ────────────────────────────────────────────────────── */}
+      {/* ─── FINANCIALS ─────────────────────────────────────────────── */}
+      <section id="financials" className="py-16 md:py-20 px-6 bg-canvas-white border-t border-border scroll-mt-28">
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+            Accountability
+          </p>
+          <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+            Financials
+          </h2>
+          <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed mb-8 max-w-2xl mx-auto">
+            We are committed to transparent stewardship of every donation. Summary
+            financial reports and fund-allocation breakdowns will be published here
+            as the initiative grows. Until then, all contributions are processed
+            through our public fundraising campaign with clear campaign goals.
+          </p>
+          <div className="bg-canvas border border-border rounded-xl p-6 text-left space-y-4">
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-border pb-4">
+              <span className="font-sans text-sm text-navy font-medium">Current campaign goal</span>
+              <span className="font-sans text-sm text-slate-mid">£{FUNDRAISING_GOAL.toLocaleString()}</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-border pb-4">
+              <span className="font-sans text-sm text-navy font-medium">Raised to date</span>
+              <span className="font-sans text-sm text-slate-mid">£{FUNDRAISING_RAISED.toLocaleString()}</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <span className="font-sans text-sm text-navy font-medium">Primary use of funds</span>
+              <span className="font-sans text-sm text-slate-mid">Clinical sessions &amp; sanctuary operations</span>
+            </div>
+          </div>
+          <a
+            href={GOFUNDME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-8 bg-navy text-white font-sans text-sm font-medium px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
+          >
+            View fundraising campaign
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+
       <section className="py-16 px-6 bg-canvas border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-sm text-slate-mid mb-6 italic">

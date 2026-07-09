@@ -85,9 +85,10 @@ export default function GovernanceBlock({
 
   return (
     <section
+      id="governance"
       className={`py-16 md:py-20 px-6 bg-canvas-white border-t border-border ${className}`}
     >
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto text-center sm:text-left">
 
         <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
           Governance
@@ -101,9 +102,11 @@ export default function GovernanceBlock({
             All clinical work undertaken by the Heal Gurukuli Initiative is
             conducted in strict accordance with the ethical framework and
             professional conduct standards set by the{" "}
-            <UKCPLink />. Every practitioner operating within the Initiative is a
-            registered member of the UKCP and is bound by its Code of Ethics
-            and Professional Practice.
+            <UKCPLink />{" "}
+            and the{" "}
+            <BACPLink />. Every practitioner operating within the Initiative is a
+            registered member of the UKCP or BACP and is bound by their Codes of
+            Ethics and Professional Practice.
           </p>
           <p>
             Confidentiality is not a procedural formality here — it is a

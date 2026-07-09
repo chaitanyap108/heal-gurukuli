@@ -12,14 +12,14 @@ export default function VolunteerPage() {
     <div className="bg-canvas font-sans text-slate min-h-screen">
       {/* ─── HERO ───────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
             Get Involved
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
             Volunteer with Us
           </h1>
-          <div className="w-12 h-px bg-blue mb-8" />
+          <div className="w-12 h-px bg-blue mx-auto mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
             Support the clinical sanctuary. We offer various opportunities for advocates, administrators, and survivors to contribute their skills toward our collective healing mission.
           </p>
@@ -58,7 +58,7 @@ export default function VolunteerPage() {
                     req: "Professional IT/Security experience",
                   },
                   {
-                    title: "Outreach & Advocacy",
+                    title: "Social Media Outreach Support",
                     desc: "Draft content, run educational social campaigns, and distribute info packets to clinics, spiritual centers, and survivor organizations.",
                     req: "Alignment with ethical communication rules",
                   },
@@ -136,7 +136,7 @@ export default function VolunteerPage() {
                       <option value="peer">Peer Group Assistant</option>
                       <option value="admin">Administrative Aid</option>
                       <option value="tech">Tech &amp; Security</option>
-                      <option value="advocacy">Outreach &amp; Advocacy</option>
+                      <option value="advocacy">Social Media Outreach Support</option>
                     </select>
                   </div>
 
@@ -151,6 +151,22 @@ export default function VolunteerPage() {
                       placeholder="Share a short note about your interest, skills, or background."
                       className="block w-full px-3 py-2.5 border border-border rounded-lg bg-canvas text-xs focus:outline-none focus:ring-1 focus:ring-blue focus:border-blue transition-all resize-y"
                     />
+                  </div>
+
+                  <div>
+                    <label htmlFor="vol-cv" className="block font-sans text-[10px] text-slate-mid uppercase tracking-wider font-semibold mb-1">
+                      Attach CV (PDF)
+                    </label>
+                    <input
+                      type="file"
+                      id="vol-cv"
+                      name="cv"
+                      accept="application/pdf,.pdf"
+                      className="block w-full text-xs text-slate-mid file:mr-3 file:py-2 file:px-3 file:rounded-lg file:border-0 file:bg-blue-soft file:text-blue file:font-semibold file:text-[10px] hover:file:bg-blue-pale transition-all"
+                    />
+                    <p className="font-sans text-[10px] text-slate-light mt-1">
+                      PDF format only. Max recommended size 5 MB.
+                    </p>
                   </div>
 
                   <button

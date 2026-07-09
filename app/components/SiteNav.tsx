@@ -17,7 +17,25 @@ type NavItem =
 
 const navItems: NavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/mission", label: "About Our Mission" },
+  {
+    label: "About",
+    parentHref: "/mission",
+    children: [
+      { href: "/mission#why-we-exist", label: "Why We Exist", description: "Our mandate to serve gurukulis" },
+      { href: "/mission#clinical-framework", label: "Therapeutic Framework", description: "Clinical approach & modalities" },
+      { href: "/mission#team", label: "Meet the Team", description: "Our clinical practitioners" },
+      { href: "/mission#founder", label: "The Founder", description: "Caitanya Lila" },
+      { href: "/mission#governance", label: "Governance", description: "Ethics & confidentiality" },
+    ],
+  },
+  {
+    label: "Therapy",
+    parentHref: "/support",
+    children: [
+      { href: "/support#intake", label: "Intake Form", description: "Begin the therapeutic process" },
+      { href: "/clinicians", label: "Meet the Therapists", description: "Our registered clinical team" },
+    ],
+  },
   {
     label: "Resources",
     parentHref: "/resources",
@@ -26,19 +44,11 @@ const navItems: NavItem[] = [
       { href: "/resources#grounding-techniques", label: "Grounding & Regulation", description: "Practical nervous system tools" },
       { href: "/resources#external-support", label: "External Support & Reading", description: "Curated external links" },
       { href: "/resources#understanding-therapy", label: "Understanding Therapy", description: "Guides to therapeutic modalities" },
-    ],
-  },
-  {
-    label: "Support",
-    parentHref: "/support",
-    children: [
-      { href: "/support#booking", label: "Book 1-to-1 Sessions", description: "Book an initial consultation" },
-      { href: "/clinicians", label: "Meet the Therapists", description: "Our registered clinical team" },
       { href: "/support#crisis", label: "Crisis Support Lines", description: "Immediate help when you need it" },
     ],
   },
+  { href: "/forum", label: "Forum" },
   { href: "/contribute", label: "Contribute" },
-  { href: "/forum", label: "Community Forum" },
   { href: "/volunteer", label: "Volunteer" },
   { href: "/impact", label: "See the Impact" },
 ];
@@ -76,7 +86,6 @@ function DropdownMenu({ item, pathname }: { item: NavItem & { children: SubLink[
 
   return (
     <div ref={ref} className="relative">
-      {/* Label navigates to parent page; chevron toggles dropdown */}
       <div className={`flex items-center gap-0.5 ${isActive ? "text-navy font-semibold" : ""}`}>
         <Link
           href={item.parentHref}
@@ -126,10 +135,8 @@ export default function SiteNav() {
 
   return (
     <header className="sticky top-0 z-50 bg-canvas-white/95 backdrop-blur-sm border-b border-border">
-      {/* ── Main bar ── */}
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
 
-        {/* Logo */}
         <Link href="/" className="shrink-0 flex items-center" aria-label="Heal Gurukuli — home">
           <Image
             src="/ConchCircle-Photoroom.png"
@@ -141,8 +148,7 @@ export default function SiteNav() {
           />
         </Link>
 
-        {/* Desktop nav */}
-        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-6 font-sans text-sm text-slate-mid">
+        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-5 font-sans text-sm text-slate-mid">
           {navItems.map((item) =>
             item.children ? (
               <DropdownMenu key={item.label} item={item} pathname={pathname} />
@@ -160,7 +166,6 @@ export default function SiteNav() {
           )}
         </nav>
 
-        {/* Right cluster: Donate + Hamburger */}
         <div className="flex items-center gap-2">
           <Link
             href="/contribute"
@@ -169,14 +174,13 @@ export default function SiteNav() {
             Donate
           </Link>
 
-          {/* Hamburger */}
           <button
             type="button"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-blue-soft transition-colors gap-[5px]"
+            className="flex flex-col justify-center items-center w-10 h-10 rounded-lg hover:bg-blue-soft transition-colors gap-[5px] lg:hidden"
           >
             <span className={`block h-[2px] w-5 bg-navy rounded-full transition-all duration-200 origin-center ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
             <span className={`block h-[2px] w-5 bg-navy rounded-full transition-all duration-200 ${menuOpen ? "opacity-0 scale-x-0" : ""}`} />
@@ -185,11 +189,10 @@ export default function SiteNav() {
         </div>
       </div>
 
-      {/* ── Mobile / full nav dropdown ── */}
       <div
         id="mobile-menu"
-        className={`overflow-hidden transition-all duration-300 ease-in-out border-t border-border bg-canvas-white ${
-          menuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-all duration-300 ease-in-out border-t border-border bg-canvas-white lg:hidden ${
+          menuOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav aria-label="Mobile navigation" className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
@@ -198,7 +201,6 @@ export default function SiteNav() {
               const isExpanded = mobileExpanded === item.label;
               return (
                 <div key={item.label}>
-                  {/* Row: link to parent + chevron toggle */}
                   <div className="flex items-center justify-between px-3 py-3 rounded-lg hover:bg-blue-soft transition-colors">
                     <Link
                       href={item.parentHref}
