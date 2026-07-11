@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
       { href: "/mission#clinical-framework", label: "Therapeutic Framework", description: "Clinical approach & modalities" },
       { href: "/mission#team", label: "Meet the Team", description: "Our clinical practitioners" },
       { href: "/mission#founder", label: "The Founder", description: "Caitanya Lila" },
+      { href: "/mission#board-of-trustees", label: "Board of Trustees", description: "Independent oversight" },
       { href: "/mission#governance", label: "Governance", description: "Ethics & confidentiality" },
     ],
   },

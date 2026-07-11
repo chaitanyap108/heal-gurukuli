@@ -4,6 +4,7 @@ import ConchDivider from "../components/ConchDivider";
 import GovernanceBlock from "../components/GovernanceBlock";
 import TeamCarousel from "../components/TeamCarousel";
 import ThreePillars from "../components/ThreePillars";
+import { trustees } from "../data/trustees";
 
 export const metadata: Metadata = {
   title: "Our Mission — Heal Gurukuli",
@@ -174,6 +175,47 @@ export default function MissionPage() {
             View full profile
             <span aria-hidden="true">→</span>
           </Link>
+        </div>
+      </section>
+
+      <ConchDivider />
+
+      <section id="board-of-trustees" className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
+              Governance
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
+              Board of Trustees
+            </h2>
+            <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto">
+              Our Board of Trustees provides independent oversight of the
+              Initiative&rsquo;s mission, finances, and ethical standards —
+              ensuring Heal Gurukuli remains accountable, transparent, and
+              steadfastly oriented toward the survivors it serves.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {trustees.map((trustee) => (
+              <Link
+                key={trustee.slug}
+                href={`/trustees/${trustee.slug}`}
+                className="group flex flex-col items-start gap-1 border border-navy/20 bg-canvas px-6 py-5 rounded-lg hover:border-navy/40 hover:bg-blue-soft active:scale-[0.99] transition-all duration-150"
+              >
+                <span className="font-serif text-lg text-navy font-semibold group-hover:text-navy-mid transition-colors">
+                  {trustee.name}
+                </span>
+                <span className="font-sans text-xs text-slate-light uppercase tracking-[0.2em]">
+                  {trustee.role}
+                </span>
+                <span className="font-sans text-xs text-blue mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  View profile →
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

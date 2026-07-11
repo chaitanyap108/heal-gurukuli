@@ -11,28 +11,28 @@ export default function ConchDivider({ className = "" }: ConchDividerProps) {
       aria-hidden="true"
     >
       {/* Left Line & Accent Pattern */}
-      <div className="flex-1 flex items-center justify-end gap-2 opacity-25">
-        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-navy/40 to-navy" />
-        <div className="w-1 h-1 rounded-full border border-navy/60 shrink-0" />
-        <div className="w-0.5 h-0.5 rounded-full bg-navy/60 shrink-0" />
+      <div className="flex-1 flex items-center justify-end gap-3 opacity-65">
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-navy/55 to-navy" />
+        <div className="w-2 h-2 rounded-full border-2 border-navy/70 shrink-0" />
+        <div className="w-1.5 h-1.5 rounded-full bg-navy/70 shrink-0" />
       </div>
 
-      {/* Central Conch Icon Container */}
-      <div className="mx-4 shrink-0 opacity-50 hover:opacity-80 transition-opacity duration-300">
+      {/* Central Conch — oversized graphic; negative margins keep parent height slim */}
+      <div className="mx-2 shrink-0 opacity-70 hover:opacity-100 hover:scale-110 transition-all duration-300 -my-8 md:-my-10">
         <Image
           src="/ConchCircle-Photoroom.png"
           alt=""
-          width={80}
-          height={80}
-          className="w-10 h-10 md:w-12 md:h-12 object-contain"
+          width={220}
+          height={220}
+          className="w-28 h-28 md:w-36 md:h-36 object-contain"
         />
       </div>
 
       {/* Right Line & Accent Pattern */}
-      <div className="flex-1 flex items-center justify-start gap-2 opacity-25">
-        <div className="w-0.5 h-0.5 rounded-full bg-navy/60 shrink-0" />
-        <div className="w-1 h-1 rounded-full border border-navy/60 shrink-0" />
-        <div className="h-[1px] w-full bg-gradient-to-l from-transparent via-navy/40 to-navy" />
+      <div className="flex-1 flex items-center justify-start gap-3 opacity-65">
+        <div className="w-1.5 h-1.5 rounded-full bg-navy/70 shrink-0" />
+        <div className="w-2 h-2 rounded-full border-2 border-navy/70 shrink-0" />
+        <div className="h-[2px] w-full bg-gradient-to-l from-transparent via-navy/55 to-navy" />
       </div>
     </div>
   );
