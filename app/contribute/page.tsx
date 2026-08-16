@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Fund trauma-informed clinical care for adult gurukuli survivors. Sponsor a therapy session, sponsor a full course of therapy, or make an open contribution.",
 };
 
-const GOFUNDME_URL = "https://www.gofundme.com/";
+const GOFUNDME_URL = "https://gofund.me/c49acb57b";
 
 /** Temporary fundraising progress — update as donations come in */
 const FUNDRAISING_RAISED = 1250;
