@@ -1,0 +1,81 @@
+{
+  "hero": {
+    "eyebrow": "Clinical Therapy",
+    "heading": "Begin Therapy",
+    "subtitle": "Specialised, trauma-informed clinical care designed specifically for adult survivors of ISKCON Gurukula abuse. You don’t need to explain yourself here — we already understand the landscape."
+  },
+  "stepsSection": {
+    "eyebrow": "How It Works",
+    "heading": "Three Steps to Begin",
+    "steps": [
+      {
+        "stepNumber": "01",
+        "title": "Fill out the intake form",
+        "description": "Share a brief overview of what brings you here. This helps us understand your needs and ensure the sanctuary is the right fit — without requiring a detailed trauma history at this stage."
+      },
+      {
+        "stepNumber": "02",
+        "title": "We review and reply",
+        "description": "A member of the clinical team reviews your submission and responds within 1–2 business days to arrange a free initial consultation if appropriate."
+      },
+      {
+        "stepNumber": "03",
+        "title": "Begin the work",
+        "description": "If the therapeutic fit is right, we agree a structured treatment plan together and begin sessions at a pace that feels safe and manageable for you."
+      }
+    ]
+  },
+  "intakeTeaser": {
+    "eyebrow": "Step 1",
+    "heading": "Therapy Intake Form",
+    "subtitle": "Complete this form to begin. After submission you will be guided to next steps while your request is reviewed.",
+    "disclaimer": ""
+  },
+  "oneToOneTherapy": {
+    "eyebrow": "Individual Therapy",
+    "heading": "One-to-One Psychotherapy",
+    "bodyParagraphs": [
+      "Our one-to-one psychotherapy service is the foundation of the clinical sanctuary. Each survivor receives a confidential, weekly 50-minute session with a UKCP-registered therapist who has specialist knowledge of gurukuli institutional dynamics.",
+      "Sessions are conducted online via a fully encrypted, GDPR-compliant platform — ensuring clinical-grade confidentiality regardless of your location. We work with survivors across the UK, Europe, North America, and beyond.",
+      "After you submit the intake form, the clinical team reviews your request and replies to arrange a free 30-minute initial consultation if appropriate — a quiet conversation to ensure this is the right therapeutic fit. There is no self-serve booking calendar."
+    ]
+  },
+  "modalitiesSection": {
+    "eyebrow": "Clinical Modalities",
+    "heading": "Therapies We Offer",
+    "subtitle": "Our clinicians draw on a range of evidence-based modalities. Learn more about each approach →",
+    "modalities": [
+      {
+        "title": "Integrative Psychotherapy",
+        "description": "A personalised, pluralistic approach that draws on multiple evidence-based modalities — tailored to the unique clinical presentation of each survivor. The therapeutic relationship itself is a central vehicle for healing.",
+        "linkText": "Understanding Psychotherapy →",
+        "linkHref": "/resources#understanding-therapy"
+      },
+      {
+        "title": "EMDR",
+        "description": "A highly effective, NICE-recommended treatment for PTSD and complex trauma. EMDR processes distressing memories at a neurological level, reducing their emotional charge without requiring detailed verbal retelling.",
+        "linkText": "Understanding EMDR →",
+        "linkHref": "/resources#understanding-therapy"
+      },
+      {
+        "title": "Somatic Therapy",
+        "description": "Recognising that trauma is stored in the body as much as the mind, somatic approaches use body awareness, breath, and movement to restore nervous system regulation and a felt sense of safety.",
+        "linkText": "Understanding Somatic Therapy →",
+        "linkHref": "/resources#understanding-therapy"
+      },
+      {
+        "title": "Trauma-Focused CBT",
+        "description": "Cognitive Behavioural Therapy adapted specifically for trauma — targeting distorted beliefs, avoidance patterns, and emotional dysregulation that have developed as survival responses to institutional abuse.",
+        "linkText": "Understanding TF-CBT →",
+        "linkHref": "/resources#understanding-therapy"
+      }
+    ]
+  },
+  "complaints": {
+    "eyebrow": "Accountability",
+    "heading": "Complaints",
+    "body": "If you have a concern about any aspect of our clinical or organisational practice, you are entitled to raise it. Our complaints process is designed to be clear, confidential, and fair — in line with UKCP and BACP professional standards.",
+    "pdfLabel": "Download Complaints Process (PDF)",
+    "pdfHref": "/complaints-process.pdf"
+  }
+}
