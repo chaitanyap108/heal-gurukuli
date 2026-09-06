@@ -1,0 +1,28 @@
+{
+  "title": "Three Pillars of Care",
+  "subtitle": "",
+  "eyebrow": "Core Areas of Support",
+  "pillars": [
+    {
+      "number": "01",
+      "title": "Professional Psychotherapy",
+      "body": "We provide secure, confidential one-on-one psychotherapy tailored to the complex needs of survivors. Utilising evidence-based, trauma-focused modalities, our BACP or UKCP-registered clinicians offer a structured and compassionate environment to process deeply rooted pain and rebuild emotional sovereignty.",
+      "ctaText": "Start Intake",
+      "ctaHref": "/support#intake"
+    },
+    {
+      "number": "02",
+      "title": "Therapeutic Resources",
+      "body": "Healing is not confined to scheduled sessions. We offer a curated selection of self-guided tools, grounding exercises, and educational materials designed to support your nervous system and promote recovery outside of clinical hours.",
+      "ctaText": "Explore Resources",
+      "ctaHref": "/resources"
+    },
+    {
+      "number": "03",
+      "title": "Community Groups",
+      "body": "Isolation is one of the deepest wounds of institutional trauma. Our facilitated community groups offer a secure, professionally guided container for survivors to connect, share experiences, and break the silence together. These forums are available to foster mutual support, resource sharing and ultimately collective resilience.",
+      "ctaText": "Visit the Forum",
+      "ctaHref": "/forum"
+    }
+  ]
+}

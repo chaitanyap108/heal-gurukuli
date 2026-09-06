@@ -144,6 +144,59 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "shared",
+        label: "Shared Components",
+        path: "content/shared",
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            name: "threePillars",
+            label: "Three Pillars",
+            type: "object",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              {
+                name: "pillars",
+                label: "Pillars",
+                type: "object",
+                list: true,
+                fields: [
+                  { type: "string", name: "number", label: "Number" },
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
+                  { type: "string", name: "ctaText", label: "CTA Text" },
+                  { type: "string", name: "ctaHref", label: "CTA Href" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "testimonials",
+            label: "Testimonials",
+            type: "object",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "note", label: "Note" },
+              {
+                name: "quotes",
+                label: "Quotes",
+                type: "object",
+                list: true,
+                fields: [
+                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+                  { type: "string", name: "attribution", label: "Attribution" },
+                  { type: "string", name: "detail", label: "Detail" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 });
