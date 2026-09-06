@@ -5,7 +5,7 @@ import GovernanceBlock from "../components/GovernanceBlock";
 import TeamCarousel from "../components/TeamCarousel";
 import ThreePillars from "../components/ThreePillars";
 import { trustees } from "../data/trustees";
-import missionData from "../content/pages/mission.json";
+import missionData from "@/content/pages/mission.json";
 
 export const metadata: Metadata = {
   title: "Our Mission — Heal Gurukuli",
@@ -13,8 +13,21 @@ export const metadata: Metadata = {
     "The clinical framework underpinning Heal Gurukuli — bridging evidence-based psychological treatment with an understanding of unique cultural and systemic traumas.",
 };
 
+interface MissionData {
+  hero: {
+    eyebrow: string;
+    heading: string;
+    subtitle: string;
+  };
+  whyWeExist: {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+  };
+}
+
 export default function MissionPage() {
-  const { hero, whyWeExist } = missionData;
+  const { hero, whyWeExist } = missionData as MissionData;
 
   return (
     <div className="bg-canvas font-sans text-slate">
@@ -44,7 +57,7 @@ export default function MissionPage() {
           </h2>
 
           <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed text-left sm:text-center">
-            {whyWeExist.paragraphs.map((paragraph, index) => (
+            {whyWeExist.paragraphs.map((paragraph: string, index: number) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
