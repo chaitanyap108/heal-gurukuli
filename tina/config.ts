@@ -63,6 +63,87 @@ export default defineConfig({
           { type: "string", name: "shortBio", label: "Short Bio", ui: { component: "textarea" } },
         ],
       },
+      {
+        name: "home",
+        label: "Home Page",
+        path: "content/pages",
+        match: { include: "home" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              { type: "image", name: "logo", label: "Logo" },
+              { type: "string", name: "logoAlt", label: "Logo Alt Text" },
+              {
+                type: "object",
+                name: "primaryCta",
+                label: "Primary CTA",
+                fields: [
+                  { type: "string", name: "text", label: "Text" },
+                  { type: "string", name: "href", label: "Href" },
+                ],
+              },
+              {
+                type: "object",
+                name: "secondaryCta",
+                label: "Secondary CTA",
+                fields: [
+                  { type: "string", name: "text", label: "Text" },
+                  { type: "string", name: "href", label: "Href" },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "missionTeaser",
+            label: "Mission Teaser",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
+              { type: "string", name: "ctaText", label: "CTA Text" },
+              { type: "string", name: "ctaHref", label: "CTA Href" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "mission",
+        label: "Mission Page",
+        path: "content/pages",
+        match: { include: "mission" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+            ],
+          },
+          {
+            type: "object",
+            name: "whyWeExist",
+            label: "Why We Exist",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "paragraphs", label: "Paragraphs", list: true, ui: { component: "textarea" } },
+            ],
+          },
+        ],
+      },
     ],
   },
 });

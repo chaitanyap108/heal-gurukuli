@@ -4,8 +4,11 @@ import ClinicalImpact from "./components/ClinicalImpact";
 import ConchDivider from "./components/ConchDivider";
 import TestimonialCarousel from "./components/TestimonialCarousel";
 import ThreePillars from "./components/ThreePillars";
+import homeData from "../content/pages/home.json";
 
 export default function Home() {
+  const { hero, missionTeaser } = homeData;
+
   return (
     <div className="min-h-screen bg-canvas font-sans text-slate">
 
@@ -15,8 +18,8 @@ export default function Home() {
 
           <div className="flex justify-center -mb-4 -mt-8">
             <Image
-              src="/LogoNoBackgd-Photoroom.png"
-              alt="Heal Gurukuli — Clinical Sanctuary Initiative"
+              src={hero.logo}
+              alt={hero.logoAlt}
               width={1200}
               height={400}
               priority
@@ -25,29 +28,27 @@ export default function Home() {
           </div>
 
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            Heal Gurukuli Initiative
+            {hero.title}
           </h1>
 
           <div className="w-12 h-px bg-blue mx-auto mb-8" />
 
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed max-w-xl mx-auto mb-10 italic">
-            A dedicated therapeutic sanctuary providing specialised, trauma-informed care
-            for adult survivors of ISKCON Gurukula abuse — grounded in the belief that
-            every survivor deserves trusted trauma treatment & a dignified path toward healing.
+            {hero.subtitle}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              href="/contribute"
+              href={hero.primaryCta.href}
               className="bg-navy text-white font-sans font-medium px-7 py-3.5 rounded-lg text-sm hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
             >
-              Support the Initiative
+              {hero.primaryCta.text}
             </Link>
             <Link
-              href="/mission"
+              href={hero.secondaryCta.href}
               className="border border-navy/30 text-navy font-sans font-medium px-7 py-3.5 rounded-lg text-sm hover:bg-blue-soft active:scale-[0.98] transition-all duration-150"
             >
-              Read Our Mission
+              {hero.secondaryCta.text}
             </Link>
           </div>
         </div>
@@ -59,21 +60,19 @@ export default function Home() {
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-4xl mx-auto">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            About the Initiative
+            {missionTeaser.eyebrow}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold mb-6 leading-tight">
-            Therapeutic Sanctuary for Survivors
+            {missionTeaser.heading}
           </h2>
           <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl italic mb-6">
-            A dedicated therapeutic sanctuary providing specialised, trauma-informed care
-            for adult survivors of ISKCON Gurukula abuse — grounded in the belief that
-            every survivor deserves trusted trauma treatment & a dignified path toward healing.
+            {missionTeaser.body}
           </p>
           <Link
-            href="/mission#clinical-framework"
+            href={missionTeaser.ctaHref}
             className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors"
           >
-            Read the Full Clinical Framework
+            {missionTeaser.ctaText}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

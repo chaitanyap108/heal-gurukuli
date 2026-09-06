@@ -5,6 +5,7 @@ import GovernanceBlock from "../components/GovernanceBlock";
 import TeamCarousel from "../components/TeamCarousel";
 import ThreePillars from "../components/ThreePillars";
 import { trustees } from "../data/trustees";
+import missionData from "../content/pages/mission.json";
 
 export const metadata: Metadata = {
   title: "Our Mission — Heal Gurukuli",
@@ -13,23 +14,22 @@ export const metadata: Metadata = {
 };
 
 export default function MissionPage() {
+  const { hero, whyWeExist } = missionData;
+
   return (
     <div className="bg-canvas font-sans text-slate">
 
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            The Clinical Framework
+            {hero.eyebrow}
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            Our Mission
+            {hero.heading}
           </h1>
           <div className="w-12 h-px bg-blue mx-auto mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
-            Bridging evidence-based psychological treatment with a deep
-            understanding of the unique cultural and systemic traumas endured by
-            gurukuli survivors — so that every person can access the dignified,
-            specialised care they deserve.
+            {hero.subtitle}
           </p>
         </div>
       </section>
@@ -37,42 +37,16 @@ export default function MissionPage() {
       <section id="why-we-exist" className="py-16 md:py-20 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Why We Exist
+            {whyWeExist.eyebrow}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            To Serve Gurukulis
+            {whyWeExist.heading}
           </h2>
 
           <div className="space-y-5 font-sans text-sm md:text-base text-slate-mid leading-relaxed text-left sm:text-center">
-            <p>
-              For decades, adult survivors of gurukuli institutions have lived
-              with the compounding weight of complex trauma — trauma that is
-              rarely addressed by mainstream mental health services, which lack
-              the cultural fluency and specialist training necessary to hold this
-              work with integrity.
-            </p>
-            <p>
-              Heal Gurukuli was founded in direct response to this gap. Our
-              mandate is unambiguous: to provide specialised, trauma-informed
-              psychotherapy that is rooted in established clinical evidence,
-              culturally attuned, and delivered within a framework of
-              unwavering ethical accountability.
-            </p>
-            <p>
-              Gurukuli survivors carry a layered burden that is distinct from
-              general childhood trauma. The intersection of spiritual betrayal,
-              cultural isolation, institutional silencing, and complex family
-              enmeshment creates a particular clinical profile that demands
-              specialist understanding — not a generic therapeutic approach
-              adapted on the fly.
-            </p>
-            <p>
-              We operate from a position that survivors are not defined by their
-              trauma. Our work is oriented toward agency, integration, and the
-              recovery of each individual&rsquo;s innate capacity for wellbeing. The
-              therapeutic relationship is not a transaction — it is a secure
-              container built on trust, consistency, and clinical rigour.
-            </p>
+            {whyWeExist.paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -191,7 +165,7 @@ export default function MissionPage() {
             </h2>
             <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto">
               Our Board of Trustees provides independent oversight of the
-              Initiative&rsquo;s mission, finances, and ethical standards —
+              Initiative’s mission, finances, and ethical standards —
               ensuring Heal Gurukuli remains accountable, transparent, and
               steadfastly oriented toward the survivors it serves.
             </p>
