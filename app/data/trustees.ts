@@ -1,3 +1,10 @@
+import type { Trustee } from "./trustees"; // re-export interface for consumers
+
+import trusteeOne from "@/content/trustees/trustee-one.json";
+import trusteeTwo from "@/content/trustees/trustee-two.json";
+import trusteeThree from "@/content/trustees/trustee-three.json";
+import trusteeFour from "@/content/trustees/trustee-four.json";
+
 export interface Trustee {
   slug: string;
   name: string;
@@ -6,34 +13,10 @@ export interface Trustee {
 }
 
 export const trustees: Trustee[] = [
-  {
-    slug: "trustee-one",
-    name: "Trustee One",
-    role: "Chair of the Board",
-    shortBio:
-      "Placeholder profile. Full biography, governance experience, and statement of purpose will appear here.",
-  },
-  {
-    slug: "trustee-two",
-    name: "Trustee Two",
-    role: "Trustee",
-    shortBio:
-      "Placeholder profile. Full biography, governance experience, and statement of purpose will appear here.",
-  },
-  {
-    slug: "trustee-three",
-    name: "Trustee Three",
-    role: "Trustee",
-    shortBio:
-      "Placeholder profile. Full biography, governance experience, and statement of purpose will appear here.",
-  },
-  {
-    slug: "trustee-four",
-    name: "Trustee Four",
-    role: "Trustee",
-    shortBio:
-      "Placeholder profile. Full biography, governance experience, and statement of purpose will appear here.",
-  },
+  trusteeOne,
+  trusteeTwo,
+  trusteeThree,
+  trusteeFour,
 ];
 
 export function getTrusteeBySlug(slug: string): Trustee | undefined {
