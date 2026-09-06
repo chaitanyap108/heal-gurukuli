@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import volunteerData from "@/content/pages/volunteer.json";
 
 export const metadata: Metadata = {
   title: "Volunteer with Us — Heal Gurukuli",
@@ -7,21 +8,64 @@ export const metadata: Metadata = {
     "Explore volunteer opportunities, support our sanctuary, and learn about our safe intake and background verification process.",
 };
 
+interface Role {
+  title: string;
+  description: string;
+  requirementText: string;
+}
+
+interface Way {
+  title: string;
+  description: string;
+  badgeText: string;
+}
+
+interface Highlight {
+  title: string;
+  description: string;
+}
+
+interface VolunteerData {
+  hero: { eyebrow: string; heading: string; subtitle: string };
+  rolesSection: {
+    eyebrow: string;
+    heading: string;
+    description: string;
+    roles: Role[];
+  };
+  safeguarding: { heading: string; description: string };
+  otherWaysSection: {
+    eyebrow: string;
+    heading: string;
+    ways: Way[];
+  };
+  cpdPlacement: {
+    eyebrow: string;
+    heading: string;
+    paragraphs: string[];
+    highlights: Highlight[];
+    ctaText: string;
+    ctaHref: string;
+  };
+}
+
 export default function VolunteerPage() {
+  const data = volunteerData as VolunteerData;
+
   return (
     <div className="bg-canvas font-sans text-slate min-h-screen">
       {/* ─── HERO ───────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            Get Involved
+            {data.hero.eyebrow}
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            Volunteer with Us
+            {data.hero.heading}
           </h1>
           <div className="w-12 h-px bg-blue mx-auto mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
-            Support the clinical sanctuary. We offer various opportunities for advocates, administrators, and survivors to contribute their skills toward our collective healing mission.
+            {data.hero.subtitle}
           </p>
         </div>
       </section>
@@ -34,41 +78,20 @@ export default function VolunteerPage() {
             {/* Roles list */}
             <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="font-serif text-2xl text-navy font-semibold mb-4">Open Volunteer Roles</h2>
+                <h2 className="font-serif text-2xl text-navy font-semibold mb-4">{data.rolesSection.heading}</h2>
                 <p className="font-sans text-sm text-slate-mid leading-relaxed mb-6">
-                  Volunteering with a trauma-recovery initiative requires dedication to safety and confidentiality. We have structured roles depending on your experience and clinical background:
+                  {data.rolesSection.description}
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {[
-                  {
-                    title: "Peer Group Assistant",
-                    desc: "Support our registered psychotherapists during online peer facilitation groups. Requires a background in social care, mental health counseling, or peer group training.",
-                    req: "DBS Check + 10hr Specialist Training",
-                  },
-                  {
-                    title: "Administrative Aid",
-                    desc: "Help coordinate session logs, verify donations, manage newsletter distributions, and handle logistics for public outreach campaigns.",
-                    req: "GDPR training module completion",
-                  },
-                  {
-                    title: "Tech & Security Volunteer",
-                    desc: "Maintain our website, support encrypted portal integrations, and advise on secure database setups for maximum patient anonymity.",
-                    req: "Professional IT/Security experience",
-                  },
-                  {
-                    title: "Social Media Outreach Support",
-                    desc: "Draft content, run educational social campaigns, and distribute info packets to clinics, spiritual centers, and survivor organizations.",
-                    req: "Alignment with ethical communication rules",
-                  },
-                ].map((role) => (
-                  <div key={role.title} className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-3 shadow-sm hover:border-blue/20 transition-all">
+                {data.rolesSection.roles.map((role: Role, index: number) => (
+                  <div key={index} className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-3 shadow-sm hover:border-blue/20 transition-all">
                     <h3 className="font-serif text-lg text-navy font-semibold">{role.title}</h3>
-                    <p className="font-sans text-xs text-slate-mid leading-relaxed flex-1 italic">{role.desc}</p>
+                    <p className="font-sans text-xs text-slate-mid leading-relaxed flex-1 italic">{role.description}</p>
                     <div className="border-t border-border pt-3 mt-1 flex justify-between items-center text-[10px]">
                       <span className="text-slate-light uppercase tracking-wider">Requirement</span>
-                      <span className="text-blue font-semibold">{role.req}</span>
+                      <span className="text-blue font-semibold">{role.requirementText}</span>
                     </div>
                   </div>
                 ))}
@@ -80,10 +103,10 @@ export default function VolunteerPage() {
                   <svg className="w-5 h-5 text-blue shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
-                  Safeguarding &amp; Training
+                  {data.safeguarding.heading}
                 </h4>
                 <p className="font-sans text-xs text-slate-mid leading-relaxed">
-                  To protect the safety of our community, all volunteers working near clinical materials or interacting with survivors must undergo comprehensive identity checks, references, and a specialized training workshop regarding boundaries and cultic trauma dynamics.
+                  {data.safeguarding.description}
                 </p>
               </div>
             </div>
@@ -133,10 +156,9 @@ export default function VolunteerPage() {
                       className="block w-full px-3 py-2.5 border border-border rounded-lg bg-canvas text-xs text-slate-mid focus:outline-none focus:ring-1 focus:ring-blue focus:border-blue transition-all"
                     >
                       <option value="">Select a role...</option>
-                      <option value="peer">Peer Group Assistant</option>
-                      <option value="admin">Administrative Aid</option>
-                      <option value="tech">Tech &amp; Security</option>
-                      <option value="advocacy">Social Media Outreach Support</option>
+                      {data.rolesSection.roles.map((role: Role, index: number) => (
+                        <option key={index} value={role.title.toLowerCase().replace(/\s+/g, "-")}>{role.title}</option>
+                      ))}
                     </select>
                   </div>
 
@@ -198,10 +220,10 @@ export default function VolunteerPage() {
         <div className="max-w-4xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            More Ways to Contribute
+            {data.otherWaysSection.eyebrow}
           </p>
           <h2 className="font-serif text-2xl md:text-3xl text-navy font-semibold mb-3">
-            Other Ways to Support the Sanctuary
+            {data.otherWaysSection.heading}
           </h2>
           <p className="font-sans text-sm text-slate-mid italic mb-10">
             Beyond our formal volunteer roles, there are meaningful ways to
@@ -210,71 +232,24 @@ export default function VolunteerPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-            {/* Forum Monitoring */}
-            <div className="bg-canvas border border-border rounded-xl p-6 flex flex-col gap-4">
-              <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/10 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                </svg>
+            {data.otherWaysSection.ways.map((way: Way, index: number) => (
+              <div key={index} className="bg-canvas border border-border rounded-xl p-6 flex flex-col gap-4">
+                <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/10 flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                  </svg>
+                </div>
+                <h3 className="font-serif text-lg text-navy font-semibold">{way.title}</h3>
+                <p className="font-sans text-xs text-slate-mid leading-relaxed italic flex-1">
+                  {way.description}
+                </p>
+                <div className="border-t border-border pt-3">
+                  <span className="font-sans text-[10px] text-blue font-semibold uppercase tracking-wider">
+                    {way.badgeText}
+                  </span>
+                </div>
               </div>
-              <h3 className="font-serif text-lg text-navy font-semibold">Forum Monitoring</h3>
-              <p className="font-sans text-xs text-slate-mid leading-relaxed italic flex-1">
-                Help maintain the safety and integrity of our Community Forum by
-                monitoring threads for distress signals, moderating tone, and
-                flagging posts that may require clinical attention. This role
-                requires empathy, discretion, and adherence to our community
-                safeguarding guidelines.
-              </p>
-              <div className="border-t border-border pt-3">
-                <span className="font-sans text-[10px] text-blue font-semibold uppercase tracking-wider">
-                  Training provided · Remote
-                </span>
-              </div>
-            </div>
-
-            {/* Art & Creative Contributions */}
-            <div className="bg-canvas border border-border rounded-xl p-6 flex flex-col gap-4">
-              <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/10 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
-                </svg>
-              </div>
-              <h3 className="font-serif text-lg text-navy font-semibold">Art &amp; Creative Contributions</h3>
-              <p className="font-sans text-xs text-slate-mid leading-relaxed italic flex-1">
-                Art, poetry, illustration, and creative writing have long been
-                healing tools. We welcome contributions from survivors and
-                supporters who wish to offer creative work for our resource
-                library, community spaces, or fundraising materials. All
-                contributions are shared with your permission and attributed
-                as you prefer.
-              </p>
-              <div className="border-t border-border pt-3">
-                <span className="font-sans text-[10px] text-blue font-semibold uppercase tracking-wider">
-                  Open to all · Your terms
-                </span>
-              </div>
-            </div>
-
-            {/* Event Help */}
-            <div className="bg-canvas border border-border rounded-xl p-6 flex flex-col gap-4">
-              <div className="w-10 h-10 rounded-full bg-blue-soft border border-blue/10 flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                </svg>
-              </div>
-              <h3 className="font-serif text-lg text-navy font-semibold">Event Assistance</h3>
-              <p className="font-sans text-xs text-slate-mid leading-relaxed italic flex-1">
-                Support the coordination of community awareness events, fundraising
-                gatherings, and online webinars. This includes logistics, promotion,
-                technical setup for virtual events, and participant communication.
-                A meaningful way to contribute without clinical involvement.
-              </p>
-              <div className="border-t border-border pt-3">
-                <span className="font-sans text-[10px] text-blue font-semibold uppercase tracking-wider">
-                  Flexible hours · Remote &amp; in-person
-                </span>
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>
@@ -286,48 +261,23 @@ export default function VolunteerPage() {
           <div className="bg-blue-soft border border-blue/15 rounded-2xl p-8 md:p-10">
 
             <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-              For Aspiring Mental Health Professionals
+              {data.cpdPlacement.eyebrow}
             </p>
             <h2 className="font-serif text-2xl md:text-3xl text-navy font-semibold mb-6">
-              Excellent CPD &amp; Work Experience for the Mental Health Field
+              {data.cpdPlacement.heading}
             </h2>
 
             <div className="space-y-4 font-sans text-sm text-slate-mid leading-relaxed mb-8">
-              <p>
-                Heal Gurukuli is led by{" "}
-                <strong className="text-navy font-medium">
-                  Caitanya Lila, a UKCP-Registered Psychotherapist
-                </strong>{" "}
-                and the initiative&rsquo;s clinical founder. This means that
-                volunteering here is not only meaningful — it is formally
-                valuable for anyone building a career in counselling,
-                psychotherapy, psychology, or social work.
-              </p>
-              <p>
-                Our environment provides direct exposure to trauma-informed clinical
-                practice, safeguarding frameworks, multi-disciplinary team dynamics,
-                and the ethical standards required by the UKCP and BACP. Volunteers
-                working in supported roles can reference this placement directly on
-                their CV and in applications to training programmes.
-              </p>
-              <p>
-                For students on placement programmes, we can provide formal written
-                references from the clinical lead, as well as structured reflection
-                opportunities to support your professional development portfolio.
-                We particularly welcome trainee counsellors, psychology graduates,
-                and MSc psychotherapy students.
-              </p>
+              {data.cpdPlacement.paragraphs.map((paragraph: string, index: number) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              {[
-                { title: "UKCP-Supervised Environment", desc: "All clinical practice is overseen by a registered UKCP practitioner" },
-                { title: "Formal References Available", desc: "Written professional references provided by the clinical lead on request" },
-                { title: "BACP-Aligned Standards", desc: "Work experience that aligns with counselling and psychotherapy training requirements" },
-              ].map(({ title, desc }) => (
-                <div key={title} className="bg-canvas-white/60 border border-blue/10 rounded-xl p-4">
-                  <p className="font-sans text-xs text-navy font-semibold mb-1">{title}</p>
-                  <p className="font-sans text-xs text-slate-mid leading-relaxed">{desc}</p>
+              {data.cpdPlacement.highlights.map((highlight: Highlight, index: number) => (
+                <div key={index} className="bg-canvas-white/60 border border-blue/10 rounded-xl p-4">
+                  <p className="font-sans text-xs text-navy font-semibold mb-1">{highlight.title}</p>
+                  <p className="font-sans text-xs text-slate-mid leading-relaxed">{highlight.description}</p>
                 </div>
               ))}
             </div>
@@ -339,10 +289,10 @@ export default function VolunteerPage() {
             </p>
 
             <Link
-              href="/contact/get-in-touch"
+              href={data.cpdPlacement.ctaHref}
               className="inline-flex items-center gap-2 bg-navy text-white font-sans text-xs font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-95 transition-all duration-150"
             >
-              Get in Touch About a Placement
+              {data.cpdPlacement.ctaText}
               <span aria-hidden="true">→</span>
             </Link>
 

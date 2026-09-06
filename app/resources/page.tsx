@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import resourcesData from "@/content/pages/resources.json";
 
 export const metadata: Metadata = {
   title: "Therapeutic Resources & Self-Guided Support — Heal Gurukuli",
@@ -7,25 +8,44 @@ export const metadata: Metadata = {
     "Accessible, trauma-informed tools, grounding techniques, and curated readings to support your self-guided healing journey.",
 };
 
+interface Guide {
+  tag: string;
+  title: string;
+  description: string;
+  readTimeOrType: string;
+  href: string;
+}
+
+interface Category {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  guides: Guide[];
+}
+
+interface ResourcesData {
+  hero: { eyebrow: string; heading: string; subtitle: string };
+  categories: Category[];
+}
+
 export default function ResourcesPage() {
+  const data = resourcesData as ResourcesData;
+
   return (
     <div className="bg-canvas font-sans text-slate">
       {/* ─── PAGE HERO ──────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
         <div className="max-w-3xl mx-auto">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            Self-Guided Support
+            {data.hero.eyebrow}
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6.5xl text-navy font-semibold leading-tight mb-6">
-            Therapeutic Resources & Self-Guided Support
+            {data.hero.heading}
           </h1>
           <div className="w-12 h-px bg-blue mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
-            Healing is not confined to scheduled sessions; it is an ongoing, everyday practice.
-            This resource hub is designed to offer accessible, trauma-informed tools to support
-            your journey. Here, you will find grounded psychoeducation, practical nervous system
-            regulation techniques, and curated external links to help you process deeply rooted
-            pain and rebuild emotional sovereignty at your own pace.
+            {data.hero.subtitle}
           </p>
         </div>
       </section>
@@ -42,30 +62,15 @@ export default function ResourcesPage() {
                   Categories
                 </p>
                 <nav className="flex flex-col gap-3 font-sans text-sm text-slate-mid">
-                  <a
-                    href="#institutional-trauma"
-                    className="hover:text-navy hover:translate-x-1 transition-all duration-150"
-                  >
-                    1. Institutional Trauma
-                  </a>
-                  <a
-                    href="#grounding-techniques"
-                    className="hover:text-navy hover:translate-x-1 transition-all duration-150"
-                  >
-                    2. Grounding & Regulation
-                  </a>
-                  <a
-                    href="#external-support"
-                    className="hover:text-navy hover:translate-x-1 transition-all duration-150"
-                  >
-                    3. External Support & Reading
-                  </a>
-                  <a
-                    href="#understanding-therapy"
-                    className="hover:text-navy hover:translate-x-1 transition-all duration-150"
-                  >
-                    4. Understanding Therapy
-                  </a>
+                  {data.categories.map((cat: Category) => (
+                    <a
+                      key={cat.id}
+                      href={`#${cat.id}`}
+                      className="hover:text-navy hover:translate-x-1 transition-all duration-150"
+                    >
+                      {cat.number}. {cat.title.split(". ")[1]}
+                    </a>
+                  ))}
                 </nav>
                 <div className="bg-blue-soft border border-blue/10 rounded-xl p-5 mt-6">
                   <h4 className="font-serif text-sm text-navy font-semibold mb-2">Need Clinical Support?</h4>
@@ -86,205 +91,41 @@ export default function ResourcesPage() {
             {/* Resources List */}
             <div className="lg:col-span-3 space-y-16">
               
-              {/* Category 1 */}
-              <section id="institutional-trauma" className="scroll-mt-24 space-y-6">
-                <div>
-                  <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
-                    Category 01
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
-                    1. Understanding Institutional Trauma
-                  </h2>
-                  <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
-                    Psychoeducational insights to help validate and conceptualize the unique challenges of escaping and healing from high-demand groups and systemic abuse.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Psychoeducation
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        The Dynamics of Institutional Betrayal
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        Understanding how trust within structured organizations can be weaponized, leading to profound systemic trauma and complex post-traumatic responses.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">5 min read</span>
+              {data.categories.map((category: Category) => (
+                <section key={category.id} id={category.id} className="scroll-mt-24 space-y-6">
+                  <div>
+                    <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
+                      Category {category.number}
+                    </p>
+                    <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
+                      {category.title}
+                    </h2>
+                    <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
+                    <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
+                      {category.description}
+                    </p>
                   </div>
 
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Analysis
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        Deconstructing Spiritual Coercion
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        An examination of how spiritual authority is sometimes misused to bypass personal boundaries, stifle dissent, and invalidate authentic emotional experiences.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">7 min read</span>
-                  </div>
-                </div>
-              </section>
-
-              {/* Category 2 */}
-              <section id="grounding-techniques" className="scroll-mt-24 space-y-6">
-                <div>
-                  <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
-                    Category 02
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
-                    2. Grounding & Regulation Techniques
-                  </h2>
-                  <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
-                    Practical somatic tools and exercises to help de-escalate acute nervous system activation, hyperarousal, and emotional flashbacks.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Practice
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        Navigating Triggers with 5-4-3-2-1 Grounding
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        A sensory-anchoring guide that helps bring your consciousness back to the immediate physical space when memories or anxiety threaten to overwhelm you.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">Step-by-step exercise</span>
-                  </div>
-
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Somatic Tool
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        Vagus Nerve Stimulation & Breathwork
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        Simple breathing patterns (such as the physiological sigh) designed to activate the parasympathetic nervous system and communicate safety to the body.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">10 min somatic guide</span>
-                  </div>
-                </div>
-              </section>
-
-              {/* Category 3 */}
-              <section id="external-support" className="scroll-mt-24 space-y-6">
-                <div>
-                  <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
-                    Category 03
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
-                    3. External Support & Recommended Reading
-                  </h2>
-                  <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
-                    Curated resources and literature from trusted trauma researchers and independent survivor support networks.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Reading List
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        Essential Trauma Literature
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        Curated works on complex trauma (CPTSD), attachment, and nervous system recovery, including titles by Bessel van der Kolk and Pete Walker.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">Recommended books</span>
-                  </div>
-
-                  <div className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                        Helplines
-                      </span>
-                      <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                        Crisis Hotlines & Advocacy
-                      </h3>
-                      <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                        Independent external organisations and 24/7 helplines offering immediate support, advocacy, and crisis counsel around the globe.
-                      </p>
-                    </div>
-                    <span className="text-xs text-slate-light font-medium mt-2">Emergency numbers</span>
-                  </div>
-                </div>
-              </section>
-
-              {/* Category 4 — Understanding Therapy */}
-              <section id="understanding-therapy" className="scroll-mt-24 space-y-6">
-                <div>
-                  <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
-                    Category 04
-                  </p>
-                  <h2 className="font-serif text-2xl sm:text-3xl text-navy font-semibold">
-                    4. Understanding Therapy
-                  </h2>
-                  <div className="w-8 h-px bg-blue/30 mt-3 mb-4" />
-                  <p className="font-sans text-sm text-slate-mid leading-relaxed italic">
-                    Plain-language guides to the therapeutic modalities used at Heal Gurukuli — so you can make informed, empowered decisions about your care.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {[
-                    {
-                      tag: "Psychotherapy",
-                      title: "What Is Integrative Psychotherapy?",
-                      body: "An overview of the pluralistic, person-centred approach used by our clinical team — how it draws on multiple modalities and why it suits complex trauma presentations.",
-                    },
-                    {
-                      tag: "EMDR",
-                      title: "How EMDR Works",
-                      body: "A plain-language explainer on Eye Movement Desensitisation and Reprocessing — what happens in a session, why it works for PTSD, and what to expect from the process.",
-                    },
-                    {
-                      tag: "Somatic Therapy",
-                      title: "The Body Keeps the Score: Somatic Approaches",
-                      body: "Why trauma is held in the body and how somatic experiencing, body scanning, and movement-based practices help restore nervous system safety.",
-                    },
-                    {
-                      tag: "TF-CBT",
-                      title: "Trauma-Focused CBT Explained",
-                      body: "How Trauma-Focused Cognitive Behavioural Therapy differs from standard CBT, and why it is effective for the avoidance, hypervigilance, and distorted beliefs that follow institutional abuse.",
-                    },
-                  ].map(({ tag, title, body }) => (
-                    <div key={title} className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
-                      <div>
-                        <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
-                          {tag}
-                        </span>
-                        <h3 className="font-serif text-lg text-navy font-semibold mb-2">
-                          {title}
-                        </h3>
-                        <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
-                          {body}
-                        </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {category.guides.map((guide: Guide, idx: number) => (
+                      <div key={idx} className="bg-canvas-white border border-border rounded-xl p-6 hover:border-blue/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between">
+                        <div>
+                          <span className="inline-block bg-blue-soft text-blue font-sans text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded mb-4">
+                            {guide.tag}
+                          </span>
+                          <h3 className="font-serif text-lg text-navy font-semibold mb-2">
+                            {guide.title}
+                          </h3>
+                          <p className="font-sans text-sm text-slate-mid leading-relaxed mb-4 italic">
+                            {guide.description}
+                          </p>
+                        </div>
+                        <span className="text-xs text-slate-light font-medium mt-2">{guide.readTimeOrType}</span>
                       </div>
-                      <span className="text-xs text-slate-light font-medium mt-2">Guide — coming soon</span>
-                    </div>
-                  ))}
-                </div>
-              </section>
+                    ))}
+                  </div>
+                </section>
+              ))}
 
             </div>
           </div>

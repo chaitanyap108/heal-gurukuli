@@ -3,6 +3,7 @@ import Link from "next/link";
 import ClinicalImpact from "../components/ClinicalImpact";
 import ConchDivider from "../components/ConchDivider";
 import TestimonialCarousel from "../components/TestimonialCarousel";
+import impactData from "@/content/pages/impact.json";
 
 export const metadata: Metadata = {
   title: "See the Impact — Heal Gurukuli",
@@ -10,16 +11,20 @@ export const metadata: Metadata = {
     "Transparent clinical outcomes data showing the measurable healing impact of community donations on gurukuli survivors.",
 };
 
-const stats = [
-  { value: "84%", label: "Reduction in PTSD symptom severity", sub: "after completing clinical programme", source: "PCL-5 score tracking" },
-  { value: "92%", label: "Report improved emotional regulation", sub: "at 6-month follow-up", source: "Clinician-rated GAD-7" },
-  { value: "72%", label: "Return to stable daily functioning", sub: "within one year of treatment", source: "WHO Disability Scale" },
-  { value: "£45", label: "Funds one full therapy session", sub: "for a survivor in need", source: "Direct cost per session" },
-  { value: "12+", label: "Median sessions per completed course", sub: "individual therapy programme", source: "Treatment plan data" },
-  { value: "4", label: "Countries currently served", sub: "UK, USA, India, Australia", source: "Client intake geography" },
-];
+interface ImpactData {
+  hero: { eyebrow: string; heading: string; subtitle: string };
+  metricsSection: {
+    eyebrow: string;
+    heading: string;
+    stats: Array<{ value: string; label: string; subtext: string; source: string }>;
+  };
+  outcomesSection: { eyebrow: string; heading: string; description: string };
+  documentary: { eyebrow: string; heading: string; description: string; statusBadge: string };
+}
 
 export default function ImpactPage() {
+  const data = impactData as ImpactData;
+
   return (
     <div className="bg-canvas font-sans text-slate min-h-screen">
 
@@ -27,17 +32,14 @@ export default function ImpactPage() {
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
         <div className="max-w-3xl mx-auto">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            Clinical Outcomes
+            {data.hero.eyebrow}
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            See the Impact
+            {data.hero.heading}
           </h1>
           <div className="w-12 h-px bg-blue mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
-            Community generosity translates directly into measurable healing.
-            Every session funded, every group supported — tracked with
-            transparent, standardised clinical data so you can see exactly
-            where your contribution goes and what it achieves.
+            {data.hero.subtitle}
           </p>
         </div>
       </section>
@@ -47,10 +49,10 @@ export default function ImpactPage() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-10">
             <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-3">
-              At a Glance
+              {data.metricsSection.eyebrow}
             </p>
             <h2 className="font-serif text-2xl md:text-3xl text-navy font-semibold mb-2">
-              The Numbers Behind the Healing
+              {data.metricsSection.heading}
             </h2>
             <p className="font-sans text-xs text-slate-mid italic">
               All figures compiled from anonymised, aggregated clinical data with full participant consent.
@@ -58,18 +60,18 @@ export default function ImpactPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {stats.map(({ value, label, sub, source }) => (
+            {data.metricsSection.stats.map((stat, index: number) => (
               <div
-                key={value}
+                key={index}
                 className="bg-canvas-white border border-border rounded-xl p-6 flex flex-col gap-2 hover:border-blue/30 hover:shadow-sm transition-all duration-200"
               >
                 <span className="font-serif text-4xl text-navy font-semibold leading-none">
-                  {value}
+                  {stat.value}
                 </span>
-                <p className="font-sans text-sm text-slate font-medium leading-snug">{label}</p>
-                <p className="font-sans text-xs text-slate-mid italic">{sub}</p>
+                <p className="font-sans text-sm text-slate font-medium leading-snug">{stat.label}</p>
+                <p className="font-sans text-xs text-slate-mid italic">{stat.subtext}</p>
                 <p className="font-sans text-[10px] text-slate-light uppercase tracking-wider mt-1 border-t border-border pt-2">
-                  Source: {source}
+                  Source: {stat.source}
                 </p>
               </div>
             ))}
@@ -81,10 +83,10 @@ export default function ImpactPage() {
 
       {/* ─── CLINICAL IMPACT CHARTS ─────────────────────────────────── */}
       <ClinicalImpact
-        eyebrow="Detailed Clinical Outcomes"
-        heading="Real Data, Real Healing"
+        eyebrow={data.outcomesSection.eyebrow}
+        heading={data.outcomesSection.heading}
         subtitle="Standardised symptom metrics before and after clinical care"
-        body="We partner with clinical supervisors to track PHQ-9 (depression), GAD-7 (anxiety), and PCL-5 (PTSD) scores at intake and discharge. The interactive dashboard below shows the average change in scores for survivors completing our programme — compiled from anonymised, aggregated clinical data."
+        body={data.outcomesSection.description}
         className="border-t-0"
       />
 
@@ -115,7 +117,7 @@ export default function ImpactPage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[1, 2, 3, 4].map((n) => (
+            {[1, 2, 3, 4].map((n: number) => (
               <div
                 key={n}
                 className="bg-canvas-white border border-dashed border-border rounded-xl p-8 flex flex-col gap-4 items-center justify-center text-center min-h-[220px]"
@@ -149,16 +151,13 @@ export default function ImpactPage() {
         <div className="max-w-4xl mx-auto">
 
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Future Documentary
+            {data.documentary.eyebrow}
           </p>
           <h2 className="font-serif text-2xl md:text-3xl text-navy font-semibold mb-3">
-            Video Testimonials &amp; Documentary
+            {data.documentary.heading}
           </h2>
           <p className="font-sans text-sm text-slate-mid italic mb-10">
-            We are working toward a documentary series capturing the lived
-            experience of gurukuli survivors and the transformative impact of
-            structured clinical care. Films will be produced with full informed
-            consent and handled with the highest sensitivity.
+            {data.documentary.description}
           </p>
 
           {/* Primary video placeholder */}
@@ -181,13 +180,13 @@ export default function ImpactPage() {
               <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
               </svg>
-              In production — expected 2026
+              {data.documentary.statusBadge}
             </span>
           </div>
 
           {/* Short-form video grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {["Survivor Short #1", "Survivor Short #2", "Survivor Short #3"].map((title) => (
+            {["Survivor Short #1", "Survivor Short #2", "Survivor Short #3"].map((title: string) => (
               <div
                 key={title}
                 className="bg-canvas border border-dashed border-border rounded-xl aspect-video flex flex-col items-center justify-center gap-2 p-4"
