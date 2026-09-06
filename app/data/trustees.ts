@@ -1,5 +1,3 @@
-import type { Trustee } from "./trustees"; // re-export interface for consumers
-
 import trusteeOne from "@/content/trustees/trustee-one.json";
 import trusteeTwo from "@/content/trustees/trustee-two.json";
 import trusteeThree from "@/content/trustees/trustee-three.json";

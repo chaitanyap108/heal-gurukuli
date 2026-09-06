@@ -1,5 +1,3 @@
-import type { Clinician } from "./clinicians"; // re-export interface for consumers
-
 import caitanyaLila from "@/content/clinicians/caitanya-lila.json";
 import liamSterling from "@/content/clinicians/liam-sterling.json";
 import sarahJenkins from "@/content/clinicians/sarah-jenkins.json";
