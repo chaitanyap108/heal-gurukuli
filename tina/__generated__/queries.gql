@@ -1,0 +1,109 @@
+query clinicians($relativePath: String!) {
+  clinicians(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CliniciansParts
+  }
+}
+
+query cliniciansConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CliniciansFilter) {
+  cliniciansConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CliniciansParts
+      }
+    }
+  }
+}
+
+query trustees($relativePath: String!) {
+  trustees(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TrusteesParts
+  }
+}
+
+query trusteesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TrusteesFilter) {
+  trusteesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TrusteesParts
+      }
+    }
+  }
+}

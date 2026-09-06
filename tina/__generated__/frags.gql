@@ -1,0 +1,19 @@
+fragment CliniciansParts on Clinicians {
+  __typename
+  slug
+  name
+  title
+  image
+  credentials
+  shortBio
+  bio
+  specialties
+}
+
+fragment TrusteesParts on Trustees {
+  __typename
+  slug
+  name
+  role
+  shortBio
+}
