@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/dev.mjs",
+    "build": "tinacms build --skip-cloud-checks && node scripts/build.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tina:patch-admin": "node scripts/ensure-local-admin.mjs"
   },
   "dependencies": {
+    "@tinacms/cli": "^2.6.1",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "tinacms": "^3.12.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
