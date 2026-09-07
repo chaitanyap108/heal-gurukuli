@@ -17,3 +17,280 @@ fragment TrusteesParts on Trustees {
   role
   shortBio
 }
+
+fragment HomeParts on Home {
+  __typename
+  hero {
+    __typename
+    title
+    subtitle
+    logo
+    logoAlt
+    primaryCta {
+      __typename
+      text
+      href
+    }
+    secondaryCta {
+      __typename
+      text
+      href
+    }
+  }
+  missionTeaser {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaText
+    ctaHref
+  }
+}
+
+fragment MissionParts on Mission {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  whyWeExist {
+    __typename
+    eyebrow
+    heading
+    paragraphs
+  }
+}
+
+fragment TherapyParts on Therapy {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  stepsSection {
+    __typename
+    eyebrow
+    heading
+    steps {
+      __typename
+      stepNumber
+      title
+      description
+    }
+  }
+  intakeTeaser {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    disclaimer
+  }
+  oneToOneTherapy {
+    __typename
+    eyebrow
+    heading
+    bodyParagraphs
+  }
+  modalitiesSection {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    modalities {
+      __typename
+      title
+      description
+      linkText
+      linkHref
+    }
+  }
+  complaints {
+    __typename
+    eyebrow
+    heading
+    body
+    pdfLabel
+    pdfHref
+  }
+}
+
+fragment ContributeParts on Contribute {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  fundraisingGoal {
+    __typename
+    targetAmount
+    raisedAmount
+    bannerText
+  }
+  tiersSection {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    tiers {
+      __typename
+      name
+      amount
+      badge
+      features
+      ctaLabel
+      ctaHref
+    }
+  }
+  transparencyNote {
+    __typename
+    heading
+    text
+  }
+}
+
+fragment SharedParts on Shared {
+  __typename
+  threePillars {
+    __typename
+    title
+    subtitle
+    eyebrow
+    pillars {
+      __typename
+      number
+      title
+      body
+      ctaText
+      ctaHref
+    }
+  }
+  testimonials {
+    __typename
+    eyebrow
+    heading
+    note
+    quotes {
+      __typename
+      quote
+      attribution
+      detail
+    }
+  }
+}
+
+fragment ImpactParts on Impact {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  metricsSection {
+    __typename
+    eyebrow
+    heading
+    stats {
+      __typename
+      value
+      label
+      subtext
+      source
+    }
+  }
+  outcomesSection {
+    __typename
+    eyebrow
+    heading
+    description
+  }
+  documentary {
+    __typename
+    eyebrow
+    heading
+    description
+    statusBadge
+  }
+}
+
+fragment ResourcesParts on Resources {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  categories {
+    __typename
+    id
+    number
+    title
+    description
+    guides {
+      __typename
+      tag
+      title
+      description
+      readTimeOrType
+      href
+    }
+  }
+}
+
+fragment VolunteerParts on Volunteer {
+  __typename
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  rolesSection {
+    __typename
+    eyebrow
+    heading
+    description
+    roles {
+      __typename
+      title
+      description
+      requirementText
+    }
+  }
+  safeguarding {
+    __typename
+    heading
+    description
+  }
+  otherWaysSection {
+    __typename
+    eyebrow
+    heading
+    ways {
+      __typename
+      title
+      description
+      badgeText
+    }
+  }
+  cpdPlacement {
+    __typename
+    eyebrow
+    heading
+    paragraphs
+    highlights {
+      __typename
+      title
+      description
+    }
+    ctaText
+    ctaHref
+  }
+}

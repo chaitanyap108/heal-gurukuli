@@ -58,11 +58,35 @@ type Query {
   cliniciansConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CliniciansFilter): CliniciansConnection!
   trustees(relativePath: String): Trustees!
   trusteesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TrusteesFilter): TrusteesConnection!
+  home(relativePath: String): Home!
+  homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
+  mission(relativePath: String): Mission!
+  missionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: MissionFilter): MissionConnection!
+  therapy(relativePath: String): Therapy!
+  therapyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TherapyFilter): TherapyConnection!
+  contribute(relativePath: String): Contribute!
+  contributeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContributeFilter): ContributeConnection!
+  shared(relativePath: String): Shared!
+  sharedConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SharedFilter): SharedConnection!
+  impact(relativePath: String): Impact!
+  impactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ImpactFilter): ImpactConnection!
+  resources(relativePath: String): Resources!
+  resourcesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ResourcesFilter): ResourcesConnection!
+  volunteer(relativePath: String): Volunteer!
+  volunteerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: VolunteerFilter): VolunteerConnection!
 }
 
 input DocumentFilter {
   clinicians: CliniciansFilter
   trustees: TrusteesFilter
+  home: HomeFilter
+  mission: MissionFilter
+  therapy: TherapyFilter
+  contribute: ContributeFilter
+  shared: SharedFilter
+  impact: ImpactFilter
+  resources: ResourcesFilter
+  volunteer: VolunteerFilter
 }
 
 type DocumentConnectionEdges {
@@ -88,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Clinicians | Trustees | Folder
+union DocumentNode = Clinicians | Trustees | Home | Mission | Therapy | Contribute | Shared | Impact | Resources | Volunteer | Folder
 
 type Clinicians implements Node & Document {
   slug: String!
@@ -168,6 +192,744 @@ type TrusteesConnection implements Connection {
   edges: [TrusteesConnectionEdges]
 }
 
+type HomeHeroPrimaryCta {
+  text: String
+  href: String
+}
+
+type HomeHeroSecondaryCta {
+  text: String
+  href: String
+}
+
+type HomeHero {
+  title: String
+  subtitle: String
+  logo: String
+  logoAlt: String
+  primaryCta: HomeHeroPrimaryCta
+  secondaryCta: HomeHeroSecondaryCta
+}
+
+type HomeMissionTeaser {
+  eyebrow: String
+  heading: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+type Home implements Node & Document {
+  hero: HomeHero
+  missionTeaser: HomeMissionTeaser
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input HomeHeroPrimaryCtaFilter {
+  text: StringFilter
+  href: StringFilter
+}
+
+input HomeHeroSecondaryCtaFilter {
+  text: StringFilter
+  href: StringFilter
+}
+
+input HomeHeroFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  logo: ImageFilter
+  logoAlt: StringFilter
+  primaryCta: HomeHeroPrimaryCtaFilter
+  secondaryCta: HomeHeroSecondaryCtaFilter
+}
+
+input HomeMissionTeaserFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  body: StringFilter
+  ctaText: StringFilter
+  ctaHref: StringFilter
+}
+
+input HomeFilter {
+  hero: HomeHeroFilter
+  missionTeaser: HomeMissionTeaserFilter
+}
+
+type HomeConnectionEdges {
+  cursor: String!
+  node: Home
+}
+
+type HomeConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HomeConnectionEdges]
+}
+
+type MissionHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type MissionWhyWeExist {
+  eyebrow: String
+  heading: String
+  paragraphs: [String]
+}
+
+type Mission implements Node & Document {
+  hero: MissionHero
+  whyWeExist: MissionWhyWeExist
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input MissionHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input MissionWhyWeExistFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  paragraphs: StringFilter
+}
+
+input MissionFilter {
+  hero: MissionHeroFilter
+  whyWeExist: MissionWhyWeExistFilter
+}
+
+type MissionConnectionEdges {
+  cursor: String!
+  node: Mission
+}
+
+type MissionConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [MissionConnectionEdges]
+}
+
+type TherapyHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type TherapyStepsSectionSteps {
+  stepNumber: String
+  title: String
+  description: String
+}
+
+type TherapyStepsSection {
+  eyebrow: String
+  heading: String
+  steps: [TherapyStepsSectionSteps]
+}
+
+type TherapyIntakeTeaser {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  disclaimer: String
+}
+
+type TherapyOneToOneTherapy {
+  eyebrow: String
+  heading: String
+  bodyParagraphs: [String]
+}
+
+type TherapyModalitiesSectionModalities {
+  title: String
+  description: String
+  linkText: String
+  linkHref: String
+}
+
+type TherapyModalitiesSection {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  modalities: [TherapyModalitiesSectionModalities]
+}
+
+type TherapyComplaints {
+  eyebrow: String
+  heading: String
+  body: String
+  pdfLabel: String
+  pdfHref: String
+}
+
+type Therapy implements Node & Document {
+  hero: TherapyHero
+  stepsSection: TherapyStepsSection
+  intakeTeaser: TherapyIntakeTeaser
+  oneToOneTherapy: TherapyOneToOneTherapy
+  modalitiesSection: TherapyModalitiesSection
+  complaints: TherapyComplaints
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TherapyHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input TherapyStepsSectionStepsFilter {
+  stepNumber: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input TherapyStepsSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  steps: TherapyStepsSectionStepsFilter
+}
+
+input TherapyIntakeTeaserFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+  disclaimer: StringFilter
+}
+
+input TherapyOneToOneTherapyFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  bodyParagraphs: StringFilter
+}
+
+input TherapyModalitiesSectionModalitiesFilter {
+  title: StringFilter
+  description: StringFilter
+  linkText: StringFilter
+  linkHref: StringFilter
+}
+
+input TherapyModalitiesSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+  modalities: TherapyModalitiesSectionModalitiesFilter
+}
+
+input TherapyComplaintsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  body: StringFilter
+  pdfLabel: StringFilter
+  pdfHref: StringFilter
+}
+
+input TherapyFilter {
+  hero: TherapyHeroFilter
+  stepsSection: TherapyStepsSectionFilter
+  intakeTeaser: TherapyIntakeTeaserFilter
+  oneToOneTherapy: TherapyOneToOneTherapyFilter
+  modalitiesSection: TherapyModalitiesSectionFilter
+  complaints: TherapyComplaintsFilter
+}
+
+type TherapyConnectionEdges {
+  cursor: String!
+  node: Therapy
+}
+
+type TherapyConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TherapyConnectionEdges]
+}
+
+type ContributeHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type ContributeFundraisingGoal {
+  targetAmount: Float
+  raisedAmount: Float
+  bannerText: String
+}
+
+type ContributeTiersSectionTiers {
+  name: String
+  amount: Float
+  badge: String
+  features: [String]
+  ctaLabel: String
+  ctaHref: String
+}
+
+type ContributeTiersSection {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  tiers: [ContributeTiersSectionTiers]
+}
+
+type ContributeTransparencyNote {
+  heading: String
+  text: String
+}
+
+type Contribute implements Node & Document {
+  hero: ContributeHero
+  fundraisingGoal: ContributeFundraisingGoal
+  tiersSection: ContributeTiersSection
+  transparencyNote: ContributeTransparencyNote
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContributeHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input ContributeFundraisingGoalFilter {
+  targetAmount: NumberFilter
+  raisedAmount: NumberFilter
+  bannerText: StringFilter
+}
+
+input ContributeTiersSectionTiersFilter {
+  name: StringFilter
+  amount: NumberFilter
+  badge: StringFilter
+  features: StringFilter
+  ctaLabel: StringFilter
+  ctaHref: StringFilter
+}
+
+input ContributeTiersSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+  tiers: ContributeTiersSectionTiersFilter
+}
+
+input ContributeTransparencyNoteFilter {
+  heading: StringFilter
+  text: StringFilter
+}
+
+input ContributeFilter {
+  hero: ContributeHeroFilter
+  fundraisingGoal: ContributeFundraisingGoalFilter
+  tiersSection: ContributeTiersSectionFilter
+  transparencyNote: ContributeTransparencyNoteFilter
+}
+
+type ContributeConnectionEdges {
+  cursor: String!
+  node: Contribute
+}
+
+type ContributeConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContributeConnectionEdges]
+}
+
+type SharedThreePillarsPillars {
+  number: String
+  title: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+type SharedThreePillars {
+  title: String
+  subtitle: String
+  eyebrow: String
+  pillars: [SharedThreePillarsPillars]
+}
+
+type SharedTestimonialsQuotes {
+  quote: String
+  attribution: String
+  detail: String
+}
+
+type SharedTestimonials {
+  eyebrow: String
+  heading: String
+  note: String
+  quotes: [SharedTestimonialsQuotes]
+}
+
+type Shared implements Node & Document {
+  threePillars: SharedThreePillars
+  testimonials: SharedTestimonials
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SharedThreePillarsPillarsFilter {
+  number: StringFilter
+  title: StringFilter
+  body: StringFilter
+  ctaText: StringFilter
+  ctaHref: StringFilter
+}
+
+input SharedThreePillarsFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  eyebrow: StringFilter
+  pillars: SharedThreePillarsPillarsFilter
+}
+
+input SharedTestimonialsQuotesFilter {
+  quote: StringFilter
+  attribution: StringFilter
+  detail: StringFilter
+}
+
+input SharedTestimonialsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  note: StringFilter
+  quotes: SharedTestimonialsQuotesFilter
+}
+
+input SharedFilter {
+  threePillars: SharedThreePillarsFilter
+  testimonials: SharedTestimonialsFilter
+}
+
+type SharedConnectionEdges {
+  cursor: String!
+  node: Shared
+}
+
+type SharedConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SharedConnectionEdges]
+}
+
+type ImpactHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type ImpactMetricsSectionStats {
+  value: String
+  label: String
+  subtext: String
+  source: String
+}
+
+type ImpactMetricsSection {
+  eyebrow: String
+  heading: String
+  stats: [ImpactMetricsSectionStats]
+}
+
+type ImpactOutcomesSection {
+  eyebrow: String
+  heading: String
+  description: String
+}
+
+type ImpactDocumentary {
+  eyebrow: String
+  heading: String
+  description: String
+  statusBadge: String
+}
+
+type Impact implements Node & Document {
+  hero: ImpactHero
+  metricsSection: ImpactMetricsSection
+  outcomesSection: ImpactOutcomesSection
+  documentary: ImpactDocumentary
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ImpactHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input ImpactMetricsSectionStatsFilter {
+  value: StringFilter
+  label: StringFilter
+  subtext: StringFilter
+  source: StringFilter
+}
+
+input ImpactMetricsSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  stats: ImpactMetricsSectionStatsFilter
+}
+
+input ImpactOutcomesSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  description: StringFilter
+}
+
+input ImpactDocumentaryFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  statusBadge: StringFilter
+}
+
+input ImpactFilter {
+  hero: ImpactHeroFilter
+  metricsSection: ImpactMetricsSectionFilter
+  outcomesSection: ImpactOutcomesSectionFilter
+  documentary: ImpactDocumentaryFilter
+}
+
+type ImpactConnectionEdges {
+  cursor: String!
+  node: Impact
+}
+
+type ImpactConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ImpactConnectionEdges]
+}
+
+type ResourcesHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type ResourcesCategoriesGuides {
+  tag: String
+  title: String
+  description: String
+  readTimeOrType: String
+  href: String
+}
+
+type ResourcesCategories {
+  id: String
+  number: String
+  title: String
+  description: String
+  guides: [ResourcesCategoriesGuides]
+}
+
+type Resources implements Node & Document {
+  hero: ResourcesHero
+  categories: [ResourcesCategories]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ResourcesHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input ResourcesCategoriesGuidesFilter {
+  tag: StringFilter
+  title: StringFilter
+  description: StringFilter
+  readTimeOrType: StringFilter
+  href: StringFilter
+}
+
+input ResourcesCategoriesFilter {
+  id: StringFilter
+  number: StringFilter
+  title: StringFilter
+  description: StringFilter
+  guides: ResourcesCategoriesGuidesFilter
+}
+
+input ResourcesFilter {
+  hero: ResourcesHeroFilter
+  categories: ResourcesCategoriesFilter
+}
+
+type ResourcesConnectionEdges {
+  cursor: String!
+  node: Resources
+}
+
+type ResourcesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ResourcesConnectionEdges]
+}
+
+type VolunteerHero {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+type VolunteerRolesSectionRoles {
+  title: String
+  description: String
+  requirementText: String
+}
+
+type VolunteerRolesSection {
+  eyebrow: String
+  heading: String
+  description: String
+  roles: [VolunteerRolesSectionRoles]
+}
+
+type VolunteerSafeguarding {
+  heading: String
+  description: String
+}
+
+type VolunteerOtherWaysSectionWays {
+  title: String
+  description: String
+  badgeText: String
+}
+
+type VolunteerOtherWaysSection {
+  eyebrow: String
+  heading: String
+  ways: [VolunteerOtherWaysSectionWays]
+}
+
+type VolunteerCpdPlacementHighlights {
+  title: String
+  description: String
+}
+
+type VolunteerCpdPlacement {
+  eyebrow: String
+  heading: String
+  paragraphs: [String]
+  highlights: [VolunteerCpdPlacementHighlights]
+  ctaText: String
+  ctaHref: String
+}
+
+type Volunteer implements Node & Document {
+  hero: VolunteerHero
+  rolesSection: VolunteerRolesSection
+  safeguarding: VolunteerSafeguarding
+  otherWaysSection: VolunteerOtherWaysSection
+  cpdPlacement: VolunteerCpdPlacement
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input VolunteerHeroFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  subtitle: StringFilter
+}
+
+input VolunteerRolesSectionRolesFilter {
+  title: StringFilter
+  description: StringFilter
+  requirementText: StringFilter
+}
+
+input VolunteerRolesSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  description: StringFilter
+  roles: VolunteerRolesSectionRolesFilter
+}
+
+input VolunteerSafeguardingFilter {
+  heading: StringFilter
+  description: StringFilter
+}
+
+input VolunteerOtherWaysSectionWaysFilter {
+  title: StringFilter
+  description: StringFilter
+  badgeText: StringFilter
+}
+
+input VolunteerOtherWaysSectionFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  ways: VolunteerOtherWaysSectionWaysFilter
+}
+
+input VolunteerCpdPlacementHighlightsFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input VolunteerCpdPlacementFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  paragraphs: StringFilter
+  highlights: VolunteerCpdPlacementHighlightsFilter
+  ctaText: StringFilter
+  ctaHref: StringFilter
+}
+
+input VolunteerFilter {
+  hero: VolunteerHeroFilter
+  rolesSection: VolunteerRolesSectionFilter
+  safeguarding: VolunteerSafeguardingFilter
+  otherWaysSection: VolunteerOtherWaysSectionFilter
+  cpdPlacement: VolunteerCpdPlacementFilter
+}
+
+type VolunteerConnectionEdges {
+  cursor: String!
+  node: Volunteer
+}
+
+type VolunteerConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [VolunteerConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -178,17 +940,49 @@ type Mutation {
   createClinicians(relativePath: String!, params: CliniciansMutation!): Clinicians!
   updateTrustees(relativePath: String!, params: TrusteesMutation!): Trustees!
   createTrustees(relativePath: String!, params: TrusteesMutation!): Trustees!
+  updateHome(relativePath: String!, params: HomeMutation!): Home!
+  createHome(relativePath: String!, params: HomeMutation!): Home!
+  updateMission(relativePath: String!, params: MissionMutation!): Mission!
+  createMission(relativePath: String!, params: MissionMutation!): Mission!
+  updateTherapy(relativePath: String!, params: TherapyMutation!): Therapy!
+  createTherapy(relativePath: String!, params: TherapyMutation!): Therapy!
+  updateContribute(relativePath: String!, params: ContributeMutation!): Contribute!
+  createContribute(relativePath: String!, params: ContributeMutation!): Contribute!
+  updateShared(relativePath: String!, params: SharedMutation!): Shared!
+  createShared(relativePath: String!, params: SharedMutation!): Shared!
+  updateImpact(relativePath: String!, params: ImpactMutation!): Impact!
+  createImpact(relativePath: String!, params: ImpactMutation!): Impact!
+  updateResources(relativePath: String!, params: ResourcesMutation!): Resources!
+  createResources(relativePath: String!, params: ResourcesMutation!): Resources!
+  updateVolunteer(relativePath: String!, params: VolunteerMutation!): Volunteer!
+  createVolunteer(relativePath: String!, params: VolunteerMutation!): Volunteer!
 }
 
 input DocumentUpdateMutation {
   clinicians: CliniciansMutation
   trustees: TrusteesMutation
+  home: HomeMutation
+  mission: MissionMutation
+  therapy: TherapyMutation
+  contribute: ContributeMutation
+  shared: SharedMutation
+  impact: ImpactMutation
+  resources: ResourcesMutation
+  volunteer: VolunteerMutation
   relativePath: String
 }
 
 input DocumentMutation {
   clinicians: CliniciansMutation
   trustees: TrusteesMutation
+  home: HomeMutation
+  mission: MissionMutation
+  therapy: TherapyMutation
+  contribute: ContributeMutation
+  shared: SharedMutation
+  impact: ImpactMutation
+  resources: ResourcesMutation
+  volunteer: VolunteerMutation
 }
 
 input CliniciansMutation {
@@ -207,6 +1001,314 @@ input TrusteesMutation {
   name: String
   role: String
   shortBio: String
+}
+
+input HomeHeroPrimaryCtaMutation {
+  text: String
+  href: String
+}
+
+input HomeHeroSecondaryCtaMutation {
+  text: String
+  href: String
+}
+
+input HomeHeroMutation {
+  title: String
+  subtitle: String
+  logo: String
+  logoAlt: String
+  primaryCta: HomeHeroPrimaryCtaMutation
+  secondaryCta: HomeHeroSecondaryCtaMutation
+}
+
+input HomeMissionTeaserMutation {
+  eyebrow: String
+  heading: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+input HomeMutation {
+  hero: HomeHeroMutation
+  missionTeaser: HomeMissionTeaserMutation
+}
+
+input MissionHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input MissionWhyWeExistMutation {
+  eyebrow: String
+  heading: String
+  paragraphs: [String]
+}
+
+input MissionMutation {
+  hero: MissionHeroMutation
+  whyWeExist: MissionWhyWeExistMutation
+}
+
+input TherapyHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input TherapyStepsSectionStepsMutation {
+  stepNumber: String
+  title: String
+  description: String
+}
+
+input TherapyStepsSectionMutation {
+  eyebrow: String
+  heading: String
+  steps: [TherapyStepsSectionStepsMutation]
+}
+
+input TherapyIntakeTeaserMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  disclaimer: String
+}
+
+input TherapyOneToOneTherapyMutation {
+  eyebrow: String
+  heading: String
+  bodyParagraphs: [String]
+}
+
+input TherapyModalitiesSectionModalitiesMutation {
+  title: String
+  description: String
+  linkText: String
+  linkHref: String
+}
+
+input TherapyModalitiesSectionMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  modalities: [TherapyModalitiesSectionModalitiesMutation]
+}
+
+input TherapyComplaintsMutation {
+  eyebrow: String
+  heading: String
+  body: String
+  pdfLabel: String
+  pdfHref: String
+}
+
+input TherapyMutation {
+  hero: TherapyHeroMutation
+  stepsSection: TherapyStepsSectionMutation
+  intakeTeaser: TherapyIntakeTeaserMutation
+  oneToOneTherapy: TherapyOneToOneTherapyMutation
+  modalitiesSection: TherapyModalitiesSectionMutation
+  complaints: TherapyComplaintsMutation
+}
+
+input ContributeHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input ContributeFundraisingGoalMutation {
+  targetAmount: Float
+  raisedAmount: Float
+  bannerText: String
+}
+
+input ContributeTiersSectionTiersMutation {
+  name: String
+  amount: Float
+  badge: String
+  features: [String]
+  ctaLabel: String
+  ctaHref: String
+}
+
+input ContributeTiersSectionMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+  tiers: [ContributeTiersSectionTiersMutation]
+}
+
+input ContributeTransparencyNoteMutation {
+  heading: String
+  text: String
+}
+
+input ContributeMutation {
+  hero: ContributeHeroMutation
+  fundraisingGoal: ContributeFundraisingGoalMutation
+  tiersSection: ContributeTiersSectionMutation
+  transparencyNote: ContributeTransparencyNoteMutation
+}
+
+input SharedThreePillarsPillarsMutation {
+  number: String
+  title: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+input SharedThreePillarsMutation {
+  title: String
+  subtitle: String
+  eyebrow: String
+  pillars: [SharedThreePillarsPillarsMutation]
+}
+
+input SharedTestimonialsQuotesMutation {
+  quote: String
+  attribution: String
+  detail: String
+}
+
+input SharedTestimonialsMutation {
+  eyebrow: String
+  heading: String
+  note: String
+  quotes: [SharedTestimonialsQuotesMutation]
+}
+
+input SharedMutation {
+  threePillars: SharedThreePillarsMutation
+  testimonials: SharedTestimonialsMutation
+}
+
+input ImpactHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input ImpactMetricsSectionStatsMutation {
+  value: String
+  label: String
+  subtext: String
+  source: String
+}
+
+input ImpactMetricsSectionMutation {
+  eyebrow: String
+  heading: String
+  stats: [ImpactMetricsSectionStatsMutation]
+}
+
+input ImpactOutcomesSectionMutation {
+  eyebrow: String
+  heading: String
+  description: String
+}
+
+input ImpactDocumentaryMutation {
+  eyebrow: String
+  heading: String
+  description: String
+  statusBadge: String
+}
+
+input ImpactMutation {
+  hero: ImpactHeroMutation
+  metricsSection: ImpactMetricsSectionMutation
+  outcomesSection: ImpactOutcomesSectionMutation
+  documentary: ImpactDocumentaryMutation
+}
+
+input ResourcesHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input ResourcesCategoriesGuidesMutation {
+  tag: String
+  title: String
+  description: String
+  readTimeOrType: String
+  href: String
+}
+
+input ResourcesCategoriesMutation {
+  id: String
+  number: String
+  title: String
+  description: String
+  guides: [ResourcesCategoriesGuidesMutation]
+}
+
+input ResourcesMutation {
+  hero: ResourcesHeroMutation
+  categories: [ResourcesCategoriesMutation]
+}
+
+input VolunteerHeroMutation {
+  eyebrow: String
+  heading: String
+  subtitle: String
+}
+
+input VolunteerRolesSectionRolesMutation {
+  title: String
+  description: String
+  requirementText: String
+}
+
+input VolunteerRolesSectionMutation {
+  eyebrow: String
+  heading: String
+  description: String
+  roles: [VolunteerRolesSectionRolesMutation]
+}
+
+input VolunteerSafeguardingMutation {
+  heading: String
+  description: String
+}
+
+input VolunteerOtherWaysSectionWaysMutation {
+  title: String
+  description: String
+  badgeText: String
+}
+
+input VolunteerOtherWaysSectionMutation {
+  eyebrow: String
+  heading: String
+  ways: [VolunteerOtherWaysSectionWaysMutation]
+}
+
+input VolunteerCpdPlacementHighlightsMutation {
+  title: String
+  description: String
+}
+
+input VolunteerCpdPlacementMutation {
+  eyebrow: String
+  heading: String
+  paragraphs: [String]
+  highlights: [VolunteerCpdPlacementHighlightsMutation]
+  ctaText: String
+  ctaHref: String
+}
+
+input VolunteerMutation {
+  hero: VolunteerHeroMutation
+  rolesSection: VolunteerRolesSectionMutation
+  safeguarding: VolunteerSafeguardingMutation
+  otherWaysSection: VolunteerOtherWaysSectionMutation
+  cpdPlacement: VolunteerCpdPlacementMutation
 }
 
 schema {
