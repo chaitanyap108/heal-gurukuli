@@ -46,8 +46,18 @@ export default defineConfig({
           { type: "string", name: "title", label: "Title" },
           { type: "image", name: "image", label: "Profile Image" },
           { type: "string", name: "credentials", label: "Credentials", list: true },
-          { type: "string", name: "shortBio", label: "Short Bio", ui: { component: "textarea" } },
-          { type: "string", name: "bio", label: "Full Bio", ui: { component: "textarea" } },
+          {
+            type: "string",
+            name: "shortBio",
+            label: "Short Bio",
+            ui: { component: "textarea" },
+          },
+          {
+            type: "string",
+            name: "bio",
+            label: "Full Bio",
+            ui: { component: "textarea" },
+          },
           { type: "string", name: "specialties", label: "Specialties", list: true },
         ],
       },
@@ -60,7 +70,74 @@ export default defineConfig({
           { type: "string", name: "slug", label: "Slug", required: true },
           { type: "string", name: "name", label: "Name", required: true },
           { type: "string", name: "role", label: "Role" },
-          { type: "string", name: "shortBio", label: "Short Bio", ui: { component: "textarea" } },
+          {
+            type: "string",
+            name: "shortBio",
+            label: "Short Bio",
+            ui: { component: "textarea" },
+          },
+        ],
+      },
+      {
+        name: "shared",
+        label: "Shared Components",
+        path: "content/shared",
+        match: { include: "*" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        templates: [
+          {
+            name: "threePillars",
+            label: "Three Pillars",
+            fields: [
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "subtitle", label: "Subtitle" },
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              {
+                type: "object",
+                name: "pillars",
+                label: "Pillars",
+                list: true,
+                fields: [
+                  { type: "string", name: "number", label: "Number" },
+                  { type: "string", name: "title", label: "Title" },
+                  {
+                    type: "string",
+                    name: "body",
+                    label: "Body",
+                    ui: { component: "textarea" },
+                  },
+                  { type: "string", name: "ctaText", label: "CTA Text" },
+                  { type: "string", name: "ctaHref", label: "CTA Href" },
+                ],
+              },
+            ],
+          },
+          {
+            name: "testimonials",
+            label: "Testimonials",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              { type: "string", name: "note", label: "Note" },
+              {
+                type: "object",
+                name: "quotes",
+                label: "Quotes",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "quote",
+                    label: "Quote",
+                    ui: { component: "textarea" },
+                  },
+                  { type: "string", name: "attribution", label: "Attribution" },
+                  { type: "string", name: "detail", label: "Detail" },
+                ],
+              },
+            ],
+          },
         ],
       },
       {
@@ -77,7 +154,12 @@ export default defineConfig({
             label: "Hero",
             fields: [
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
               { type: "image", name: "logo", label: "Logo" },
               { type: "string", name: "logoAlt", label: "Logo Alt Text" },
               {
@@ -107,7 +189,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
               { type: "string", name: "ctaText", label: "CTA Text" },
               { type: "string", name: "ctaHref", label: "CTA Href" },
             ],
@@ -129,7 +216,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -139,7 +231,13 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "paragraphs", label: "Paragraphs", list: true, ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "paragraphs",
+                label: "Paragraphs",
+                list: true,
+                ui: { component: "textarea" },
+              },
             ],
           },
         ],
@@ -159,7 +257,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -177,7 +280,12 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "stepNumber", label: "Step Number" },
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
                 ],
               },
             ],
@@ -189,8 +297,18 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
-              { type: "string", name: "disclaimer", label: "Disclaimer", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "string",
+                name: "disclaimer",
+                label: "Disclaimer",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -200,7 +318,13 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "bodyParagraphs", label: "Body Paragraphs", list: true, ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "bodyParagraphs",
+                label: "Body Paragraphs",
+                list: true,
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -210,7 +334,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
               {
                 type: "object",
                 name: "modalities",
@@ -218,7 +347,12 @@ export default defineConfig({
                 list: true,
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
                   { type: "string", name: "linkText", label: "Link Text" },
                   { type: "string", name: "linkHref", label: "Link Href" },
                 ],
@@ -232,7 +366,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
               { type: "string", name: "pdfLabel", label: "PDF Label" },
               { type: "string", name: "pdfHref", label: "PDF Href" },
             ],
@@ -254,7 +393,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -264,7 +408,12 @@ export default defineConfig({
             fields: [
               { type: "number", name: "targetAmount", label: "Target Amount" },
               { type: "number", name: "raisedAmount", label: "Raised Amount" },
-              { type: "string", name: "bannerText", label: "Banner Text", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "bannerText",
+                label: "Banner Text",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -274,7 +423,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
               {
                 type: "object",
                 name: "tiers",
@@ -284,7 +438,13 @@ export default defineConfig({
                   { type: "string", name: "name", label: "Name" },
                   { type: "number", name: "amount", label: "Amount" },
                   { type: "string", name: "badge", label: "Badge" },
-                  { type: "string", name: "features", label: "Features", list: true, ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "features",
+                    label: "Features",
+                    list: true,
+                    ui: { component: "textarea" },
+                  },
                   { type: "string", name: "ctaLabel", label: "CTA Label" },
                   { type: "string", name: "ctaHref", label: "CTA Href" },
                 ],
@@ -297,59 +457,11 @@ export default defineConfig({
             label: "Transparency Note",
             fields: [
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "text", label: "Text", ui: { component: "textarea" } },
-            ],
-          },
-        ],
-      },
-      {
-        name: "shared",
-        label: "Shared Components",
-        path: "content/shared",
-        format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
-        fields: [
-          {
-            name: "threePillars",
-            label: "Three Pillars",
-            type: "object",
-            fields: [
-              { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "subtitle", label: "Subtitle" },
-              { type: "string", name: "eyebrow", label: "Eyebrow" },
               {
-                name: "pillars",
-                label: "Pillars",
-                type: "object",
-                list: true,
-                fields: [
-                  { type: "string", name: "number", label: "Number" },
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "body", label: "Body", ui: { component: "textarea" } },
-                  { type: "string", name: "ctaText", label: "CTA Text" },
-                  { type: "string", name: "ctaHref", label: "CTA Href" },
-                ],
-              },
-            ],
-          },
-          {
-            name: "testimonials",
-            label: "Testimonials",
-            type: "object",
-            fields: [
-              { type: "string", name: "eyebrow", label: "Eyebrow" },
-              { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "note", label: "Note" },
-              {
-                name: "quotes",
-                label: "Quotes",
-                type: "object",
-                list: true,
-                fields: [
-                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
-                  { type: "string", name: "attribution", label: "Attribution" },
-                  { type: "string", name: "detail", label: "Detail" },
-                ],
+                type: "string",
+                name: "text",
+                label: "Text",
+                ui: { component: "textarea" },
               },
             ],
           },
@@ -370,7 +482,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -401,7 +518,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -411,7 +533,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
               { type: "string", name: "statusBadge", label: "Status Badge" },
             ],
           },
@@ -432,7 +559,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -444,7 +576,12 @@ export default defineConfig({
               { type: "string", name: "id", label: "ID" },
               { type: "string", name: "number", label: "Number" },
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
               {
                 type: "object",
                 name: "guides",
@@ -453,8 +590,17 @@ export default defineConfig({
                 fields: [
                   { type: "string", name: "tag", label: "Tag" },
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-                  { type: "string", name: "readTimeOrType", label: "Read Time or Type" },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
+                  {
+                    type: "string",
+                    name: "readTimeOrType",
+                    label: "Read Time or Type",
+                  },
                   { type: "string", name: "href", label: "Href" },
                 ],
               },
@@ -477,7 +623,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "subtitle", label: "Subtitle", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -487,7 +638,12 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
               {
                 type: "object",
                 name: "roles",
@@ -495,8 +651,17 @@ export default defineConfig({
                 list: true,
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-                  { type: "string", name: "requirementText", label: "Requirement Text" },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
+                  {
+                    type: "string",
+                    name: "requirementText",
+                    label: "Requirement Text",
+                  },
                 ],
               },
             ],
@@ -507,7 +672,12 @@ export default defineConfig({
             label: "Safeguarding",
             fields: [
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
             ],
           },
           {
@@ -524,7 +694,12 @@ export default defineConfig({
                 list: true,
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
                   { type: "string", name: "badgeText", label: "Badge Text" },
                 ],
               },
@@ -537,7 +712,13 @@ export default defineConfig({
             fields: [
               { type: "string", name: "eyebrow", label: "Eyebrow" },
               { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "paragraphs", label: "Paragraphs", list: true, ui: { component: "textarea" } },
+              {
+                type: "string",
+                name: "paragraphs",
+                label: "Paragraphs",
+                list: true,
+                ui: { component: "textarea" },
+              },
               {
                 type: "object",
                 name: "highlights",
@@ -545,7 +726,12 @@ export default defineConfig({
                 list: true,
                 fields: [
                   { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    ui: { component: "textarea" },
+                  },
                 ],
               },
               { type: "string", name: "ctaText", label: "CTA Text" },
