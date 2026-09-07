@@ -58,6 +58,8 @@ type Query {
   cliniciansConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CliniciansFilter): CliniciansConnection!
   trustees(relativePath: String): Trustees!
   trusteesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TrusteesFilter): TrusteesConnection!
+  shared(relativePath: String): Shared!
+  sharedConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SharedFilter): SharedConnection!
   home(relativePath: String): Home!
   homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
   mission(relativePath: String): Mission!
@@ -66,8 +68,6 @@ type Query {
   therapyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TherapyFilter): TherapyConnection!
   contribute(relativePath: String): Contribute!
   contributeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContributeFilter): ContributeConnection!
-  shared(relativePath: String): Shared!
-  sharedConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SharedFilter): SharedConnection!
   impact(relativePath: String): Impact!
   impactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ImpactFilter): ImpactConnection!
   resources(relativePath: String): Resources!
@@ -79,11 +79,11 @@ type Query {
 input DocumentFilter {
   clinicians: CliniciansFilter
   trustees: TrusteesFilter
+  shared: SharedFilter
   home: HomeFilter
   mission: MissionFilter
   therapy: TherapyFilter
   contribute: ContributeFilter
-  shared: SharedFilter
   impact: ImpactFilter
   resources: ResourcesFilter
   volunteer: VolunteerFilter
@@ -112,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Clinicians | Trustees | Home | Mission | Therapy | Contribute | Shared | Impact | Resources | Volunteer | Folder
+union DocumentNode = Clinicians | Trustees | SharedThreePillars | SharedTestimonials | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder
 
 type Clinicians implements Node & Document {
   slug: String!
@@ -190,6 +190,86 @@ type TrusteesConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [TrusteesConnectionEdges]
+}
+
+type SharedThreePillarsPillars {
+  number: String
+  title: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+type SharedThreePillars implements Node & Document {
+  title: String
+  subtitle: String
+  eyebrow: String
+  pillars: [SharedThreePillarsPillars]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+type SharedTestimonialsQuotes {
+  quote: String
+  attribution: String
+  detail: String
+}
+
+type SharedTestimonials implements Node & Document {
+  eyebrow: String
+  heading: String
+  note: String
+  quotes: [SharedTestimonialsQuotes]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+union Shared = SharedThreePillars | SharedTestimonials
+
+input SharedThreePillarsPillarsFilter {
+  number: StringFilter
+  title: StringFilter
+  body: StringFilter
+  ctaText: StringFilter
+  ctaHref: StringFilter
+}
+
+input SharedThreePillarsFilter {
+  title: StringFilter
+  subtitle: StringFilter
+  eyebrow: StringFilter
+  pillars: SharedThreePillarsPillarsFilter
+}
+
+input SharedTestimonialsQuotesFilter {
+  quote: StringFilter
+  attribution: StringFilter
+  detail: StringFilter
+}
+
+input SharedTestimonialsFilter {
+  eyebrow: StringFilter
+  heading: StringFilter
+  note: StringFilter
+  quotes: SharedTestimonialsQuotesFilter
+}
+
+input SharedFilter {
+  threePillars: SharedThreePillarsFilter
+  testimonials: SharedTestimonialsFilter
+}
+
+type SharedConnectionEdges {
+  cursor: String!
+  node: Shared
+}
+
+type SharedConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SharedConnectionEdges]
 }
 
 type HomeHeroPrimaryCta {
@@ -560,86 +640,6 @@ type ContributeConnection implements Connection {
   edges: [ContributeConnectionEdges]
 }
 
-type SharedThreePillarsPillars {
-  number: String
-  title: String
-  body: String
-  ctaText: String
-  ctaHref: String
-}
-
-type SharedThreePillars {
-  title: String
-  subtitle: String
-  eyebrow: String
-  pillars: [SharedThreePillarsPillars]
-}
-
-type SharedTestimonialsQuotes {
-  quote: String
-  attribution: String
-  detail: String
-}
-
-type SharedTestimonials {
-  eyebrow: String
-  heading: String
-  note: String
-  quotes: [SharedTestimonialsQuotes]
-}
-
-type Shared implements Node & Document {
-  threePillars: SharedThreePillars
-  testimonials: SharedTestimonials
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input SharedThreePillarsPillarsFilter {
-  number: StringFilter
-  title: StringFilter
-  body: StringFilter
-  ctaText: StringFilter
-  ctaHref: StringFilter
-}
-
-input SharedThreePillarsFilter {
-  title: StringFilter
-  subtitle: StringFilter
-  eyebrow: StringFilter
-  pillars: SharedThreePillarsPillarsFilter
-}
-
-input SharedTestimonialsQuotesFilter {
-  quote: StringFilter
-  attribution: StringFilter
-  detail: StringFilter
-}
-
-input SharedTestimonialsFilter {
-  eyebrow: StringFilter
-  heading: StringFilter
-  note: StringFilter
-  quotes: SharedTestimonialsQuotesFilter
-}
-
-input SharedFilter {
-  threePillars: SharedThreePillarsFilter
-  testimonials: SharedTestimonialsFilter
-}
-
-type SharedConnectionEdges {
-  cursor: String!
-  node: Shared
-}
-
-type SharedConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [SharedConnectionEdges]
-}
-
 type ImpactHero {
   eyebrow: String
   heading: String
@@ -940,6 +940,8 @@ type Mutation {
   createClinicians(relativePath: String!, params: CliniciansMutation!): Clinicians!
   updateTrustees(relativePath: String!, params: TrusteesMutation!): Trustees!
   createTrustees(relativePath: String!, params: TrusteesMutation!): Trustees!
+  updateShared(relativePath: String!, params: SharedMutation!): Shared!
+  createShared(relativePath: String!, params: SharedMutation!): Shared!
   updateHome(relativePath: String!, params: HomeMutation!): Home!
   createHome(relativePath: String!, params: HomeMutation!): Home!
   updateMission(relativePath: String!, params: MissionMutation!): Mission!
@@ -948,8 +950,6 @@ type Mutation {
   createTherapy(relativePath: String!, params: TherapyMutation!): Therapy!
   updateContribute(relativePath: String!, params: ContributeMutation!): Contribute!
   createContribute(relativePath: String!, params: ContributeMutation!): Contribute!
-  updateShared(relativePath: String!, params: SharedMutation!): Shared!
-  createShared(relativePath: String!, params: SharedMutation!): Shared!
   updateImpact(relativePath: String!, params: ImpactMutation!): Impact!
   createImpact(relativePath: String!, params: ImpactMutation!): Impact!
   updateResources(relativePath: String!, params: ResourcesMutation!): Resources!
@@ -961,11 +961,11 @@ type Mutation {
 input DocumentUpdateMutation {
   clinicians: CliniciansMutation
   trustees: TrusteesMutation
+  shared: SharedMutation
   home: HomeMutation
   mission: MissionMutation
   therapy: TherapyMutation
   contribute: ContributeMutation
-  shared: SharedMutation
   impact: ImpactMutation
   resources: ResourcesMutation
   volunteer: VolunteerMutation
@@ -975,11 +975,11 @@ input DocumentUpdateMutation {
 input DocumentMutation {
   clinicians: CliniciansMutation
   trustees: TrusteesMutation
+  shared: SharedMutation
   home: HomeMutation
   mission: MissionMutation
   therapy: TherapyMutation
   contribute: ContributeMutation
-  shared: SharedMutation
   impact: ImpactMutation
   resources: ResourcesMutation
   volunteer: VolunteerMutation
@@ -1001,6 +1001,39 @@ input TrusteesMutation {
   name: String
   role: String
   shortBio: String
+}
+
+input SharedThreePillarsPillarsMutation {
+  number: String
+  title: String
+  body: String
+  ctaText: String
+  ctaHref: String
+}
+
+input SharedThreePillarsMutation {
+  title: String
+  subtitle: String
+  eyebrow: String
+  pillars: [SharedThreePillarsPillarsMutation]
+}
+
+input SharedTestimonialsQuotesMutation {
+  quote: String
+  attribution: String
+  detail: String
+}
+
+input SharedTestimonialsMutation {
+  eyebrow: String
+  heading: String
+  note: String
+  quotes: [SharedTestimonialsQuotesMutation]
+}
+
+input SharedMutation {
+  threePillars: SharedThreePillarsMutation
+  testimonials: SharedTestimonialsMutation
 }
 
 input HomeHeroPrimaryCtaMutation {
@@ -1152,39 +1185,6 @@ input ContributeMutation {
   fundraisingGoal: ContributeFundraisingGoalMutation
   tiersSection: ContributeTiersSectionMutation
   transparencyNote: ContributeTransparencyNoteMutation
-}
-
-input SharedThreePillarsPillarsMutation {
-  number: String
-  title: String
-  body: String
-  ctaText: String
-  ctaHref: String
-}
-
-input SharedThreePillarsMutation {
-  title: String
-  subtitle: String
-  eyebrow: String
-  pillars: [SharedThreePillarsPillarsMutation]
-}
-
-input SharedTestimonialsQuotesMutation {
-  quote: String
-  attribution: String
-  detail: String
-}
-
-input SharedTestimonialsMutation {
-  eyebrow: String
-  heading: String
-  note: String
-  quotes: [SharedTestimonialsQuotesMutation]
-}
-
-input SharedMutation {
-  threePillars: SharedThreePillarsMutation
-  testimonials: SharedTestimonialsMutation
 }
 
 input ImpactHeroMutation {

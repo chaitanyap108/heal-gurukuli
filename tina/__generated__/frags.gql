@@ -18,6 +18,34 @@ fragment TrusteesParts on Trustees {
   shortBio
 }
 
+fragment SharedParts on Shared {
+  __typename
+  ... on SharedThreePillars {
+    title
+    subtitle
+    eyebrow
+    pillars {
+      __typename
+      number
+      title
+      body
+      ctaText
+      ctaHref
+    }
+  }
+  ... on SharedTestimonials {
+    eyebrow
+    heading
+    note
+    quotes {
+      __typename
+      quote
+      attribution
+      detail
+    }
+  }
+}
+
 fragment HomeParts on Home {
   __typename
   hero {
@@ -151,36 +179,6 @@ fragment ContributeParts on Contribute {
     __typename
     heading
     text
-  }
-}
-
-fragment SharedParts on Shared {
-  __typename
-  threePillars {
-    __typename
-    title
-    subtitle
-    eyebrow
-    pillars {
-      __typename
-      number
-      title
-      body
-      ctaText
-      ctaHref
-    }
-  }
-  testimonials {
-    __typename
-    eyebrow
-    heading
-    note
-    quotes {
-      __typename
-      quote
-      attribution
-      detail
-    }
   }
 }
 

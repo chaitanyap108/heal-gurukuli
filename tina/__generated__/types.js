@@ -27,6 +27,35 @@ export const TrusteesPartsFragmentDoc = gql`
   shortBio
 }
     `;
+export const SharedPartsFragmentDoc = gql`
+    fragment SharedParts on Shared {
+  __typename
+  ... on SharedThreePillars {
+    title
+    subtitle
+    eyebrow
+    pillars {
+      __typename
+      number
+      title
+      body
+      ctaText
+      ctaHref
+    }
+  }
+  ... on SharedTestimonials {
+    eyebrow
+    heading
+    note
+    quotes {
+      __typename
+      quote
+      attribution
+      detail
+    }
+  }
+}
+    `;
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
@@ -164,37 +193,6 @@ export const ContributePartsFragmentDoc = gql`
     __typename
     heading
     text
-  }
-}
-    `;
-export const SharedPartsFragmentDoc = gql`
-    fragment SharedParts on Shared {
-  __typename
-  threePillars {
-    __typename
-    title
-    subtitle
-    eyebrow
-    pillars {
-      __typename
-      number
-      title
-      body
-      ctaText
-      ctaHref
-    }
-  }
-  testimonials {
-    __typename
-    eyebrow
-    heading
-    note
-    quotes {
-      __typename
-      quote
-      attribution
-      detail
-    }
   }
 }
     `;
@@ -426,6 +424,63 @@ export const TrusteesConnectionDocument = gql`
   }
 }
     ${TrusteesPartsFragmentDoc}`;
+export const SharedDocument = gql`
+    query shared($relativePath: String!) {
+  shared(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SharedParts
+  }
+}
+    ${SharedPartsFragmentDoc}`;
+export const SharedConnectionDocument = gql`
+    query sharedConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SharedFilter) {
+  sharedConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SharedParts
+      }
+    }
+  }
+}
+    ${SharedPartsFragmentDoc}`;
 export const HomeDocument = gql`
     query home($relativePath: String!) {
   home(relativePath: $relativePath) {
@@ -654,63 +709,6 @@ export const ContributeConnectionDocument = gql`
   }
 }
     ${ContributePartsFragmentDoc}`;
-export const SharedDocument = gql`
-    query shared($relativePath: String!) {
-  shared(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...SharedParts
-  }
-}
-    ${SharedPartsFragmentDoc}`;
-export const SharedConnectionDocument = gql`
-    query sharedConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SharedFilter) {
-  sharedConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...SharedParts
-      }
-    }
-  }
-}
-    ${SharedPartsFragmentDoc}`;
 export const ImpactDocument = gql`
     query impact($relativePath: String!) {
   impact(relativePath: $relativePath) {
@@ -896,6 +894,12 @@ export function getSdk(requester) {
     trusteesConnection(variables, options) {
       return requester(TrusteesConnectionDocument, variables, options);
     },
+    shared(variables, options) {
+      return requester(SharedDocument, variables, options);
+    },
+    sharedConnection(variables, options) {
+      return requester(SharedConnectionDocument, variables, options);
+    },
     home(variables, options) {
       return requester(HomeDocument, variables, options);
     },
@@ -919,12 +923,6 @@ export function getSdk(requester) {
     },
     contributeConnection(variables, options) {
       return requester(ContributeConnectionDocument, variables, options);
-    },
-    shared(variables, options) {
-      return requester(SharedDocument, variables, options);
-    },
-    sharedConnection(variables, options) {
-      return requester(SharedConnectionDocument, variables, options);
     },
     impact(variables, options) {
       return requester(ImpactDocument, variables, options);
