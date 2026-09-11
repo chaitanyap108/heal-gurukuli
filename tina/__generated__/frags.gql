@@ -20,34 +20,30 @@ fragment TrusteesParts on Trustees {
 
 fragment SharedParts on Shared {
   __typename
-  ... on SharedThreePillars {
+  title
+  subtitle
+  eyebrow
+  heading
+  note
+  pillars {
+    __typename
+    number
     title
-    subtitle
-    eyebrow
-    pillars {
-      __typename
-      number
-      title
-      body
-      ctaText
-      ctaHref
-    }
+    body
+    ctaText
+    ctaHref
   }
-  ... on SharedTestimonials {
-    eyebrow
-    heading
-    note
-    quotes {
-      __typename
-      quote
-      attribution
-      detail
-    }
+  quotes {
+    __typename
+    quote
+    attribution
+    detail
   }
 }
 
 fragment HomeParts on Home {
   __typename
+  title
   hero {
     __typename
     title
@@ -77,6 +73,7 @@ fragment HomeParts on Home {
 
 fragment MissionParts on Mission {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -93,6 +90,7 @@ fragment MissionParts on Mission {
 
 fragment TherapyParts on Therapy {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -148,6 +146,7 @@ fragment TherapyParts on Therapy {
 
 fragment ContributeParts on Contribute {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -184,6 +183,7 @@ fragment ContributeParts on Contribute {
 
 fragment ImpactParts on Impact {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -219,6 +219,7 @@ fragment ImpactParts on Impact {
 
 fragment ResourcesParts on Resources {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -244,6 +245,7 @@ fragment ResourcesParts on Resources {
 
 fragment VolunteerParts on Volunteer {
   __typename
+  title
   hero {
     __typename
     eyebrow

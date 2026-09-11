@@ -1,0 +1,23 @@
+{
+  "hero": {
+    "title": "Heal Gurukuli Initiative",
+    "subtitle": "A dedicated therapeutic sanctuary providing specialised, trauma-informed care for adult survivors of ISKCON Gurukula abuse — grounded in the belief that every survivor deserves trusted trauma treatment & a dignified path toward healing.",
+    "logo": "/LogoNoBackgd-Photoroom.png",
+    "logoAlt": "Heal Gurukuli — Clinical Sanctuary Initiative",
+    "primaryCta": {
+      "text": "Support the Initiative",
+      "href": "/contribute"
+    },
+    "secondaryCta": {
+      "text": "Read Our Mission",
+      "href": "/mission"
+    }
+  },
+  "missionTeaser": {
+    "eyebrow": "About the Initiative",
+    "heading": "Therapeutic Sanctuary for Survivors",
+    "body": "A dedicated therapeutic sanctuary providing specialised, trauma-informed care for adult survivors of ISKCON Gurukula abuse — grounded in the belief that every survivor deserves trusted trauma treatment & a dignified path toward healing and growth",
+    "ctaText": "Read the Full Clinical Framework",
+    "ctaHref": "/mission#clinical-framework"
+  }
+}

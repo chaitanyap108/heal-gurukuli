@@ -30,35 +30,31 @@ export const TrusteesPartsFragmentDoc = gql`
 export const SharedPartsFragmentDoc = gql`
     fragment SharedParts on Shared {
   __typename
-  ... on SharedThreePillars {
+  title
+  subtitle
+  eyebrow
+  heading
+  note
+  pillars {
+    __typename
+    number
     title
-    subtitle
-    eyebrow
-    pillars {
-      __typename
-      number
-      title
-      body
-      ctaText
-      ctaHref
-    }
+    body
+    ctaText
+    ctaHref
   }
-  ... on SharedTestimonials {
-    eyebrow
-    heading
-    note
-    quotes {
-      __typename
-      quote
-      attribution
-      detail
-    }
+  quotes {
+    __typename
+    quote
+    attribution
+    detail
   }
 }
     `;
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
+  title
   hero {
     __typename
     title
@@ -89,6 +85,7 @@ export const HomePartsFragmentDoc = gql`
 export const MissionPartsFragmentDoc = gql`
     fragment MissionParts on Mission {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -106,6 +103,7 @@ export const MissionPartsFragmentDoc = gql`
 export const TherapyPartsFragmentDoc = gql`
     fragment TherapyParts on Therapy {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -162,6 +160,7 @@ export const TherapyPartsFragmentDoc = gql`
 export const ContributePartsFragmentDoc = gql`
     fragment ContributeParts on Contribute {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -199,6 +198,7 @@ export const ContributePartsFragmentDoc = gql`
 export const ImpactPartsFragmentDoc = gql`
     fragment ImpactParts on Impact {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -235,6 +235,7 @@ export const ImpactPartsFragmentDoc = gql`
 export const ResourcesPartsFragmentDoc = gql`
     fragment ResourcesParts on Resources {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -261,6 +262,7 @@ export const ResourcesPartsFragmentDoc = gql`
 export const VolunteerPartsFragmentDoc = gql`
     fragment VolunteerParts on Volunteer {
   __typename
+  title
   hero {
     __typename
     eyebrow

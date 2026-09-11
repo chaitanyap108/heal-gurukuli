@@ -324,7 +324,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Clinicians | Trustees | SharedThreePillars | SharedTestimonials | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder;
+export type DocumentNode = Clinicians | Trustees | Shared | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder;
 
 export type Clinicians = Node & Document & {
   __typename?: 'Clinicians';
@@ -410,8 +410,8 @@ export type TrusteesConnection = Connection & {
   edges?: Maybe<Array<Maybe<TrusteesConnectionEdges>>>;
 };
 
-export type SharedThreePillarsPillars = {
-  __typename?: 'SharedThreePillarsPillars';
+export type SharedPillars = {
+  __typename?: 'SharedPillars';
   number?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['String']['output']>;
@@ -419,38 +419,28 @@ export type SharedThreePillarsPillars = {
   ctaHref?: Maybe<Scalars['String']['output']>;
 };
 
-export type SharedThreePillars = Node & Document & {
-  __typename?: 'SharedThreePillars';
-  title?: Maybe<Scalars['String']['output']>;
-  subtitle?: Maybe<Scalars['String']['output']>;
-  eyebrow?: Maybe<Scalars['String']['output']>;
-  pillars?: Maybe<Array<Maybe<SharedThreePillarsPillars>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type SharedTestimonialsQuotes = {
-  __typename?: 'SharedTestimonialsQuotes';
+export type SharedQuotes = {
+  __typename?: 'SharedQuotes';
   quote?: Maybe<Scalars['String']['output']>;
   attribution?: Maybe<Scalars['String']['output']>;
   detail?: Maybe<Scalars['String']['output']>;
 };
 
-export type SharedTestimonials = Node & Document & {
-  __typename?: 'SharedTestimonials';
+export type Shared = Node & Document & {
+  __typename?: 'Shared';
+  title: Scalars['String']['output'];
+  subtitle?: Maybe<Scalars['String']['output']>;
   eyebrow?: Maybe<Scalars['String']['output']>;
   heading?: Maybe<Scalars['String']['output']>;
   note?: Maybe<Scalars['String']['output']>;
-  quotes?: Maybe<Array<Maybe<SharedTestimonialsQuotes>>>;
+  pillars?: Maybe<Array<Maybe<SharedPillars>>>;
+  quotes?: Maybe<Array<Maybe<SharedQuotes>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
-export type Shared = SharedThreePillars | SharedTestimonials;
-
-export type SharedThreePillarsPillarsFilter = {
+export type SharedPillarsFilter = {
   number?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   body?: InputMaybe<StringFilter>;
@@ -458,29 +448,20 @@ export type SharedThreePillarsPillarsFilter = {
   ctaHref?: InputMaybe<StringFilter>;
 };
 
-export type SharedThreePillarsFilter = {
-  title?: InputMaybe<StringFilter>;
-  subtitle?: InputMaybe<StringFilter>;
-  eyebrow?: InputMaybe<StringFilter>;
-  pillars?: InputMaybe<SharedThreePillarsPillarsFilter>;
-};
-
-export type SharedTestimonialsQuotesFilter = {
+export type SharedQuotesFilter = {
   quote?: InputMaybe<StringFilter>;
   attribution?: InputMaybe<StringFilter>;
   detail?: InputMaybe<StringFilter>;
 };
 
-export type SharedTestimonialsFilter = {
+export type SharedFilter = {
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
   eyebrow?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
   note?: InputMaybe<StringFilter>;
-  quotes?: InputMaybe<SharedTestimonialsQuotesFilter>;
-};
-
-export type SharedFilter = {
-  threePillars?: InputMaybe<SharedThreePillarsFilter>;
-  testimonials?: InputMaybe<SharedTestimonialsFilter>;
+  pillars?: InputMaybe<SharedPillarsFilter>;
+  quotes?: InputMaybe<SharedQuotesFilter>;
 };
 
 export type SharedConnectionEdges = {
@@ -529,6 +510,7 @@ export type HomeMissionTeaser = {
 
 export type Home = Node & Document & {
   __typename?: 'Home';
+  title: Scalars['String']['output'];
   hero?: Maybe<HomeHero>;
   missionTeaser?: Maybe<HomeMissionTeaser>;
   id: Scalars['ID']['output'];
@@ -564,6 +546,7 @@ export type HomeMissionTeaserFilter = {
 };
 
 export type HomeFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<HomeHeroFilter>;
   missionTeaser?: InputMaybe<HomeMissionTeaserFilter>;
 };
@@ -597,6 +580,7 @@ export type MissionWhyWeExist = {
 
 export type Mission = Node & Document & {
   __typename?: 'Mission';
+  title: Scalars['String']['output'];
   hero?: Maybe<MissionHero>;
   whyWeExist?: Maybe<MissionWhyWeExist>;
   id: Scalars['ID']['output'];
@@ -617,6 +601,7 @@ export type MissionWhyWeExistFilter = {
 };
 
 export type MissionFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<MissionHeroFilter>;
   whyWeExist?: InputMaybe<MissionWhyWeExistFilter>;
 };
@@ -697,6 +682,7 @@ export type TherapyComplaints = {
 
 export type Therapy = Node & Document & {
   __typename?: 'Therapy';
+  title: Scalars['String']['output'];
   hero?: Maybe<TherapyHero>;
   stepsSection?: Maybe<TherapyStepsSection>;
   intakeTeaser?: Maybe<TherapyIntakeTeaser>;
@@ -762,6 +748,7 @@ export type TherapyComplaintsFilter = {
 };
 
 export type TherapyFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<TherapyHeroFilter>;
   stepsSection?: InputMaybe<TherapyStepsSectionFilter>;
   intakeTeaser?: InputMaybe<TherapyIntakeTeaserFilter>;
@@ -823,6 +810,7 @@ export type ContributeTransparencyNote = {
 
 export type Contribute = Node & Document & {
   __typename?: 'Contribute';
+  title: Scalars['String']['output'];
   hero?: Maybe<ContributeHero>;
   fundraisingGoal?: Maybe<ContributeFundraisingGoal>;
   tiersSection?: Maybe<ContributeTiersSection>;
@@ -876,6 +864,7 @@ export type ContributeTransparencyNoteFilter = {
 };
 
 export type ContributeFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<ContributeHeroFilter>;
   fundraisingGoal?: InputMaybe<ContributeFundraisingGoalFilter>;
   tiersSection?: InputMaybe<ContributeTiersSectionFilter>;
@@ -934,6 +923,7 @@ export type ImpactDocumentary = {
 
 export type Impact = Node & Document & {
   __typename?: 'Impact';
+  title: Scalars['String']['output'];
   hero?: Maybe<ImpactHero>;
   metricsSection?: Maybe<ImpactMetricsSection>;
   outcomesSection?: Maybe<ImpactOutcomesSection>;
@@ -976,6 +966,7 @@ export type ImpactDocumentaryFilter = {
 };
 
 export type ImpactFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<ImpactHeroFilter>;
   metricsSection?: InputMaybe<ImpactMetricsSectionFilter>;
   outcomesSection?: InputMaybe<ImpactOutcomesSectionFilter>;
@@ -1022,6 +1013,7 @@ export type ResourcesCategories = {
 
 export type Resources = Node & Document & {
   __typename?: 'Resources';
+  title: Scalars['String']['output'];
   hero?: Maybe<ResourcesHero>;
   categories?: Maybe<Array<Maybe<ResourcesCategories>>>;
   id: Scalars['ID']['output'];
@@ -1052,6 +1044,7 @@ export type ResourcesCategoriesFilter = {
 };
 
 export type ResourcesFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<ResourcesHeroFilter>;
   categories?: InputMaybe<ResourcesCategoriesFilter>;
 };
@@ -1129,6 +1122,7 @@ export type VolunteerCpdPlacement = {
 
 export type Volunteer = Node & Document & {
   __typename?: 'Volunteer';
+  title: Scalars['String']['output'];
   hero?: Maybe<VolunteerHero>;
   rolesSection?: Maybe<VolunteerRolesSection>;
   safeguarding?: Maybe<VolunteerSafeguarding>;
@@ -1190,6 +1184,7 @@ export type VolunteerCpdPlacementFilter = {
 };
 
 export type VolunteerFilter = {
+  title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<VolunteerHeroFilter>;
   rolesSection?: InputMaybe<VolunteerRolesSectionFilter>;
   safeguarding?: InputMaybe<VolunteerSafeguardingFilter>;
@@ -1437,7 +1432,7 @@ export type TrusteesMutation = {
   shortBio?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SharedThreePillarsPillarsMutation = {
+export type SharedPillarsMutation = {
   number?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['String']['input']>;
@@ -1445,29 +1440,20 @@ export type SharedThreePillarsPillarsMutation = {
   ctaHref?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SharedThreePillarsMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  subtitle?: InputMaybe<Scalars['String']['input']>;
-  eyebrow?: InputMaybe<Scalars['String']['input']>;
-  pillars?: InputMaybe<Array<InputMaybe<SharedThreePillarsPillarsMutation>>>;
-};
-
-export type SharedTestimonialsQuotesMutation = {
+export type SharedQuotesMutation = {
   quote?: InputMaybe<Scalars['String']['input']>;
   attribution?: InputMaybe<Scalars['String']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type SharedTestimonialsMutation = {
+export type SharedMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
   note?: InputMaybe<Scalars['String']['input']>;
-  quotes?: InputMaybe<Array<InputMaybe<SharedTestimonialsQuotesMutation>>>;
-};
-
-export type SharedMutation = {
-  threePillars?: InputMaybe<SharedThreePillarsMutation>;
-  testimonials?: InputMaybe<SharedTestimonialsMutation>;
+  pillars?: InputMaybe<Array<InputMaybe<SharedPillarsMutation>>>;
+  quotes?: InputMaybe<Array<InputMaybe<SharedQuotesMutation>>>;
 };
 
 export type HomeHeroPrimaryCtaMutation = {
@@ -1498,6 +1484,7 @@ export type HomeMissionTeaserMutation = {
 };
 
 export type HomeMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<HomeHeroMutation>;
   missionTeaser?: InputMaybe<HomeMissionTeaserMutation>;
 };
@@ -1515,6 +1502,7 @@ export type MissionWhyWeExistMutation = {
 };
 
 export type MissionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<MissionHeroMutation>;
   whyWeExist?: InputMaybe<MissionWhyWeExistMutation>;
 };
@@ -1573,6 +1561,7 @@ export type TherapyComplaintsMutation = {
 };
 
 export type TherapyMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<TherapyHeroMutation>;
   stepsSection?: InputMaybe<TherapyStepsSectionMutation>;
   intakeTeaser?: InputMaybe<TherapyIntakeTeaserMutation>;
@@ -1615,6 +1604,7 @@ export type ContributeTransparencyNoteMutation = {
 };
 
 export type ContributeMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<ContributeHeroMutation>;
   fundraisingGoal?: InputMaybe<ContributeFundraisingGoalMutation>;
   tiersSection?: InputMaybe<ContributeTiersSectionMutation>;
@@ -1654,6 +1644,7 @@ export type ImpactDocumentaryMutation = {
 };
 
 export type ImpactMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<ImpactHeroMutation>;
   metricsSection?: InputMaybe<ImpactMetricsSectionMutation>;
   outcomesSection?: InputMaybe<ImpactOutcomesSectionMutation>;
@@ -1683,6 +1674,7 @@ export type ResourcesCategoriesMutation = {
 };
 
 export type ResourcesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<ResourcesHeroMutation>;
   categories?: InputMaybe<Array<InputMaybe<ResourcesCategoriesMutation>>>;
 };
@@ -1738,6 +1730,7 @@ export type VolunteerCpdPlacementMutation = {
 };
 
 export type VolunteerMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<VolunteerHeroMutation>;
   rolesSection?: InputMaybe<VolunteerRolesSectionMutation>;
   safeguarding?: InputMaybe<VolunteerSafeguardingMutation>;
@@ -1777,7 +1770,7 @@ export type TrusteesFilter = {
   shortBio?: StringFilter | null | undefined;
 };
 
-export type SharedThreePillarsPillarsFilter = {
+export type SharedPillarsFilter = {
   number?: StringFilter | null | undefined;
   title?: StringFilter | null | undefined;
   body?: StringFilter | null | undefined;
@@ -1785,29 +1778,20 @@ export type SharedThreePillarsPillarsFilter = {
   ctaHref?: StringFilter | null | undefined;
 };
 
-export type SharedThreePillarsFilter = {
-  title?: StringFilter | null | undefined;
-  subtitle?: StringFilter | null | undefined;
-  eyebrow?: StringFilter | null | undefined;
-  pillars?: SharedThreePillarsPillarsFilter | null | undefined;
-};
-
-export type SharedTestimonialsQuotesFilter = {
+export type SharedQuotesFilter = {
   quote?: StringFilter | null | undefined;
   attribution?: StringFilter | null | undefined;
   detail?: StringFilter | null | undefined;
 };
 
-export type SharedTestimonialsFilter = {
+export type SharedFilter = {
+  title?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
   eyebrow?: StringFilter | null | undefined;
   heading?: StringFilter | null | undefined;
   note?: StringFilter | null | undefined;
-  quotes?: SharedTestimonialsQuotesFilter | null | undefined;
-};
-
-export type SharedFilter = {
-  threePillars?: SharedThreePillarsFilter | null | undefined;
-  testimonials?: SharedTestimonialsFilter | null | undefined;
+  pillars?: SharedPillarsFilter | null | undefined;
+  quotes?: SharedQuotesFilter | null | undefined;
 };
 
 export type HomeHeroPrimaryCtaFilter = {
@@ -1838,6 +1822,7 @@ export type HomeMissionTeaserFilter = {
 };
 
 export type HomeFilter = {
+  title?: StringFilter | null | undefined;
   hero?: HomeHeroFilter | null | undefined;
   missionTeaser?: HomeMissionTeaserFilter | null | undefined;
 };
@@ -1855,6 +1840,7 @@ export type MissionWhyWeExistFilter = {
 };
 
 export type MissionFilter = {
+  title?: StringFilter | null | undefined;
   hero?: MissionHeroFilter | null | undefined;
   whyWeExist?: MissionWhyWeExistFilter | null | undefined;
 };
@@ -1913,6 +1899,7 @@ export type TherapyComplaintsFilter = {
 };
 
 export type TherapyFilter = {
+  title?: StringFilter | null | undefined;
   hero?: TherapyHeroFilter | null | undefined;
   stepsSection?: TherapyStepsSectionFilter | null | undefined;
   intakeTeaser?: TherapyIntakeTeaserFilter | null | undefined;
@@ -1965,6 +1952,7 @@ export type ContributeTransparencyNoteFilter = {
 };
 
 export type ContributeFilter = {
+  title?: StringFilter | null | undefined;
   hero?: ContributeHeroFilter | null | undefined;
   fundraisingGoal?: ContributeFundraisingGoalFilter | null | undefined;
   tiersSection?: ContributeTiersSectionFilter | null | undefined;
@@ -2004,6 +1992,7 @@ export type ImpactDocumentaryFilter = {
 };
 
 export type ImpactFilter = {
+  title?: StringFilter | null | undefined;
   hero?: ImpactHeroFilter | null | undefined;
   metricsSection?: ImpactMetricsSectionFilter | null | undefined;
   outcomesSection?: ImpactOutcomesSectionFilter | null | undefined;
@@ -2033,6 +2022,7 @@ export type ResourcesCategoriesFilter = {
 };
 
 export type ResourcesFilter = {
+  title?: StringFilter | null | undefined;
   hero?: ResourcesHeroFilter | null | undefined;
   categories?: ResourcesCategoriesFilter | null | undefined;
 };
@@ -2088,6 +2078,7 @@ export type VolunteerCpdPlacementFilter = {
 };
 
 export type VolunteerFilter = {
+  title?: StringFilter | null | undefined;
   hero?: VolunteerHeroFilter | null | undefined;
   rolesSection?: VolunteerRolesSectionFilter | null | undefined;
   safeguarding?: VolunteerSafeguardingFilter | null | undefined;
@@ -2099,28 +2090,21 @@ export type CliniciansPartsFragment = { __typename: 'Clinicians', slug: string, 
 
 export type TrusteesPartsFragment = { __typename: 'Trustees', slug: string, name: string, role: string | null, shortBio: string | null };
 
-type SharedParts_SharedThreePillars_Fragment = { __typename: 'SharedThreePillars', title: string | null, subtitle: string | null, eyebrow: string | null, pillars: Array<{ __typename: 'SharedThreePillarsPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null };
+export type SharedPartsFragment = { __typename: 'Shared', title: string, subtitle: string | null, eyebrow: string | null, heading: string | null, note: string | null, pillars: Array<{ __typename: 'SharedPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null, quotes: Array<{ __typename: 'SharedQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null };
 
-type SharedParts_SharedTestimonials_Fragment = { __typename: 'SharedTestimonials', eyebrow: string | null, heading: string | null, note: string | null, quotes: Array<{ __typename: 'SharedTestimonialsQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null };
+export type HomePartsFragment = { __typename: 'Home', title: string, hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null };
 
-export type SharedPartsFragment =
-  | SharedParts_SharedThreePillars_Fragment
-  | SharedParts_SharedTestimonials_Fragment
-;
+export type MissionPartsFragment = { __typename: 'Mission', title: string, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null };
 
-export type HomePartsFragment = { __typename: 'Home', hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null };
+export type TherapyPartsFragment = { __typename: 'Therapy', title: string, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null };
 
-export type MissionPartsFragment = { __typename: 'Mission', hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null };
+export type ContributePartsFragment = { __typename: 'Contribute', title: string, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null };
 
-export type TherapyPartsFragment = { __typename: 'Therapy', hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null };
+export type ImpactPartsFragment = { __typename: 'Impact', title: string, hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null };
 
-export type ContributePartsFragment = { __typename: 'Contribute', hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null };
+export type ResourcesPartsFragment = { __typename: 'Resources', title: string, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null };
 
-export type ImpactPartsFragment = { __typename: 'Impact', hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null };
-
-export type ResourcesPartsFragment = { __typename: 'Resources', hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null };
-
-export type VolunteerPartsFragment = { __typename: 'Volunteer', hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null };
+export type VolunteerPartsFragment = { __typename: 'Volunteer', title: string, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null };
 
 export type CliniciansQueryVariables = Exact<{
   relativePath: string;
@@ -2165,10 +2149,7 @@ export type SharedQueryVariables = Exact<{
 }>;
 
 
-export type SharedQuery = { shared:
-    | { __typename: 'SharedThreePillars', id: string, title: string | null, subtitle: string | null, eyebrow: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pillars: Array<{ __typename: 'SharedThreePillarsPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null }
-    | { __typename: 'SharedTestimonials', id: string, eyebrow: string | null, heading: string | null, note: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, quotes: Array<{ __typename: 'SharedTestimonialsQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null }
-   };
+export type SharedQuery = { shared: { __typename: 'Shared', id: string, title: string, subtitle: string | null, eyebrow: string | null, heading: string | null, note: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pillars: Array<{ __typename: 'SharedPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null, quotes: Array<{ __typename: 'SharedQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null } };
 
 export type SharedConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2180,17 +2161,14 @@ export type SharedConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SharedConnectionQuery = { sharedConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node:
-        | { __typename: 'SharedThreePillars', id: string, title: string | null, subtitle: string | null, eyebrow: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pillars: Array<{ __typename: 'SharedThreePillarsPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null }
-        | { __typename: 'SharedTestimonials', id: string, eyebrow: string | null, heading: string | null, note: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, quotes: Array<{ __typename: 'SharedTestimonialsQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null }
-       | null } | null> | null } };
+export type SharedConnectionQuery = { sharedConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Shared', id: string, title: string, subtitle: string | null, eyebrow: string | null, heading: string | null, note: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, pillars: Array<{ __typename: 'SharedPillars', number: string | null, title: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null> | null, quotes: Array<{ __typename: 'SharedQuotes', quote: string | null, attribution: string | null, detail: string | null } | null> | null } | null } | null> | null } };
 
 export type HomeQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type HomeQuery = { home: { __typename: 'Home', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null } };
+export type HomeQuery = { home: { __typename: 'Home', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2202,14 +2180,14 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { homeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Home', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null } | null } | null> | null } };
+export type HomeConnectionQuery = { homeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Home', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'HomeHero', title: string | null, subtitle: string | null, logo: string | null, logoAlt: string | null, primaryCta: { __typename: 'HomeHeroPrimaryCta', text: string | null, href: string | null } | null, secondaryCta: { __typename: 'HomeHeroSecondaryCta', text: string | null, href: string | null } | null } | null, missionTeaser: { __typename: 'HomeMissionTeaser', eyebrow: string | null, heading: string | null, body: string | null, ctaText: string | null, ctaHref: string | null } | null } | null } | null> | null } };
 
 export type MissionQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type MissionQuery = { mission: { __typename: 'Mission', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null } };
+export type MissionQuery = { mission: { __typename: 'Mission', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null } };
 
 export type MissionConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2221,14 +2199,14 @@ export type MissionConnectionQueryVariables = Exact<{
 }>;
 
 
-export type MissionConnectionQuery = { missionConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Mission', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null } | null } | null> | null } };
+export type MissionConnectionQuery = { missionConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Mission', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null } | null } | null> | null } };
 
 export type TherapyQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type TherapyQuery = { therapy: { __typename: 'Therapy', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } };
+export type TherapyQuery = { therapy: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } };
 
 export type TherapyConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2240,14 +2218,14 @@ export type TherapyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type TherapyConnectionQuery = { therapyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Therapy', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } | null } | null> | null } };
+export type TherapyConnectionQuery = { therapyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } | null } | null> | null } };
 
 export type ContributeQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type ContributeQuery = { contribute: { __typename: 'Contribute', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null } };
+export type ContributeQuery = { contribute: { __typename: 'Contribute', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null } };
 
 export type ContributeConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2259,14 +2237,14 @@ export type ContributeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ContributeConnectionQuery = { contributeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Contribute', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null } | null } | null> | null } };
+export type ContributeConnectionQuery = { contributeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Contribute', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null } | null } | null> | null } };
 
 export type ImpactQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type ImpactQuery = { impact: { __typename: 'Impact', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null } };
+export type ImpactQuery = { impact: { __typename: 'Impact', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null } };
 
 export type ImpactConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2278,14 +2256,14 @@ export type ImpactConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ImpactConnectionQuery = { impactConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Impact', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null } | null } | null> | null } };
+export type ImpactConnectionQuery = { impactConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Impact', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ImpactHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, metricsSection: { __typename: 'ImpactMetricsSection', eyebrow: string | null, heading: string | null, stats: Array<{ __typename: 'ImpactMetricsSectionStats', value: string | null, label: string | null, subtext: string | null, source: string | null } | null> | null } | null, outcomesSection: { __typename: 'ImpactOutcomesSection', eyebrow: string | null, heading: string | null, description: string | null } | null, documentary: { __typename: 'ImpactDocumentary', eyebrow: string | null, heading: string | null, description: string | null, statusBadge: string | null } | null } | null } | null> | null } };
 
 export type ResourcesQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type ResourcesQuery = { resources: { __typename: 'Resources', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null } };
+export type ResourcesQuery = { resources: { __typename: 'Resources', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null } };
 
 export type ResourcesConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2297,14 +2275,14 @@ export type ResourcesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ResourcesConnectionQuery = { resourcesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Resources', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type ResourcesConnectionQuery = { resourcesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Resources', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type VolunteerQueryVariables = Exact<{
   relativePath: string;
 }>;
 
 
-export type VolunteerQuery = { volunteer: { __typename: 'Volunteer', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null } };
+export type VolunteerQuery = { volunteer: { __typename: 'Volunteer', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null } };
 
 export type VolunteerConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2316,7 +2294,7 @@ export type VolunteerConnectionQueryVariables = Exact<{
 }>;
 
 
-export type VolunteerConnectionQuery = { volunteerConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Volunteer', id: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null } | null } | null> | null } };
+export type VolunteerConnectionQuery = { volunteerConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Volunteer', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null } | null } | null> | null } };
 
 export const CliniciansPartsFragmentDoc = gql`
     fragment CliniciansParts on Clinicians {
@@ -2343,35 +2321,31 @@ export const TrusteesPartsFragmentDoc = gql`
 export const SharedPartsFragmentDoc = gql`
     fragment SharedParts on Shared {
   __typename
-  ... on SharedThreePillars {
+  title
+  subtitle
+  eyebrow
+  heading
+  note
+  pillars {
+    __typename
+    number
     title
-    subtitle
-    eyebrow
-    pillars {
-      __typename
-      number
-      title
-      body
-      ctaText
-      ctaHref
-    }
+    body
+    ctaText
+    ctaHref
   }
-  ... on SharedTestimonials {
-    eyebrow
-    heading
-    note
-    quotes {
-      __typename
-      quote
-      attribution
-      detail
-    }
+  quotes {
+    __typename
+    quote
+    attribution
+    detail
   }
 }
     `;
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
+  title
   hero {
     __typename
     title
@@ -2402,6 +2376,7 @@ export const HomePartsFragmentDoc = gql`
 export const MissionPartsFragmentDoc = gql`
     fragment MissionParts on Mission {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -2419,6 +2394,7 @@ export const MissionPartsFragmentDoc = gql`
 export const TherapyPartsFragmentDoc = gql`
     fragment TherapyParts on Therapy {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -2475,6 +2451,7 @@ export const TherapyPartsFragmentDoc = gql`
 export const ContributePartsFragmentDoc = gql`
     fragment ContributeParts on Contribute {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -2512,6 +2489,7 @@ export const ContributePartsFragmentDoc = gql`
 export const ImpactPartsFragmentDoc = gql`
     fragment ImpactParts on Impact {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -2548,6 +2526,7 @@ export const ImpactPartsFragmentDoc = gql`
 export const ResourcesPartsFragmentDoc = gql`
     fragment ResourcesParts on Resources {
   __typename
+  title
   hero {
     __typename
     eyebrow
@@ -2574,6 +2553,7 @@ export const ResourcesPartsFragmentDoc = gql`
 export const VolunteerPartsFragmentDoc = gql`
     fragment VolunteerParts on Volunteer {
   __typename
+  title
   hero {
     __typename
     eyebrow

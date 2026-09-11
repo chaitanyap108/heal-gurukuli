@@ -112,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Clinicians | Trustees | SharedThreePillars | SharedTestimonials | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder
+union DocumentNode = Clinicians | Trustees | Shared | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder
 
 type Clinicians implements Node & Document {
   slug: String!
@@ -192,7 +192,7 @@ type TrusteesConnection implements Connection {
   edges: [TrusteesConnectionEdges]
 }
 
-type SharedThreePillarsPillars {
+type SharedPillars {
   number: String
   title: String
   body: String
@@ -200,35 +200,26 @@ type SharedThreePillarsPillars {
   ctaHref: String
 }
 
-type SharedThreePillars implements Node & Document {
-  title: String
-  subtitle: String
-  eyebrow: String
-  pillars: [SharedThreePillarsPillars]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-type SharedTestimonialsQuotes {
+type SharedQuotes {
   quote: String
   attribution: String
   detail: String
 }
 
-type SharedTestimonials implements Node & Document {
+type Shared implements Node & Document {
+  title: String!
+  subtitle: String
   eyebrow: String
   heading: String
   note: String
-  quotes: [SharedTestimonialsQuotes]
+  pillars: [SharedPillars]
+  quotes: [SharedQuotes]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-union Shared = SharedThreePillars | SharedTestimonials
-
-input SharedThreePillarsPillarsFilter {
+input SharedPillarsFilter {
   number: StringFilter
   title: StringFilter
   body: StringFilter
@@ -236,29 +227,20 @@ input SharedThreePillarsPillarsFilter {
   ctaHref: StringFilter
 }
 
-input SharedThreePillarsFilter {
-  title: StringFilter
-  subtitle: StringFilter
-  eyebrow: StringFilter
-  pillars: SharedThreePillarsPillarsFilter
-}
-
-input SharedTestimonialsQuotesFilter {
+input SharedQuotesFilter {
   quote: StringFilter
   attribution: StringFilter
   detail: StringFilter
 }
 
-input SharedTestimonialsFilter {
+input SharedFilter {
+  title: StringFilter
+  subtitle: StringFilter
   eyebrow: StringFilter
   heading: StringFilter
   note: StringFilter
-  quotes: SharedTestimonialsQuotesFilter
-}
-
-input SharedFilter {
-  threePillars: SharedThreePillarsFilter
-  testimonials: SharedTestimonialsFilter
+  pillars: SharedPillarsFilter
+  quotes: SharedQuotesFilter
 }
 
 type SharedConnectionEdges {
@@ -300,6 +282,7 @@ type HomeMissionTeaser {
 }
 
 type Home implements Node & Document {
+  title: String!
   hero: HomeHero
   missionTeaser: HomeMissionTeaser
   id: ID!
@@ -335,6 +318,7 @@ input HomeMissionTeaserFilter {
 }
 
 input HomeFilter {
+  title: StringFilter
   hero: HomeHeroFilter
   missionTeaser: HomeMissionTeaserFilter
 }
@@ -363,6 +347,7 @@ type MissionWhyWeExist {
 }
 
 type Mission implements Node & Document {
+  title: String!
   hero: MissionHero
   whyWeExist: MissionWhyWeExist
   id: ID!
@@ -383,6 +368,7 @@ input MissionWhyWeExistFilter {
 }
 
 input MissionFilter {
+  title: StringFilter
   hero: MissionHeroFilter
   whyWeExist: MissionWhyWeExistFilter
 }
@@ -452,6 +438,7 @@ type TherapyComplaints {
 }
 
 type Therapy implements Node & Document {
+  title: String!
   hero: TherapyHero
   stepsSection: TherapyStepsSection
   intakeTeaser: TherapyIntakeTeaser
@@ -517,6 +504,7 @@ input TherapyComplaintsFilter {
 }
 
 input TherapyFilter {
+  title: StringFilter
   hero: TherapyHeroFilter
   stepsSection: TherapyStepsSectionFilter
   intakeTeaser: TherapyIntakeTeaserFilter
@@ -570,6 +558,7 @@ type ContributeTransparencyNote {
 }
 
 type Contribute implements Node & Document {
+  title: String!
   hero: ContributeHero
   fundraisingGoal: ContributeFundraisingGoal
   tiersSection: ContributeTiersSection
@@ -623,6 +612,7 @@ input ContributeTransparencyNoteFilter {
 }
 
 input ContributeFilter {
+  title: StringFilter
   hero: ContributeHeroFilter
   fundraisingGoal: ContributeFundraisingGoalFilter
   tiersSection: ContributeTiersSectionFilter
@@ -673,6 +663,7 @@ type ImpactDocumentary {
 }
 
 type Impact implements Node & Document {
+  title: String!
   hero: ImpactHero
   metricsSection: ImpactMetricsSection
   outcomesSection: ImpactOutcomesSection
@@ -715,6 +706,7 @@ input ImpactDocumentaryFilter {
 }
 
 input ImpactFilter {
+  title: StringFilter
   hero: ImpactHeroFilter
   metricsSection: ImpactMetricsSectionFilter
   outcomesSection: ImpactOutcomesSectionFilter
@@ -755,6 +747,7 @@ type ResourcesCategories {
 }
 
 type Resources implements Node & Document {
+  title: String!
   hero: ResourcesHero
   categories: [ResourcesCategories]
   id: ID!
@@ -785,6 +778,7 @@ input ResourcesCategoriesFilter {
 }
 
 input ResourcesFilter {
+  title: StringFilter
   hero: ResourcesHeroFilter
   categories: ResourcesCategoriesFilter
 }
@@ -851,6 +845,7 @@ type VolunteerCpdPlacement {
 }
 
 type Volunteer implements Node & Document {
+  title: String!
   hero: VolunteerHero
   rolesSection: VolunteerRolesSection
   safeguarding: VolunteerSafeguarding
@@ -912,6 +907,7 @@ input VolunteerCpdPlacementFilter {
 }
 
 input VolunteerFilter {
+  title: StringFilter
   hero: VolunteerHeroFilter
   rolesSection: VolunteerRolesSectionFilter
   safeguarding: VolunteerSafeguardingFilter
@@ -1003,7 +999,7 @@ input TrusteesMutation {
   shortBio: String
 }
 
-input SharedThreePillarsPillarsMutation {
+input SharedPillarsMutation {
   number: String
   title: String
   body: String
@@ -1011,29 +1007,20 @@ input SharedThreePillarsPillarsMutation {
   ctaHref: String
 }
 
-input SharedThreePillarsMutation {
-  title: String
-  subtitle: String
-  eyebrow: String
-  pillars: [SharedThreePillarsPillarsMutation]
-}
-
-input SharedTestimonialsQuotesMutation {
+input SharedQuotesMutation {
   quote: String
   attribution: String
   detail: String
 }
 
-input SharedTestimonialsMutation {
+input SharedMutation {
+  title: String
+  subtitle: String
   eyebrow: String
   heading: String
   note: String
-  quotes: [SharedTestimonialsQuotesMutation]
-}
-
-input SharedMutation {
-  threePillars: SharedThreePillarsMutation
-  testimonials: SharedTestimonialsMutation
+  pillars: [SharedPillarsMutation]
+  quotes: [SharedQuotesMutation]
 }
 
 input HomeHeroPrimaryCtaMutation {
@@ -1064,6 +1051,7 @@ input HomeMissionTeaserMutation {
 }
 
 input HomeMutation {
+  title: String
   hero: HomeHeroMutation
   missionTeaser: HomeMissionTeaserMutation
 }
@@ -1081,6 +1069,7 @@ input MissionWhyWeExistMutation {
 }
 
 input MissionMutation {
+  title: String
   hero: MissionHeroMutation
   whyWeExist: MissionWhyWeExistMutation
 }
@@ -1139,6 +1128,7 @@ input TherapyComplaintsMutation {
 }
 
 input TherapyMutation {
+  title: String
   hero: TherapyHeroMutation
   stepsSection: TherapyStepsSectionMutation
   intakeTeaser: TherapyIntakeTeaserMutation
@@ -1181,6 +1171,7 @@ input ContributeTransparencyNoteMutation {
 }
 
 input ContributeMutation {
+  title: String
   hero: ContributeHeroMutation
   fundraisingGoal: ContributeFundraisingGoalMutation
   tiersSection: ContributeTiersSectionMutation
@@ -1220,6 +1211,7 @@ input ImpactDocumentaryMutation {
 }
 
 input ImpactMutation {
+  title: String
   hero: ImpactHeroMutation
   metricsSection: ImpactMetricsSectionMutation
   outcomesSection: ImpactOutcomesSectionMutation
@@ -1249,6 +1241,7 @@ input ResourcesCategoriesMutation {
 }
 
 input ResourcesMutation {
+  title: String
   hero: ResourcesHeroMutation
   categories: [ResourcesCategoriesMutation]
 }
@@ -1304,6 +1297,7 @@ input VolunteerCpdPlacementMutation {
 }
 
 input VolunteerMutation {
+  title: String
   hero: VolunteerHeroMutation
   rolesSection: VolunteerRolesSectionMutation
   safeguarding: VolunteerSafeguardingMutation

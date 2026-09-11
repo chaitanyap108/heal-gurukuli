@@ -5,10 +5,18 @@ var isLocal = process.env.TINA_PUBLIC_IS_LOCAL === "true";
 var localGraphqlProxy = "/api/tina-graphql";
 var config_default = defineConfig({
   branch,
+  // CRITICAL (local): omit clientId/token entirely.
+  // - Empty strings still count as "defined" → Cloud Auth mounts
+  // - `undefined` can still serialize into the admin payload
+  // - Any leftover NEXT_PUBLIC_TINA_CLIENT_ID in the Vite env also triggers
+  //   "TinaCloud config is missing for domain: …"
+  // Only attach real credentials when NOT in local mode.
   ...isLocal ? {} : {
     clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || process.env.TINA_CLIENT_ID,
     token: process.env.TINA_TOKEN
   },
+  // Local: force filesystem GraphQL via Next proxy.
+  // Prod/cloud: leave unset so Tina Cloud is used with real credentials.
   ...isLocal ? { contentApiUrlOverride: localGraphqlProxy } : {},
   build: {
     outputFolder: "admin",
@@ -29,7 +37,13 @@ var config_default = defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "slug", label: "Slug", required: true },
-          { type: "string", name: "name", label: "Name", required: true },
+          {
+            type: "string",
+            name: "name",
+            label: "Name",
+            isTitle: true,
+            required: true
+          },
           { type: "string", name: "title", label: "Title" },
           { type: "image", name: "image", label: "Profile Image" },
           { type: "string", name: "credentials", label: "Credentials", list: true },
@@ -55,7 +69,13 @@ var config_default = defineConfig({
         format: "json",
         fields: [
           { type: "string", name: "slug", label: "Slug", required: true },
-          { type: "string", name: "name", label: "Name", required: true },
+          {
+            type: "string",
+            name: "name",
+            label: "Name",
+            isTitle: true,
+            required: true
+          },
           { type: "string", name: "role", label: "Role" },
           {
             type: "string",
@@ -65,76 +85,106 @@ var config_default = defineConfig({
           }
         ]
       },
+      // Saragrahi-style: one fields-only collection per content folder (no polymorphic
+      // `templates`). Directory is content/shared → collection name MUST be `shared`
+      // so frontend/admin routes that query `shared` keep working for every doc
+      // (threePillars + testimonials). Superset of both JSON shapes; unused fields
+      // stay empty per document. Strip any leftover `_template` keys from JSON if
+      // present (fields-only collections do not use templates).
       {
         name: "shared",
-        label: "Shared Components",
+        label: "Shared",
         path: "content/shared",
-        match: { include: "*" },
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
-        templates: [
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          }
+        },
+        fields: [
           {
-            name: "threePillars",
-            label: "Three Pillars",
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true
+          },
+          { type: "string", name: "subtitle", label: "Subtitle" },
+          { type: "string", name: "eyebrow", label: "Eyebrow" },
+          // testimonials.json primary label (threePillars leaves this empty)
+          { type: "string", name: "heading", label: "Heading" },
+          { type: "string", name: "note", label: "Note" },
+          {
+            type: "object",
+            name: "pillars",
+            label: "Pillars",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.title || item?.number || "Pillar"
+              })
+            },
             fields: [
+              { type: "string", name: "number", label: "Number" },
               { type: "string", name: "title", label: "Title" },
-              { type: "string", name: "subtitle", label: "Subtitle" },
-              { type: "string", name: "eyebrow", label: "Eyebrow" },
               {
-                type: "object",
-                name: "pillars",
-                label: "Pillars",
-                list: true,
-                fields: [
-                  { type: "string", name: "number", label: "Number" },
-                  { type: "string", name: "title", label: "Title" },
-                  {
-                    type: "string",
-                    name: "body",
-                    label: "Body",
-                    ui: { component: "textarea" }
-                  },
-                  { type: "string", name: "ctaText", label: "CTA Text" },
-                  { type: "string", name: "ctaHref", label: "CTA Href" }
-                ]
-              }
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" }
+              },
+              { type: "string", name: "ctaText", label: "CTA Text" },
+              { type: "string", name: "ctaHref", label: "CTA Href" }
             ]
           },
           {
-            name: "testimonials",
-            label: "Testimonials",
+            type: "object",
+            name: "quotes",
+            label: "Quotes",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.attribution || "Quote"
+              })
+            },
             fields: [
-              { type: "string", name: "eyebrow", label: "Eyebrow" },
-              { type: "string", name: "heading", label: "Heading" },
-              { type: "string", name: "note", label: "Note" },
               {
-                type: "object",
-                name: "quotes",
-                label: "Quotes",
-                list: true,
-                fields: [
-                  {
-                    type: "string",
-                    name: "quote",
-                    label: "Quote",
-                    ui: { component: "textarea" }
-                  },
-                  { type: "string", name: "attribution", label: "Attribution" },
-                  { type: "string", name: "detail", label: "Detail" }
-                ]
-              }
+                type: "string",
+                name: "quote",
+                label: "Quote",
+                ui: { component: "textarea" }
+              },
+              { type: "string", name: "attribution", label: "Attribution" },
+              { type: "string", name: "detail", label: "Detail" }
             ]
           }
         ]
       },
+      // Page singletons (Saragrahi: one collection per page, fields-only, no
+      // templates). Heal keeps files at content/pages/*.json, so path + match
+      // replaces Saragrahi's per-folder paths (content/home, content/about, …).
       {
         name: "home",
         label: "Home Page",
-        path: "content/pages",
-        match: { include: "home" },
+        path: "content/home",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -191,11 +241,24 @@ var config_default = defineConfig({
       {
         name: "mission",
         label: "Mission Page",
-        path: "content/pages",
-        match: { include: "mission" },
+        path: "content/mission",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/mission"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -232,11 +295,24 @@ var config_default = defineConfig({
       {
         name: "therapy",
         label: "Therapy Page",
-        path: "content/pages",
-        match: { include: "therapy" },
+        path: "content/therapy",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/therapy"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -264,6 +340,11 @@ var config_default = defineConfig({
                 name: "steps",
                 label: "Steps",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || item?.stepNumber || "Step"
+                  })
+                },
                 fields: [
                   { type: "string", name: "stepNumber", label: "Step Number" },
                   { type: "string", name: "title", label: "Title" },
@@ -332,6 +413,11 @@ var config_default = defineConfig({
                 name: "modalities",
                 label: "Modalities",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Modality"
+                  })
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   {
@@ -368,11 +454,24 @@ var config_default = defineConfig({
       {
         name: "contribute",
         label: "Contribute Page",
-        path: "content/pages",
-        match: { include: "contribute" },
+        path: "content/contribute",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/contribute"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -421,6 +520,11 @@ var config_default = defineConfig({
                 name: "tiers",
                 label: "Tiers",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.name || "Tier"
+                  })
+                },
                 fields: [
                   { type: "string", name: "name", label: "Name" },
                   { type: "number", name: "amount", label: "Amount" },
@@ -457,11 +561,24 @@ var config_default = defineConfig({
       {
         name: "impact",
         label: "Impact Page",
-        path: "content/pages",
-        match: { include: "impact" },
+        path: "content/impact",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/impact"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -489,6 +606,11 @@ var config_default = defineConfig({
                 name: "stats",
                 label: "Stats",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.label || item?.value || "Stat"
+                  })
+                },
                 fields: [
                   { type: "string", name: "value", label: "Value" },
                   { type: "string", name: "label", label: "Label" },
@@ -534,11 +656,24 @@ var config_default = defineConfig({
       {
         name: "resources",
         label: "Resources Page",
-        path: "content/pages",
-        match: { include: "resources" },
+        path: "content/resources",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/resources"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -559,6 +694,11 @@ var config_default = defineConfig({
             name: "categories",
             label: "Categories",
             list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.title || item?.id || "Category"
+              })
+            },
             fields: [
               { type: "string", name: "id", label: "ID" },
               { type: "string", name: "number", label: "Number" },
@@ -574,6 +714,11 @@ var config_default = defineConfig({
                 name: "guides",
                 label: "Guides",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Guide"
+                  })
+                },
                 fields: [
                   { type: "string", name: "tag", label: "Tag" },
                   { type: "string", name: "title", label: "Title" },
@@ -598,11 +743,24 @@ var config_default = defineConfig({
       {
         name: "volunteer",
         label: "Volunteer Page",
-        path: "content/pages",
-        match: { include: "volunteer" },
+        path: "content/volunteer",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false
+          },
+          router: () => "/volunteer"
+        },
         fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true
+          },
           {
             type: "object",
             name: "hero",
@@ -636,6 +794,11 @@ var config_default = defineConfig({
                 name: "roles",
                 label: "Roles",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Role"
+                  })
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   {
@@ -679,6 +842,11 @@ var config_default = defineConfig({
                 name: "ways",
                 label: "Ways",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Way"
+                  })
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   {
@@ -711,6 +879,11 @@ var config_default = defineConfig({
                 name: "highlights",
                 label: "Highlights",
                 list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Highlight"
+                  })
+                },
                 fields: [
                   { type: "string", name: "title", label: "Title" },
                   {

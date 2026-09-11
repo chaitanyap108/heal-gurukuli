@@ -188,8 +188,7 @@ export default defineConfig({
       {
         name: "home",
         label: "Home Page",
-        path: "content/pages",
-        match: { include: "home" },
+        path: "content/home",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -263,8 +262,7 @@ export default defineConfig({
       {
         name: "mission",
         label: "Mission Page",
-        path: "content/pages",
-        match: { include: "mission" },
+        path: "content/mission",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -318,8 +316,7 @@ export default defineConfig({
       {
         name: "therapy",
         label: "Therapy Page",
-        path: "content/pages",
-        match: { include: "therapy" },
+        path: "content/therapy",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -478,8 +475,7 @@ export default defineConfig({
       {
         name: "contribute",
         label: "Contribute Page",
-        path: "content/pages",
-        match: { include: "contribute" },
+        path: "content/contribute",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -586,8 +582,7 @@ export default defineConfig({
       {
         name: "impact",
         label: "Impact Page",
-        path: "content/pages",
-        match: { include: "impact" },
+        path: "content/impact",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -682,8 +677,7 @@ export default defineConfig({
       {
         name: "resources",
         label: "Resources Page",
-        path: "content/pages",
-        match: { include: "resources" },
+        path: "content/resources",
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -770,8 +764,7 @@ export default defineConfig({
       {
         name: "volunteer",
         label: "Volunteer Page",
-        path: "content/pages",
-        match: { include: "volunteer" },
+        path: "content/volunteer",
         format: "json",
         ui: {
           filename: { readonly: true },
