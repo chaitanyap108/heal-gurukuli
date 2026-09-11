@@ -1,30 +1,29 @@
-# 1) Ensure you are on main and up to date
-git checkout main
-git pull origin main
-
-# 2) Install deps cleanly
-rm -rf node_modules .next
-npm ci
-
-# 3) Export production Tina env (use your real values)
-export TINA_PUBLIC_IS_LOCAL=false
-export NODE_ENV=production
-export NEXT_PUBLIC_TINA_CLIENT_ID="your_tina_client_id"
-export TINA_TOKEN="your_tina_token"
-# optional but recommended if you use a non-main content branch:
-# export NEXT_PUBLIC_TINA_BRANCH="main"
-
-# 4) Clean local compilation of the cloud admin bundle
-npx tinacms build --skip-cloud-checks
-
-# 5) Sanity check: admin must NOT point at localhost Tina
-# (should print nothing)
-grep -R "localhost:4001" public/admin || true
-
-# 6) Commit generated admin outputs + any schema-generated files Tina updated
-git add public/admin tina/__generated__
-git status
-git commit -m "Rebuild Tina admin bundle for production schema sync"
-
-# 7) Push the same commit hash to main (Vercel + TinaCloud webhook)
-git push origin main
+{
+  "name": "heal_gurukuli",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "start": "next start",
+    "lint": "eslint",
+    "tina:patch-admin": "node scripts/ensure-local-admin.mjs"
+  },
+  "dependencies": {
+    "@tinacms/cli": "^2.6.1",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tinacms": "^3.12.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
