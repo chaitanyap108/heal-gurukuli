@@ -40,8 +40,9 @@ if (process.platform === "win32") {
 }
 
 // ALWAYS regenerate admin + GraphQL schema from tina/config.ts during deploy.
-// Skipping this (and relying on committed public/admin) is a common cause of
-// "GraphQL Schema Mismatch" when config/content drift from the baked admin.
+// Do not skip when creds are missing (Saragrahi skips and uses committed admin) —
+// that leaves stale collection names and causes errors like:
+// "Expected to find collection named shared" / schema mismatch on Vercel.
 if (!hasTinaCreds) {
   console.warn(
     "NEXT_PUBLIC_TINA_CLIENT_ID and/or TINA_TOKEN not set. " +
@@ -52,8 +53,7 @@ if (!hasTinaCreds) {
   console.log("Tina credentials found — running production tinacms build…");
 }
 
-// NOTE: no --local flag here. This generates cloud-oriented admin assets.
-// TINA_PUBLIC_IS_LOCAL is forced false above (Saragrahi-aligned).
+// NOTE: no --local flag. Cloud-oriented admin assets; TINA_PUBLIC_IS_LOCAL is false above.
 run("npx", ["tinacms", "build", "--skip-cloud-checks"]);
 
 run("npx", ["next", "build"]);

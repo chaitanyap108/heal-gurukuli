@@ -106,27 +106,36 @@ export default defineConfig({
           },
         ],
       },
-      // IMPORTANT: fields-only (Saragrahi-style). Do NOT use `templates` here.
-      // Polymorphic `templates` caused "Expected to find template named shared"
-      // when documents/_template did not match threePillars|testimonials.
+      // Saragrahi-style: one fields-only collection per content folder (no polymorphic
+      // `templates`). Directory is content/shared → collection name MUST be `shared`
+      // so frontend/admin routes that query `shared` keep working for every doc
+      // (threePillars + testimonials). Superset of both JSON shapes; unused fields
+      // stay empty per document. Strip any leftover `_template` keys from JSON if
+      // present (fields-only collections do not use templates).
       {
-        name: "sharedThreePillars",
-        label: "Shared – Three Pillars",
+        name: "shared",
+        label: "Shared",
         path: "content/shared",
-        match: { include: "threePillars" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
         },
         fields: [
           {
             type: "string",
             name: "title",
             label: "Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           { type: "string", name: "subtitle", label: "Subtitle" },
           { type: "string", name: "eyebrow", label: "Eyebrow" },
+          // testimonials.json primary label (threePillars leaves this empty)
+          { type: "string", name: "heading", label: "Heading" },
+          { type: "string", name: "note", label: "Note" },
           {
             type: "object",
             name: "pillars",
@@ -150,26 +159,6 @@ export default defineConfig({
               { type: "string", name: "ctaHref", label: "CTA Href" },
             ],
           },
-        ],
-      },
-      {
-        name: "sharedTestimonials",
-        label: "Shared – Testimonials",
-        path: "content/shared",
-        match: { include: "testimonials" },
-        format: "json",
-        ui: {
-          allowedActions: { create: false, delete: false },
-        },
-        fields: [
-          { type: "string", name: "eyebrow", label: "Eyebrow" },
-          {
-            type: "string",
-            name: "heading",
-            label: "Heading",
-            isTitle: true, required: true,
-          },
-          { type: "string", name: "note", label: "Note" },
           {
             type: "object",
             name: "quotes",
@@ -193,6 +182,9 @@ export default defineConfig({
           },
         ],
       },
+      // Page singletons (Saragrahi: one collection per page, fields-only, no
+      // templates). Heal keeps files at content/pages/*.json, so path + match
+      // replaces Saragrahi's per-folder paths (content/home, content/about, …).
       {
         name: "home",
         label: "Home Page",
@@ -200,7 +192,11 @@ export default defineConfig({
         match: { include: "home" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/",
         },
         fields: [
@@ -208,7 +204,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -270,7 +267,11 @@ export default defineConfig({
         match: { include: "mission" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/mission",
         },
         fields: [
@@ -278,7 +279,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -320,7 +322,11 @@ export default defineConfig({
         match: { include: "therapy" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/therapy",
         },
         fields: [
@@ -328,7 +334,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -475,7 +482,11 @@ export default defineConfig({
         match: { include: "contribute" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/contribute",
         },
         fields: [
@@ -483,7 +494,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -578,7 +590,11 @@ export default defineConfig({
         match: { include: "impact" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/impact",
         },
         fields: [
@@ -586,7 +602,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -669,7 +686,11 @@ export default defineConfig({
         match: { include: "resources" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/resources",
         },
         fields: [
@@ -677,7 +698,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
@@ -752,7 +774,11 @@ export default defineConfig({
         match: { include: "volunteer" },
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
+          filename: { readonly: true },
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
           router: () => "/volunteer",
         },
         fields: [
@@ -760,7 +786,8 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true, required: true,
+            isTitle: true,
+            required: true,
           },
           {
             type: "object",
