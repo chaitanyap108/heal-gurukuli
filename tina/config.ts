@@ -123,7 +123,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           { type: "string", name: "subtitle", label: "Subtitle" },
           { type: "string", name: "eyebrow", label: "Eyebrow" },
@@ -167,7 +167,7 @@ export default defineConfig({
             type: "string",
             name: "heading",
             label: "Heading",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           { type: "string", name: "note", label: "Note" },
           {
@@ -208,7 +208,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -278,7 +278,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -328,7 +328,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -483,7 +483,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -586,7 +586,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -677,7 +677,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
@@ -760,7 +760,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Page Title",
-            isTitle: true,
+            isTitle: true, required: true,
           },
           {
             type: "object",
