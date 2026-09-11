@@ -39,14 +39,21 @@ if (process.platform === "win32") {
   });
 }
 
-if (hasTinaCreds) {
-  console.log("Tina credentials found — running production tinacms build…");
-  // NOTE: no --local flag here. This generates cloud-oriented admin assets.
-  run("npx", ["tinacms", "build", "--skip-cloud-checks"]);
-} else {
+// ALWAYS regenerate admin + GraphQL schema from tina/config.ts during deploy.
+// Skipping this (and relying on committed public/admin) is a common cause of
+// "GraphQL Schema Mismatch" when config/content drift from the baked admin.
+if (!hasTinaCreds) {
   console.warn(
-    "Skipping tinacms build — using committed public/admin assets. Set NEXT_PUBLIC_TINA_CLIENT_ID and TINA_TOKEN on Vercel to regenerate admin during deploy."
+    "NEXT_PUBLIC_TINA_CLIENT_ID and/or TINA_TOKEN not set. " +
+      "Running tinacms build with --skip-cloud-checks so schema/admin still match config. " +
+      "Set both env vars on Vercel for full Tina Cloud auth/editorial."
   );
+} else {
+  console.log("Tina credentials found — running production tinacms build…");
 }
+
+// NOTE: no --local flag here. This generates cloud-oriented admin assets.
+// TINA_PUBLIC_IS_LOCAL is forced false above (Saragrahi-aligned).
+run("npx", ["tinacms", "build", "--skip-cloud-checks"]);
 
 run("npx", ["next", "build"]);
