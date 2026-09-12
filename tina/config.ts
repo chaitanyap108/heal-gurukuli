@@ -45,7 +45,7 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
+      mediaRoot: "uploads",
       publicFolder: "public",
     },
   },
@@ -53,7 +53,7 @@ export default defineConfig({
     collections: [
       {
         name: "clinicians",
-        label: "Clinicians",
+    label: "Clinicians",
         path: "content/clinicians",
         format: "json",
         fields: [
@@ -85,7 +85,7 @@ export default defineConfig({
       },
       {
         name: "trustees",
-        label: "Trustees",
+    label: "Trustees",
         path: "content/trustees",
         format: "json",
         fields: [
@@ -114,7 +114,7 @@ export default defineConfig({
       // present (fields-only collections do not use templates).
       {
         name: "shared",
-        label: "Shared",
+    label: "Shared",
         path: "content/shared",
         format: "json",
         ui: {
@@ -187,8 +187,9 @@ export default defineConfig({
       // replaces Saragrahi's per-folder paths (content/home, content/about, …).
       {
         name: "home",
-        label: "Home Page",
-        path: "content/home",
+    label: "Home Page",
+        path: "content/pages",
+    match: { include: "home" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -261,8 +262,9 @@ export default defineConfig({
       },
       {
         name: "mission",
-        label: "Mission Page",
-        path: "content/mission",
+    label: "Mission Page",
+        path: "content/pages",
+    match: { include: "mission" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -315,8 +317,9 @@ export default defineConfig({
       },
       {
         name: "therapy",
-        label: "Therapy Page",
-        path: "content/therapy",
+    label: "Therapy Page",
+        path: "content/pages",
+    match: { include: "therapy" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -474,8 +477,9 @@ export default defineConfig({
       },
       {
         name: "contribute",
-        label: "Contribute Page",
-        path: "content/contribute",
+    label: "Contribute Page",
+        path: "content/pages",
+    match: { include: "contribute" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -581,8 +585,9 @@ export default defineConfig({
       },
       {
         name: "impact",
-        label: "Impact Page",
-        path: "content/impact",
+    label: "Impact Page",
+        path: "content/pages",
+    match: { include: "impact" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -676,8 +681,9 @@ export default defineConfig({
       },
       {
         name: "resources",
-        label: "Resources Page",
-        path: "content/resources",
+    label: "Resources Page",
+        path: "content/pages",
+    match: { include: "resources" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -763,8 +769,9 @@ export default defineConfig({
       },
       {
         name: "volunteer",
-        label: "Volunteer Page",
-        path: "content/volunteer",
+    label: "Volunteer Page",
+        path: "content/pages",
+    match: { include: "volunteer" },
         format: "json",
         ui: {
           filename: { readonly: true },

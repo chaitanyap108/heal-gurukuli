@@ -24,7 +24,7 @@ var config_default = defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
+      mediaRoot: "uploads",
       publicFolder: "public"
     }
   },
@@ -64,6 +64,7 @@ var config_default = defineConfig({
       },
       {
         name: "trustees",
+        name: "trustees",
         label: "Trustees",
         path: "content/trustees",
         format: "json",
@@ -92,6 +93,7 @@ var config_default = defineConfig({
       // stay empty per document. Strip any leftover `_template` keys from JSON if
       // present (fields-only collections do not use templates).
       {
+        name: "shared",
         name: "shared",
         label: "Shared",
         path: "content/shared",
@@ -166,8 +168,10 @@ var config_default = defineConfig({
       // replaces Saragrahi's per-folder paths (content/home, content/about, …).
       {
         name: "home",
+        name: "home",
         label: "Home Page",
-        path: "content/home",
+        path: "content/pages",
+        match: { include: "home" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -240,8 +244,10 @@ var config_default = defineConfig({
       },
       {
         name: "mission",
+        name: "mission",
         label: "Mission Page",
-        path: "content/mission",
+        path: "content/pages",
+        match: { include: "mission" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -294,8 +300,10 @@ var config_default = defineConfig({
       },
       {
         name: "therapy",
+        name: "therapy",
         label: "Therapy Page",
-        path: "content/therapy",
+        path: "content/pages",
+        match: { include: "therapy" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -453,8 +461,10 @@ var config_default = defineConfig({
       },
       {
         name: "contribute",
+        name: "contribute",
         label: "Contribute Page",
-        path: "content/contribute",
+        path: "content/pages",
+        match: { include: "contribute" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -560,8 +570,10 @@ var config_default = defineConfig({
       },
       {
         name: "impact",
+        name: "impact",
         label: "Impact Page",
-        path: "content/impact",
+        path: "content/pages",
+        match: { include: "impact" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -655,8 +667,10 @@ var config_default = defineConfig({
       },
       {
         name: "resources",
+        name: "resources",
         label: "Resources Page",
-        path: "content/resources",
+        path: "content/pages",
+        match: { include: "resources" },
         format: "json",
         ui: {
           filename: { readonly: true },
@@ -742,8 +756,10 @@ var config_default = defineConfig({
       },
       {
         name: "volunteer",
+        name: "volunteer",
         label: "Volunteer Page",
-        path: "content/volunteer",
+        path: "content/pages",
+        match: { include: "volunteer" },
         format: "json",
         ui: {
           filename: { readonly: true },
