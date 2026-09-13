@@ -1,5 +1,11 @@
 import { spawnSync } from "node:child_process";
 
+process.env.NEXT_PUBLIC_TINA_BRANCH =
+  process.env.NEXT_PUBLIC_TINA_BRANCH ||
+  process.env.VERCEL_GIT_COMMIT_REF ||
+  process.env.GITHUB_BRANCH ||
+  "main";
+
 // Production must NEVER build the admin in local mode.
 // (Prevents localhost:4001 from being baked into the deployed admin.)
 process.env.TINA_PUBLIC_IS_LOCAL = "false";
@@ -54,6 +60,10 @@ if (!hasTinaCreds) {
 }
 
 // NOTE: no --local flag. Cloud-oriented admin assets; TINA_PUBLIC_IS_LOCAL is false above.
-run("npx", ["tinacms", "build", "--skip-cloud-checks"]);
+if (hasTinaCreds) {
+  run("npx", ["tinacms", "build"]);
+} else {
+  run("npx", ["tinacms", "build", "--skip-cloud-checks"]);
+}
 
 run("npx", ["next", "build"]);
