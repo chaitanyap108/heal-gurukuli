@@ -932,3 +932,4 @@ export default defineConfig({
   },
 });
 // Trigger Tina Cloud Indexer
+// Force indexer wake up after GitHub permissions fix
