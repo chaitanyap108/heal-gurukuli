@@ -1,0 +1,47 @@
+{
+  "title": "Media & Press",
+  "hero": {
+    "eyebrow": "Press Relations",
+    "heading": "Media & Press",
+    "subtitle": "For journalists, researchers, and documentarians looking to cover the Heal Gurukuli Initiative, our therapeutic methods, or the history of institutional abuse within gurukulas."
+  },
+  "pressOffice": {
+    "heading": "Press Office & Spokesperson",
+    "body": "We accommodate interview requests and statements regarding clinical support, safeguarding, and recovery frameworks. To coordinate interviews with our founder Caitanya Lila or external clinical advisors, please submit an inquiry.",
+    "note": "Note: We will never disclose patient identities, clinical data, or active treatment details under any circumstance.",
+    "emailLabel": "Direct Press Email",
+    "email": "press@healgurukuli.org",
+    "responseNote": "Response within 4 hours for urgent breaking news."
+  },
+  "guidelines": {
+    "heading": "Ethical Reporting Guidelines",
+    "intro": "Reporting on institutional child abuse and complex PTSD requires extreme sensitivity. When covering these topics, we urge journalists to follow these guidelines:",
+    "items": [
+      {
+        "title": "1. Protect Anonymity",
+        "body": "Many adult survivors reside in close-knit communities where exposure would cause social or professional disruption. Always verify consent before disclosing names, locations, or family ties."
+      },
+      {
+        "title": "2. Avoid Sensationalism",
+        "body": "Focus on systemic institutional failure, clinical recovery frameworks, and therapeutic resources rather than detailed descriptions of abuse that may act as trauma triggers."
+      },
+      {
+        "title": "3. Frame Around Agency",
+        "body": "Represent survivors as active agents in their own recovery, rather than passive victims. Highlight clinical progress and community initiatives."
+      },
+      {
+        "title": "4. Provide Help Resources",
+        "body": "Always close your articles or broadcasts with details for national support helplines (such as Samaritans, child protection lines, or our resource page link)."
+      }
+    ]
+  },
+  "pressKit": {
+    "heading": "Heal Gurukuli Press Kit",
+    "description": "Includes high-res logos, approved clinician photos, and our clinical charter sheet (PDF).",
+    "ctaLabel": "Download Press Kit"
+  },
+  "backLink": {
+    "label": "Back to General Contact",
+    "href": "/contact/get-in-touch"
+  }
+}

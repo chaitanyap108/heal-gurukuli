@@ -1,4 +1,5 @@
 {
+  "title": "Therapy",
   "hero": {
     "eyebrow": "Clinical Therapy",
     "heading": "Begin Therapy",
@@ -40,6 +41,13 @@
       "After you submit the intake form, the clinical team reviews your request and replies to arrange a free 30-minute initial consultation if appropriate — a quiet conversation to ensure this is the right therapeutic fit. There is no self-serve booking calendar."
     ]
   },
+  "consultationInfo": {
+    "eyebrow": "How consultations are arranged",
+    "heading": "Intake first — then we get in touch",
+    "body": "Complete the intake form above. Once reviewed, we will contact you to schedule your free initial consultation. Typical reply time is 1–2 business days.",
+    "ctaLabel": "Go to Intake Form",
+    "ctaHref": "#intake"
+  },
   "modalitiesSection": {
     "eyebrow": "Clinical Modalities",
     "heading": "Therapies We Offer",
@@ -71,11 +79,62 @@
       }
     ]
   },
+  "meetTheTeam": {
+    "eyebrow": "Our Clinicians",
+    "heading": "Meet the Therapists",
+    "body": "Our clinical team consists of UKCP and BACP-registered psychotherapists and clinical psychologists who bring specialist understanding of complex trauma, spiritual abuse, and the particular institutional dynamics of the gurukuli experience.",
+    "ctaLabel": "View the Clinical Team",
+    "ctaHref": "/clinicians"
+  },
   "complaints": {
     "eyebrow": "Accountability",
     "heading": "Complaints",
     "body": "If you have a concern about any aspect of our clinical or organisational practice, you are entitled to raise it. Our complaints process is designed to be clear, confidential, and fair — in line with UKCP and BACP professional standards.",
     "pdfLabel": "Download Complaints Process (PDF)",
     "pdfHref": "/complaints-process.pdf"
+  },
+  "crisisTeaser": {
+    "eyebrow": "Immediate Help",
+    "heading": "Crisis Support Lines",
+    "subtitle": "If you are in immediate distress, please reach out to one of the following services. All lines are free, confidential, and available around the clock.",
+    "groups": [
+      {
+        "region": "United Kingdom",
+        "lines": [
+          {
+            "name": "Samaritans",
+            "detail": "Free, 24/7 emotional support",
+            "contact": "116 123"
+          },
+          {
+            "name": "Shout Crisis Text Line",
+            "detail": "Text-based crisis support",
+            "contact": "Text SHOUT to 85258"
+          }
+        ]
+      },
+      {
+        "region": "United States & Canada",
+        "lines": [
+          {
+            "name": "988 Suicide & Crisis Lifeline",
+            "detail": "Free, 24/7 crisis support",
+            "contact": "Call or text 988"
+          },
+          {
+            "name": "Crisis Text Line",
+            "detail": "Text-based support",
+            "contact": "Text HOME to 741741"
+          }
+        ]
+      }
+    ],
+    "viewAllLabel": "View all crisis resources →",
+    "viewAllHref": "/contact/crisis-support"
+  },
+  "privacyTeaser": {
+    "text": "How we handle your information",
+    "ctaLabel": "Privacy Policy",
+    "ctaHref": "/privacy"
   }
 }

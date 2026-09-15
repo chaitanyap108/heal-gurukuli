@@ -1,0 +1,66 @@
+{
+  "title": "Community Forum",
+  "hero": {
+    "eyebrow": "Peer Sanctuary",
+    "heading": "Community Forum",
+    "subtitle": "A secure, moderated, and confidential discussion forum for adult gurukuli survivors. Connect with peers, share resources, and discuss therapeutic journeys in a safe space designed to honour your privacy and agency."
+  },
+  "safetyNotice": {
+    "heading": "Safety Notice",
+    "body": "This forum is restricted to verified adult survivors of gurukula abuse. All discussions are protected under secure clinical protocols.",
+    "bullets": [
+      "Protect your anonymity",
+      "Avoid detailed trauma triggers",
+      "No spiritual coercion or debate",
+      "Confidentiality is absolute"
+    ]
+  },
+  "crisisTeaser": {
+    "heading": "Need Immediate Support?",
+    "body": "If you are experiencing acute distress, please reach out to our dedicated support channels or external help.",
+    "ctaLabel": "Crisis Support Options",
+    "ctaHref": "/contact/crisis-support"
+  },
+  "threads": [
+    {
+      "id": "1",
+      "title": "Grounding after an activation — sharing what works for you",
+      "category": "Coping Strategies",
+      "replies": 34,
+      "views": 245,
+      "lastActive": "10m ago",
+      "isPinned": true,
+      "author": "ActiveMember"
+    },
+    {
+      "id": "2",
+      "title": "Reclaiming personal agency: A journey of leaving the high-demand system",
+      "category": "Healing Journeys",
+      "replies": 18,
+      "views": 189,
+      "lastActive": "2h ago",
+      "isPinned": false,
+      "author": "PhoenixRising"
+    },
+    {
+      "id": "3",
+      "title": "Creative writing: Poetry on breaking the silence and reclaiming voice",
+      "category": "Creative Expression",
+      "replies": 12,
+      "views": 94,
+      "lastActive": "1d ago",
+      "isPinned": false,
+      "author": "WordWeaver"
+    },
+    {
+      "id": "4",
+      "title": "Weekly check-in: Small victories and gentle self-care habits",
+      "category": "General Discussion",
+      "replies": 52,
+      "views": 412,
+      "lastActive": "3d ago",
+      "isPinned": false,
+      "author": "SanctuarySeeker"
+    }
+  ]
+}

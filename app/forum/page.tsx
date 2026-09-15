@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import forumData from "@/content/pages/forum.json";
 
 export const metadata: Metadata = {
   title: "Community Forum — Heal Gurukuli",
@@ -18,45 +19,14 @@ interface Thread {
   author: string;
 }
 
-const mockThreads: Thread[] = [
-  {
-    id: "1",
-    title: "Grounding after an activation — sharing what works for you",
-    category: "Coping Strategies",
-    replies: 34,
-    views: 245,
-    lastActive: "10m ago",
-    isPinned: true,
-    author: "ActiveMember",
-  },
-  {
-    id: "2",
-    title: "Reclaiming personal agency: A journey of leaving the high-demand system",
-    category: "Healing Journeys",
-    replies: 18,
-    views: 189,
-    lastActive: "2h ago",
-    author: "PhoenixRising",
-  },
-  {
-    id: "3",
-    title: "Creative writing: Poetry on breaking the silence and reclaiming voice",
-    category: "Creative Expression",
-    replies: 12,
-    views: 94,
-    lastActive: "1d ago",
-    author: "WordWeaver",
-  },
-  {
-    id: "4",
-    title: "Weekly check-in: Small victories and gentle self-care habits",
-    category: "General Discussion",
-    replies: 52,
-    views: 412,
-    lastActive: "3d ago",
-    author: "SanctuarySeeker",
-  },
-];
+interface ForumData {
+  hero: { eyebrow: string; heading: string; subtitle: string };
+  safetyNotice: { heading: string; body: string; bullets: string[] };
+  crisisTeaser: { heading: string; body: string; ctaLabel: string; ctaHref: string };
+  threads: Thread[];
+}
+
+const data = forumData as ForumData;
 
 export default function ForumPage() {
   return (
@@ -65,16 +35,14 @@ export default function ForumPage() {
       <section className="py-20 md:py-28 px-6 bg-canvas-white border-b border-border">
         <div className="max-w-3xl mx-auto">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-5">
-            Peer Sanctuary
+            {data.hero.eyebrow}
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl text-navy font-semibold leading-tight mb-6">
-            Community Forum
+            {data.hero.heading}
           </h1>
           <div className="w-12 h-px bg-blue mb-8" />
           <p className="font-sans text-base md:text-lg text-slate-mid leading-relaxed italic">
-            A secure, moderated, and confidential discussion forum for adult gurukuli survivors. 
-            Connect with peers, share resources, and discuss therapeutic journeys in a safe space 
-            designed to honour your privacy and agency.
+            {data.hero.subtitle}
           </p>
         </div>
       </section>
@@ -91,29 +59,28 @@ export default function ForumPage() {
                   <svg className="w-5 h-5 text-blue shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
-                  Safety Notice
+                  {data.safetyNotice.heading}
                 </h3>
                 <p className="font-sans text-xs text-slate-mid leading-relaxed mb-4">
-                  This forum is restricted to verified adult survivors of gurukula abuse. All discussions are protected under secure clinical protocols.
+                  {data.safetyNotice.body}
                 </p>
                 <div className="text-xs text-slate-light border-t border-border pt-3 space-y-2">
-                  <p>• Protect your anonymity</p>
-                  <p>• Avoid detailed trauma triggers</p>
-                  <p>• No spiritual coercion or debate</p>
-                  <p>• Confidentiality is absolute</p>
+                  {data.safetyNotice.bullets.map((bullet) => (
+                    <p key={bullet}>• {bullet}</p>
+                  ))}
                 </div>
               </div>
 
               <div className="bg-blue-soft border border-blue/15 rounded-xl p-6">
-                <h4 className="font-serif text-sm text-navy font-semibold mb-2">Need Immediate Support?</h4>
+                <h4 className="font-serif text-sm text-navy font-semibold mb-2">{data.crisisTeaser.heading}</h4>
                 <p className="font-sans text-xs text-slate-mid leading-relaxed mb-4">
-                  If you are experiencing acute distress, please reach out to our dedicated support channels or external help.
+                  {data.crisisTeaser.body}
                 </p>
                 <Link
-                  href="/contact/crisis-support"
+                  href={data.crisisTeaser.ctaHref}
                   className="inline-flex items-center gap-1.5 text-xs text-blue font-semibold hover:underline"
                 >
-                  Crisis Support Options
+                  {data.crisisTeaser.ctaLabel}
                   <span aria-hidden="true">→</span>
                 </Link>
               </div>
@@ -163,7 +130,7 @@ export default function ForumPage() {
 
               {/* Discussion List */}
               <div className="bg-canvas-white border border-border rounded-xl divide-y divide-border overflow-hidden">
-                {mockThreads.map((thread) => (
+                {data.threads.map((thread) => (
                   <div
                     key={thread.id}
                     className="p-5 hover:bg-canvas-soft transition-colors duration-150 flex items-start gap-4"

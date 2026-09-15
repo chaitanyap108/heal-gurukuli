@@ -19,6 +19,15 @@ const isLocal =
 // needs cross-origin requests and cannot drift back to Tina Cloud.
 const localGraphqlProxy = "/api/tina-graphql";
 
+const singletonUi = (route: string) => ({
+  filename: { readonly: true },
+  allowedActions: {
+    create: false,
+    delete: false,
+  },
+  router: () => route,
+});
+
 export default defineConfig({
   branch,
 
@@ -53,9 +62,12 @@ export default defineConfig({
     collections: [
       {
         name: "clinicians",
-    label: "Clinicians",
+        label: "Clinicians",
         path: "content/clinicians",
         format: "json",
+        ui: {
+          router: ({ document }) => `/clinicians/${document._sys.filename}`,
+        },
         fields: [
           { type: "string", name: "slug", label: "Slug", required: true },
           {
@@ -67,7 +79,12 @@ export default defineConfig({
           },
           { type: "string", name: "title", label: "Title" },
           { type: "image", name: "image", label: "Profile Image" },
-          { type: "string", name: "credentials", label: "Credentials", list: true },
+          {
+            type: "string",
+            name: "credentials",
+            label: "Credentials",
+            list: true,
+          },
           {
             type: "string",
             name: "shortBio",
@@ -80,14 +97,22 @@ export default defineConfig({
             label: "Full Bio",
             ui: { component: "textarea" },
           },
-          { type: "string", name: "specialties", label: "Specialties", list: true },
+          {
+            type: "string",
+            name: "specialties",
+            label: "Specialties",
+            list: true,
+          },
         ],
       },
       {
         name: "trustees",
-    label: "Trustees",
+        label: "Trustees",
         path: "content/trustees",
         format: "json",
+        ui: {
+          router: ({ document }) => `/trustees/${document._sys.filename}`,
+        },
         fields: [
           { type: "string", name: "slug", label: "Slug", required: true },
           {
@@ -114,7 +139,7 @@ export default defineConfig({
       // present (fields-only collections do not use templates).
       {
         name: "shared",
-    label: "Shared",
+        label: "Shared",
         path: "content/shared",
         format: "json",
         ui: {
@@ -155,8 +180,8 @@ export default defineConfig({
                 label: "Body",
                 ui: { component: "textarea" },
               },
-              { type: "string", name: "ctaText", label: "CTA Text" },
-              { type: "string", name: "ctaHref", label: "CTA Href" },
+              { type: "string", name: "ctaText", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
             ],
           },
           {
@@ -187,18 +212,11 @@ export default defineConfig({
       // replaces Saragrahi's per-folder paths (content/home, content/about, …).
       {
         name: "home",
-    label: "Home Page",
+        label: "Home Page",
         path: "content/pages",
-    match: { include: "home" },
+        match: { include: "home" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/",
-        },
+        ui: singletonUi("/"),
         fields: [
           {
             type: "string",
@@ -224,19 +242,19 @@ export default defineConfig({
               {
                 type: "object",
                 name: "primaryCta",
-                label: "Primary CTA",
+                label: "Primary Button",
                 fields: [
-                  { type: "string", name: "text", label: "Text" },
-                  { type: "string", name: "href", label: "Href" },
+                  { type: "string", name: "text", label: "Label" },
+                  { type: "string", name: "href", label: "Link URL" },
                 ],
               },
               {
                 type: "object",
                 name: "secondaryCta",
-                label: "Secondary CTA",
+                label: "Secondary Button",
                 fields: [
-                  { type: "string", name: "text", label: "Text" },
-                  { type: "string", name: "href", label: "Href" },
+                  { type: "string", name: "text", label: "Label" },
+                  { type: "string", name: "href", label: "Link URL" },
                 ],
               },
             ],
@@ -254,26 +272,19 @@ export default defineConfig({
                 label: "Body",
                 ui: { component: "textarea" },
               },
-              { type: "string", name: "ctaText", label: "CTA Text" },
-              { type: "string", name: "ctaHref", label: "CTA Href" },
+              { type: "string", name: "ctaText", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
             ],
           },
         ],
       },
       {
         name: "mission",
-    label: "Mission Page",
+        label: "Mission Page",
         path: "content/pages",
-    match: { include: "mission" },
+        match: { include: "mission" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/mission",
-        },
+        ui: singletonUi("/mission"),
         fields: [
           {
             type: "string",
@@ -317,18 +328,11 @@ export default defineConfig({
       },
       {
         name: "therapy",
-    label: "Therapy Page",
+        label: "Therapy Page",
         path: "content/pages",
-    match: { include: "therapy" },
+        match: { include: "therapy" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/therapy",
-        },
+        ui: singletonUi("/support"),
         fields: [
           {
             type: "string",
@@ -421,6 +425,23 @@ export default defineConfig({
           },
           {
             type: "object",
+            name: "consultationInfo",
+            label: "Consultation Info",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
+            ],
+          },
+          {
+            type: "object",
             name: "modalitiesSection",
             label: "Modalities Section",
             fields: [
@@ -451,9 +472,26 @@ export default defineConfig({
                     ui: { component: "textarea" },
                   },
                   { type: "string", name: "linkText", label: "Link Text" },
-                  { type: "string", name: "linkHref", label: "Link Href" },
+                  { type: "string", name: "linkHref", label: "Link URL" },
                 ],
               },
+            ],
+          },
+          {
+            type: "object",
+            name: "meetTheTeam",
+            label: "Meet the Team",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
             ],
           },
           {
@@ -470,25 +508,75 @@ export default defineConfig({
                 ui: { component: "textarea" },
               },
               { type: "string", name: "pdfLabel", label: "PDF Label" },
-              { type: "string", name: "pdfHref", label: "PDF Href" },
+              { type: "string", name: "pdfHref", label: "PDF URL" },
+            ],
+          },
+          {
+            type: "object",
+            name: "crisisTeaser",
+            label: "Crisis Teaser",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "object",
+                name: "groups",
+                label: "Groups",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.region || "Region",
+                  }),
+                },
+                fields: [
+                  { type: "string", name: "region", label: "Region" },
+                  {
+                    type: "object",
+                    name: "lines",
+                    label: "Lines",
+                    list: true,
+                    ui: {
+                      itemProps: (item) => ({
+                        label: item?.name || "Line",
+                      }),
+                    },
+                    fields: [
+                      { type: "string", name: "name", label: "Name" },
+                      { type: "string", name: "detail", label: "Detail" },
+                      { type: "string", name: "contact", label: "Contact" },
+                    ],
+                  },
+                ],
+              },
+              { type: "string", name: "viewAllLabel", label: "View All Label" },
+              { type: "string", name: "viewAllHref", label: "View All Link URL" },
+            ],
+          },
+          {
+            type: "object",
+            name: "privacyTeaser",
+            label: "Privacy Teaser",
+            fields: [
+              { type: "string", name: "text", label: "Text" },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
             ],
           },
         ],
       },
       {
         name: "contribute",
-    label: "Contribute Page",
+        label: "Contribute Page",
         path: "content/pages",
-    match: { include: "contribute" },
+        match: { include: "contribute" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/contribute",
-        },
+        ui: singletonUi("/contribute"),
         fields: [
           {
             type: "string",
@@ -561,8 +649,8 @@ export default defineConfig({
                     list: true,
                     ui: { component: "textarea" },
                   },
-                  { type: "string", name: "ctaLabel", label: "CTA Label" },
-                  { type: "string", name: "ctaHref", label: "CTA Href" },
+                  { type: "string", name: "ctaLabel", label: "Button Label" },
+                  { type: "string", name: "ctaHref", label: "Button Link URL" },
                 ],
               },
             ],
@@ -585,18 +673,11 @@ export default defineConfig({
       },
       {
         name: "impact",
-    label: "Impact Page",
+        label: "Impact Page",
         path: "content/pages",
-    match: { include: "impact" },
+        match: { include: "impact" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/impact",
-        },
+        ui: singletonUi("/impact"),
         fields: [
           {
             type: "string",
@@ -681,18 +762,11 @@ export default defineConfig({
       },
       {
         name: "resources",
-    label: "Resources Page",
+        label: "Resources Page",
         path: "content/pages",
-    match: { include: "resources" },
+        match: { include: "resources" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/resources",
-        },
+        ui: singletonUi("/resources"),
         fields: [
           {
             type: "string",
@@ -760,7 +834,7 @@ export default defineConfig({
                     name: "readTimeOrType",
                     label: "Read Time or Type",
                   },
-                  { type: "string", name: "href", label: "Href" },
+                  { type: "string", name: "href", label: "Link URL" },
                 ],
               },
             ],
@@ -769,18 +843,11 @@ export default defineConfig({
       },
       {
         name: "volunteer",
-    label: "Volunteer Page",
+        label: "Volunteer Page",
         path: "content/pages",
-    match: { include: "volunteer" },
+        match: { include: "volunteer" },
         format: "json",
-        ui: {
-          filename: { readonly: true },
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-          router: () => "/volunteer",
-        },
+        ui: singletonUi("/volunteer"),
         fields: [
           {
             type: "string",
@@ -922,8 +989,378 @@ export default defineConfig({
                   },
                 ],
               },
-              { type: "string", name: "ctaText", label: "CTA Text" },
-              { type: "string", name: "ctaHref", label: "CTA Href" },
+              { type: "string", name: "ctaText", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "privacy",
+        label: "Privacy Page",
+        path: "content/pages",
+        match: { include: "privacy" },
+        format: "json",
+        ui: singletonUi("/privacy"),
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "sections",
+            label: "Sections",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.heading || "Section",
+              }),
+            },
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "linkLabel", label: "Link Label" },
+              { type: "string", name: "linkHref", label: "Link URL" },
+            ],
+          },
+          {
+            type: "string",
+            name: "footerNote",
+            label: "Footer Note",
+            ui: { component: "textarea" },
+          },
+        ],
+      },
+      {
+        name: "media",
+        label: "Media & Press Page",
+        path: "content/pages",
+        match: { include: "media" },
+        format: "json",
+        ui: singletonUi("/contact/media"),
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "pressOffice",
+            label: "Press Office",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "string",
+                name: "note",
+                label: "Note",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "emailLabel", label: "Email Label" },
+              { type: "string", name: "email", label: "Email" },
+              {
+                type: "string",
+                name: "responseNote",
+                label: "Response Note",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "guidelines",
+            label: "Ethical Reporting Guidelines",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "intro",
+                label: "Intro",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "object",
+                name: "items",
+                label: "Items",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.title || "Guideline",
+                  }),
+                },
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  {
+                    type: "string",
+                    name: "body",
+                    label: "Body",
+                    ui: { component: "textarea" },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "pressKit",
+            label: "Press Kit",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+            ],
+          },
+          {
+            type: "object",
+            name: "backLink",
+            label: "Back Link",
+            fields: [
+              { type: "string", name: "label", label: "Label" },
+              { type: "string", name: "href", label: "Link URL" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "crisisSupport",
+        label: "Crisis Support Page",
+        path: "content/pages",
+        match: { include: "crisis-support" },
+        format: "json",
+        ui: singletonUi("/external-crisis-support"),
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "registry",
+            label: "Crisis Registry",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.country || "Country",
+              }),
+            },
+            fields: [
+              {
+                type: "string",
+                name: "country",
+                label: "Country",
+                required: true,
+              },
+              {
+                type: "object",
+                name: "lines",
+                label: "Support Lines",
+                list: true,
+                ui: {
+                  itemProps: (item) => ({
+                    label: item?.name || "Line",
+                  }),
+                },
+                fields: [
+                  {
+                    type: "string",
+                    name: "name",
+                    label: "Name",
+                    required: true,
+                  },
+                  { type: "string", name: "number", label: "Number / Contact" },
+                  { type: "string", name: "availability", label: "Availability" },
+                  {
+                    type: "string",
+                    name: "notes",
+                    label: "Notes",
+                    ui: { component: "textarea" },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "international",
+            label: "International Notice",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
+            ],
+          },
+          {
+            type: "object",
+            name: "backLink",
+            label: "Back Link",
+            fields: [
+              { type: "string", name: "label", label: "Label" },
+              { type: "string", name: "href", label: "Link URL" },
+            ],
+          },
+        ],
+      },
+      {
+        name: "forum",
+        label: "Forum Page",
+        path: "content/pages",
+        match: { include: "forum" },
+        format: "json",
+        ui: singletonUi("/forum"),
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "object",
+            name: "hero",
+            label: "Hero",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Eyebrow" },
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "subtitle",
+                label: "Subtitle",
+                ui: { component: "textarea" },
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "safetyNotice",
+            label: "Safety Notice",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              {
+                type: "string",
+                name: "bullets",
+                label: "Bullets",
+                list: true,
+              },
+            ],
+          },
+          {
+            type: "object",
+            name: "crisisTeaser",
+            label: "Crisis Teaser",
+            fields: [
+              { type: "string", name: "heading", label: "Heading" },
+              {
+                type: "string",
+                name: "body",
+                label: "Body",
+                ui: { component: "textarea" },
+              },
+              { type: "string", name: "ctaLabel", label: "Button Label" },
+              { type: "string", name: "ctaHref", label: "Button Link URL" },
+            ],
+          },
+          {
+            type: "object",
+            name: "threads",
+            label: "Discussion Threads",
+            list: true,
+            ui: {
+              itemProps: (item) => ({
+                label: item?.title || "Thread",
+              }),
+            },
+            fields: [
+              { type: "string", name: "id", label: "ID" },
+              { type: "string", name: "title", label: "Title" },
+              { type: "string", name: "category", label: "Category" },
+              { type: "number", name: "replies", label: "Replies" },
+              { type: "number", name: "views", label: "Views" },
+              { type: "string", name: "lastActive", label: "Last Active" },
+              { type: "boolean", name: "isPinned", label: "Pinned" },
+              { type: "string", name: "author", label: "Author" },
             ],
           },
         ],

@@ -16,8 +16,19 @@ interface TherapyData {
   stepsSection: { eyebrow: string; heading: string; steps: Array<{ stepNumber: string; title: string; description: string }> };
   intakeTeaser: { eyebrow: string; heading: string; subtitle: string; disclaimer: string };
   oneToOneTherapy: { eyebrow: string; heading: string; bodyParagraphs: string[] };
+  consultationInfo: { eyebrow: string; heading: string; body: string; ctaLabel: string; ctaHref: string };
   modalitiesSection: { eyebrow: string; heading: string; subtitle: string; modalities: Array<{ title: string; description: string; linkText: string; linkHref: string }> };
+  meetTheTeam: { eyebrow: string; heading: string; body: string; ctaLabel: string; ctaHref: string };
   complaints: { eyebrow: string; heading: string; body: string; pdfLabel: string; pdfHref: string };
+  crisisTeaser: {
+    eyebrow: string;
+    heading: string;
+    subtitle: string;
+    groups: Array<{ region: string; lines: Array<{ name: string; detail: string; contact: string }> }>;
+    viewAllLabel: string;
+    viewAllHref: string;
+  };
+  privacyTeaser: { text: string; ctaLabel: string; ctaHref: string };
 }
 
 const data = therapyData as TherapyData;
@@ -106,21 +117,19 @@ export default function SupportPage() {
 
           <div className="bg-blue-soft border border-blue/15 rounded-xl p-6 text-left">
             <p className="font-sans text-xs text-blue uppercase tracking-wider font-semibold mb-1">
-              How consultations are arranged
+              {data.consultationInfo.eyebrow}
             </p>
             <p className="font-serif text-lg text-navy font-semibold mb-2">
-              Intake first — then we get in touch
+              {data.consultationInfo.heading}
             </p>
             <p className="font-sans text-sm text-slate-mid leading-relaxed">
-              Complete the intake form above. Once reviewed, we will contact you
-              to schedule your free initial consultation. Typical reply time is
-              1–2 business days.
+              {data.consultationInfo.body}
             </p>
             <a
-              href="#intake"
+              href={data.consultationInfo.ctaHref}
               className="inline-flex items-center gap-2 mt-5 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-95 transition-all duration-150"
             >
-              Go to Intake Form
+              {data.consultationInfo.ctaLabel}
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -174,22 +183,19 @@ export default function SupportPage() {
       <section className="py-16 md:py-20 px-6 bg-canvas-white border-y border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Our Clinicians
+            {data.meetTheTeam.eyebrow}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-6">
-            Meet the Therapists
+            {data.meetTheTeam.heading}
           </h2>
           <p className="font-sans text-sm md:text-base text-slate-mid leading-relaxed max-w-2xl mx-auto mb-8 italic">
-            Our clinical team consists of UKCP and BACP-registered psychotherapists
-            and clinical psychologists who bring specialist understanding of complex
-            trauma, spiritual abuse, and the particular institutional dynamics of
-            the gurukuli experience.
+            {data.meetTheTeam.body}
           </p>
           <Link
-            href="/clinicians"
+            href={data.meetTheTeam.ctaHref}
             className="inline-flex items-center gap-2 bg-navy text-white font-sans text-sm font-semibold px-6 py-3 rounded-lg hover:bg-navy-mid active:scale-[0.98] transition-all duration-150"
           >
-            View the Clinical Team
+            {data.meetTheTeam.ctaLabel}
             <span aria-hidden="true">→</span>
           </Link>
         </div>
@@ -230,34 +236,17 @@ export default function SupportPage() {
       <section id="crisis" className="py-16 md:py-20 px-6 scroll-mt-28">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-blue text-xs uppercase tracking-[0.35em] mb-4">
-            Immediate Help
+            {data.crisisTeaser.eyebrow}
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy font-semibold leading-tight mb-3">
-            Crisis Support Lines
+            {data.crisisTeaser.heading}
           </h2>
           <p className="font-sans text-sm text-slate-mid italic mb-10">
-            If you are in immediate distress, please reach out to one of the
-            following services. All lines are free, confidential, and available
-            around the clock.
+            {data.crisisTeaser.subtitle}
           </p>
 
           <div className="space-y-3 text-left">
-            {[
-              {
-                region: "United Kingdom",
-                lines: [
-                  { name: "Samaritans", detail: "Free, 24/7 emotional support", contact: "116 123" },
-                  { name: "Shout Crisis Text Line", detail: "Text-based crisis support", contact: "Text SHOUT to 85258" },
-                ],
-              },
-              {
-                region: "United States & Canada",
-                lines: [
-                  { name: "988 Suicide & Crisis Lifeline", detail: "Free, 24/7 crisis support", contact: "Call or text 988" },
-                  { name: "Crisis Text Line", detail: "Text-based support", contact: "Text HOME to 741741" },
-                ],
-              },
-            ].map((group: { region: string; lines: Array<{ name: string; detail: string; contact: string }> }) => (
+            {data.crisisTeaser.groups.map((group: { region: string; lines: Array<{ name: string; detail: string; contact: string }> }) => (
               <div key={group.region} className="bg-canvas-white border border-border rounded-xl overflow-hidden">
                 <div className="px-6 py-3 bg-blue-soft border-b border-blue/10">
                   <p className="font-sans text-xs text-navy font-semibold uppercase tracking-[0.2em]">
@@ -280,10 +269,10 @@ export default function SupportPage() {
           </div>
 
           <Link
-            href="/contact/crisis-support"
+            href={data.crisisTeaser.viewAllHref}
             className="inline-flex items-center gap-1.5 text-xs text-blue font-semibold hover:underline mt-8"
           >
-            View all crisis resources →
+            {data.crisisTeaser.viewAllLabel}
           </Link>
         </div>
       </section>
@@ -292,13 +281,13 @@ export default function SupportPage() {
       <section className="py-12 px-6 bg-canvas-white border-t border-border">
         <div className="max-w-3xl mx-auto text-center">
           <p className="font-sans text-sm text-slate-mid mb-3">
-            How we handle your information
+            {data.privacyTeaser.text}
           </p>
           <Link
-            href="/privacy"
+            href={data.privacyTeaser.ctaHref}
             className="inline-flex items-center gap-2 font-sans text-sm text-navy font-medium border border-navy/30 px-5 py-2.5 rounded-lg hover:bg-blue-soft transition-colors"
           >
-            Privacy Policy
+            {data.privacyTeaser.ctaLabel}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

@@ -1,0 +1,100 @@
+{
+  "title": "External Crisis Support",
+  "hero": {
+    "badge": "Global Hotlines",
+    "heading": "External Crisis Support",
+    "subtitle": "A comprehensive list of free, confidential crisis hotlines and support services available in major countries. If you are in immediate danger of self-harm or require urgent medical assistance, please contact your local national first responders or visit your local hospital."
+  },
+  "registry": [
+    {
+      "country": "United Kingdom",
+      "lines": [
+        {
+          "name": "Samaritans",
+          "number": "116 123",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Free, confidential emotional support for anyone in distress."
+        },
+        {
+          "name": "Shout Crisis Text Line",
+          "number": "Text SHOUT to 85258",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Free, confidential text support for immediate mental help."
+        },
+        {
+          "name": "NHS Mental Health Services",
+          "number": "Call 111",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Non-urgent support and guidance for clinical routing."
+        }
+      ]
+    },
+    {
+      "country": "United States & Canada",
+      "lines": [
+        {
+          "name": "988 Suicide & Crisis Lifeline",
+          "number": "Call or Text 988",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Free, confidential support for individuals in suicidal crisis or emotional distress."
+        },
+        {
+          "name": "Crisis Text Line",
+          "number": "Text HOME to 741741",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Free connection to a crisis counselor via SMS."
+        },
+        {
+          "name": "The Trevor Project (LGBTQ+)",
+          "number": "Call 1-866-488-7386 or Text START to 678-678",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Specialized support for LGBTQ young people."
+        }
+      ]
+    },
+    {
+      "country": "Australia",
+      "lines": [
+        {
+          "name": "Lifeline",
+          "number": "Call 13 11 14",
+          "availability": "24 hours, 7 days a week",
+          "notes": "National charity providing all Australians access to crisis support."
+        },
+        {
+          "name": "Beyond Blue",
+          "number": "Call 1300 22 4636",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Support and information on anxiety, depression, and suicide prevention."
+        }
+      ]
+    },
+    {
+      "country": "New Zealand",
+      "lines": [
+        {
+          "name": "1737, Need to Talk?",
+          "number": "Call or Text 1737",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Free, confidential service connecting you to a trained counselor."
+        },
+        {
+          "name": "Lifeline Aotearoa",
+          "number": "Call 0800 543 354",
+          "availability": "24 hours, 7 days a week",
+          "notes": "Confidential support services delivered by qualified staff and volunteers."
+        }
+      ]
+    }
+  ],
+  "international": {
+    "heading": "Other Countries & Regions",
+    "body": "If your country is not listed above, Befrienders Worldwide helps you search for local helpline numbers and support organizations in over 40 countries.",
+    "ctaLabel": "Search Befrienders Worldwide",
+    "ctaHref": "https://www.befrienders.org"
+  },
+  "backLink": {
+    "label": "Back to Support Services",
+    "href": "/support"
+  }
+}

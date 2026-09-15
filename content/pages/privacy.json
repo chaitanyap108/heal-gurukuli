@@ -1,0 +1,29 @@
+{
+  "title": "Privacy Policy",
+  "hero": {
+    "eyebrow": "Governance",
+    "heading": "Privacy Policy",
+    "subtitle": "How we collect, store, and protect your information."
+  },
+  "sections": [
+    {
+      "heading": "Overview",
+      "body": "Heal Gurukuli Initiative treats confidentiality as a clinical and ethical cornerstone. Personal data submitted through this website — including contact forms, volunteer applications, and therapy intake forms — is handled in accordance with UK GDPR and the ethical frameworks of the UKCP and BACP."
+    },
+    {
+      "heading": "What we collect",
+      "body": "We may collect your name, email address, location or time zone, and any information you choose to share in free-text fields. Clinical records created after intake are stored separately under encrypted, clinician-only systems and are never shared with funders or third parties without explicit written consent."
+    },
+    {
+      "heading": "How we use it",
+      "body": "Intake and contact data are used solely to review requests, schedule consultations, and communicate about services. We do not sell or rent personal data. Safeguarding disclosures required by law are the only exceptions to confidentiality, and these are discussed with clients wherever safe to do so."
+    },
+    {
+      "heading": "Your rights",
+      "body": "You may request access to, correction of, or deletion of personal data we hold about you, subject to clinical record-keeping requirements. Contact us via the Get in Touch page for privacy-related requests.",
+      "linkLabel": "Get in Touch",
+      "linkHref": "/contact/get-in-touch"
+    }
+  ],
+  "footerNote": "This page provides a summary of our privacy practices. A full policy document will be published as the initiative formalises its data-protection framework."
+}
