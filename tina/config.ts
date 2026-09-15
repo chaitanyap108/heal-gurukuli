@@ -14,11 +14,6 @@ const isLocal =
   process.env.NODE_ENV === "development" &&
   process.env.TINA_PUBLIC_IS_LOCAL === "true";
 
-// Same-origin proxy (dev only).
-// Prefer this over calling :4001 directly so the admin on :3000 never
-// needs cross-origin requests and cannot drift back to Tina Cloud.
-const localGraphqlProxy = "/api/tina-graphql";
-
 const singletonUi = (route: string) => ({
   filename: { readonly: true },
   allowedActions: {
@@ -43,10 +38,6 @@ export default defineConfig({
         clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || process.env.TINA_CLIENT_ID,
         token: process.env.TINA_TOKEN,
       }),
-
-  // Local: force filesystem GraphQL via Next proxy.
-  // Prod/cloud: leave unset so Tina Cloud is used with real credentials.
-  ...(isLocal ? { contentApiUrlOverride: localGraphqlProxy } : {}),
 
   build: {
     outputFolder: "admin",
