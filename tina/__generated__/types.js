@@ -134,6 +134,14 @@ export const TherapyPartsFragmentDoc = gql`
     heading
     bodyParagraphs
   }
+  consultationInfo {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   modalitiesSection {
     __typename
     eyebrow
@@ -147,6 +155,14 @@ export const TherapyPartsFragmentDoc = gql`
       linkHref
     }
   }
+  meetTheTeam {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   complaints {
     __typename
     eyebrow
@@ -154,6 +170,30 @@ export const TherapyPartsFragmentDoc = gql`
     body
     pdfLabel
     pdfHref
+  }
+  crisisTeaser {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    groups {
+      __typename
+      region
+      lines {
+        __typename
+        name
+        detail
+        contact
+      }
+    }
+    viewAllLabel
+    viewAllHref
+  }
+  privacyTeaser {
+    __typename
+    text
+    ctaLabel
+    ctaHref
   }
 }
     `;
@@ -309,6 +349,139 @@ export const VolunteerPartsFragmentDoc = gql`
     }
     ctaText
     ctaHref
+  }
+}
+    `;
+export const PrivacyPartsFragmentDoc = gql`
+    fragment PrivacyParts on Privacy {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  sections {
+    __typename
+    heading
+    body
+    linkLabel
+    linkHref
+  }
+  footerNote
+}
+    `;
+export const MediaPartsFragmentDoc = gql`
+    fragment MediaParts on Media {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  pressOffice {
+    __typename
+    heading
+    body
+    note
+    emailLabel
+    email
+    responseNote
+  }
+  guidelines {
+    __typename
+    heading
+    intro
+    items {
+      __typename
+      title
+      body
+    }
+  }
+  pressKit {
+    __typename
+    heading
+    description
+    ctaLabel
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+    `;
+export const CrisisSupportPartsFragmentDoc = gql`
+    fragment CrisisSupportParts on CrisisSupport {
+  __typename
+  title
+  hero {
+    __typename
+    badge
+    heading
+    subtitle
+  }
+  registry {
+    __typename
+    country
+    lines {
+      __typename
+      name
+      number
+      availability
+      notes
+    }
+  }
+  international {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+    `;
+export const ForumPartsFragmentDoc = gql`
+    fragment ForumParts on Forum {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  safetyNotice {
+    __typename
+    heading
+    body
+    bullets
+  }
+  crisisTeaser {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  threads {
+    __typename
+    id
+    title
+    category
+    replies
+    views
+    lastActive
+    isPinned
+    author
   }
 }
     `;
@@ -882,6 +1055,234 @@ export const VolunteerConnectionDocument = gql`
   }
 }
     ${VolunteerPartsFragmentDoc}`;
+export const PrivacyDocument = gql`
+    query privacy($relativePath: String!) {
+  privacy(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PrivacyParts
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
+export const PrivacyConnectionDocument = gql`
+    query privacyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PrivacyFilter) {
+  privacyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PrivacyParts
+      }
+    }
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
+export const MediaDocument = gql`
+    query media($relativePath: String!) {
+  media(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...MediaParts
+  }
+}
+    ${MediaPartsFragmentDoc}`;
+export const MediaConnectionDocument = gql`
+    query mediaConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: MediaFilter) {
+  mediaConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...MediaParts
+      }
+    }
+  }
+}
+    ${MediaPartsFragmentDoc}`;
+export const CrisisSupportDocument = gql`
+    query crisisSupport($relativePath: String!) {
+  crisisSupport(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CrisisSupportParts
+  }
+}
+    ${CrisisSupportPartsFragmentDoc}`;
+export const CrisisSupportConnectionDocument = gql`
+    query crisisSupportConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CrisisSupportFilter) {
+  crisisSupportConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CrisisSupportParts
+      }
+    }
+  }
+}
+    ${CrisisSupportPartsFragmentDoc}`;
+export const ForumDocument = gql`
+    query forum($relativePath: String!) {
+  forum(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ForumParts
+  }
+}
+    ${ForumPartsFragmentDoc}`;
+export const ForumConnectionDocument = gql`
+    query forumConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ForumFilter) {
+  forumConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ForumParts
+      }
+    }
+  }
+}
+    ${ForumPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
     clinicians(variables, options) {
@@ -943,6 +1344,30 @@ export function getSdk(requester) {
     },
     volunteerConnection(variables, options) {
       return requester(VolunteerConnectionDocument, variables, options);
+    },
+    privacy(variables, options) {
+      return requester(PrivacyDocument, variables, options);
+    },
+    privacyConnection(variables, options) {
+      return requester(PrivacyConnectionDocument, variables, options);
+    },
+    media(variables, options) {
+      return requester(MediaDocument, variables, options);
+    },
+    mediaConnection(variables, options) {
+      return requester(MediaConnectionDocument, variables, options);
+    },
+    crisisSupport(variables, options) {
+      return requester(CrisisSupportDocument, variables, options);
+    },
+    crisisSupportConnection(variables, options) {
+      return requester(CrisisSupportConnectionDocument, variables, options);
+    },
+    forum(variables, options) {
+      return requester(ForumDocument, variables, options);
+    },
+    forumConnection(variables, options) {
+      return requester(ForumConnectionDocument, variables, options);
     }
   };
 }
@@ -966,7 +1391,7 @@ const generateRequester = (client) => {
 export const ExperimentalGetTinaClient = () => getSdk(
   generateRequester(
     createClient({
-      url: "https://content.tinajs.io/2.4/content/0bc6acd4-5c31-487f-ac41-fc4bfecd5003/github/main",
+      url: "http://localhost:4001/graphql",
       queries
     })
   )

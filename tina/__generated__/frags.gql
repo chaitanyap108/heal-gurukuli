@@ -121,6 +121,14 @@ fragment TherapyParts on Therapy {
     heading
     bodyParagraphs
   }
+  consultationInfo {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   modalitiesSection {
     __typename
     eyebrow
@@ -134,6 +142,14 @@ fragment TherapyParts on Therapy {
       linkHref
     }
   }
+  meetTheTeam {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   complaints {
     __typename
     eyebrow
@@ -141,6 +157,30 @@ fragment TherapyParts on Therapy {
     body
     pdfLabel
     pdfHref
+  }
+  crisisTeaser {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    groups {
+      __typename
+      region
+      lines {
+        __typename
+        name
+        detail
+        contact
+      }
+    }
+    viewAllLabel
+    viewAllHref
+  }
+  privacyTeaser {
+    __typename
+    text
+    ctaLabel
+    ctaHref
   }
 }
 
@@ -292,5 +332,134 @@ fragment VolunteerParts on Volunteer {
     }
     ctaText
     ctaHref
+  }
+}
+
+fragment PrivacyParts on Privacy {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  sections {
+    __typename
+    heading
+    body
+    linkLabel
+    linkHref
+  }
+  footerNote
+}
+
+fragment MediaParts on Media {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  pressOffice {
+    __typename
+    heading
+    body
+    note
+    emailLabel
+    email
+    responseNote
+  }
+  guidelines {
+    __typename
+    heading
+    intro
+    items {
+      __typename
+      title
+      body
+    }
+  }
+  pressKit {
+    __typename
+    heading
+    description
+    ctaLabel
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+
+fragment CrisisSupportParts on CrisisSupport {
+  __typename
+  title
+  hero {
+    __typename
+    badge
+    heading
+    subtitle
+  }
+  registry {
+    __typename
+    country
+    lines {
+      __typename
+      name
+      number
+      availability
+      notes
+    }
+  }
+  international {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+
+fragment ForumParts on Forum {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  safetyNotice {
+    __typename
+    heading
+    body
+    bullets
+  }
+  crisisTeaser {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  threads {
+    __typename
+    id
+    title
+    category
+    replies
+    views
+    lastActive
+    isPinned
+    author
   }
 }

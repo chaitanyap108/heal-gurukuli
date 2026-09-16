@@ -101,6 +101,14 @@ export type Query = {
   resourcesConnection: ResourcesConnection;
   volunteer: Volunteer;
   volunteerConnection: VolunteerConnection;
+  privacy: Privacy;
+  privacyConnection: PrivacyConnection;
+  media: Media;
+  mediaConnection: MediaConnection;
+  crisisSupport: CrisisSupport;
+  crisisSupportConnection: CrisisSupportConnection;
+  forum: Forum;
+  forumConnection: ForumConnection;
 };
 
 
@@ -274,6 +282,66 @@ export type QueryVolunteerConnectionArgs = {
   filter?: InputMaybe<VolunteerFilter>;
 };
 
+
+export type QueryPrivacyArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPrivacyConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PrivacyFilter>;
+};
+
+
+export type QueryMediaArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryMediaConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<MediaFilter>;
+};
+
+
+export type QueryCrisisSupportArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCrisisSupportConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CrisisSupportFilter>;
+};
+
+
+export type QueryForumArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForumConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ForumFilter>;
+};
+
 export type DocumentFilter = {
   clinicians?: InputMaybe<CliniciansFilter>;
   trustees?: InputMaybe<TrusteesFilter>;
@@ -285,6 +353,10 @@ export type DocumentFilter = {
   impact?: InputMaybe<ImpactFilter>;
   resources?: InputMaybe<ResourcesFilter>;
   volunteer?: InputMaybe<VolunteerFilter>;
+  privacy?: InputMaybe<PrivacyFilter>;
+  media?: InputMaybe<MediaFilter>;
+  crisisSupport?: InputMaybe<CrisisSupportFilter>;
+  forum?: InputMaybe<ForumFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -324,7 +396,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Clinicians | Trustees | Shared | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Folder;
+export type DocumentNode = Clinicians | Trustees | Shared | Home | Mission | Therapy | Contribute | Impact | Resources | Volunteer | Privacy | Media | CrisisSupport | Forum | Folder;
 
 export type Clinicians = Node & Document & {
   __typename?: 'Clinicians';
@@ -655,6 +727,15 @@ export type TherapyOneToOneTherapy = {
   bodyParagraphs?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
+export type TherapyConsultationInfo = {
+  __typename?: 'TherapyConsultationInfo';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaHref?: Maybe<Scalars['String']['output']>;
+};
+
 export type TherapyModalitiesSectionModalities = {
   __typename?: 'TherapyModalitiesSectionModalities';
   title?: Maybe<Scalars['String']['output']>;
@@ -671,6 +752,15 @@ export type TherapyModalitiesSection = {
   modalities?: Maybe<Array<Maybe<TherapyModalitiesSectionModalities>>>;
 };
 
+export type TherapyMeetTheTeam = {
+  __typename?: 'TherapyMeetTheTeam';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaHref?: Maybe<Scalars['String']['output']>;
+};
+
 export type TherapyComplaints = {
   __typename?: 'TherapyComplaints';
   eyebrow?: Maybe<Scalars['String']['output']>;
@@ -680,6 +770,36 @@ export type TherapyComplaints = {
   pdfHref?: Maybe<Scalars['String']['output']>;
 };
 
+export type TherapyCrisisTeaserGroupsLines = {
+  __typename?: 'TherapyCrisisTeaserGroupsLines';
+  name?: Maybe<Scalars['String']['output']>;
+  detail?: Maybe<Scalars['String']['output']>;
+  contact?: Maybe<Scalars['String']['output']>;
+};
+
+export type TherapyCrisisTeaserGroups = {
+  __typename?: 'TherapyCrisisTeaserGroups';
+  region?: Maybe<Scalars['String']['output']>;
+  lines?: Maybe<Array<Maybe<TherapyCrisisTeaserGroupsLines>>>;
+};
+
+export type TherapyCrisisTeaser = {
+  __typename?: 'TherapyCrisisTeaser';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  groups?: Maybe<Array<Maybe<TherapyCrisisTeaserGroups>>>;
+  viewAllLabel?: Maybe<Scalars['String']['output']>;
+  viewAllHref?: Maybe<Scalars['String']['output']>;
+};
+
+export type TherapyPrivacyTeaser = {
+  __typename?: 'TherapyPrivacyTeaser';
+  text?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaHref?: Maybe<Scalars['String']['output']>;
+};
+
 export type Therapy = Node & Document & {
   __typename?: 'Therapy';
   title: Scalars['String']['output'];
@@ -687,8 +807,12 @@ export type Therapy = Node & Document & {
   stepsSection?: Maybe<TherapyStepsSection>;
   intakeTeaser?: Maybe<TherapyIntakeTeaser>;
   oneToOneTherapy?: Maybe<TherapyOneToOneTherapy>;
+  consultationInfo?: Maybe<TherapyConsultationInfo>;
   modalitiesSection?: Maybe<TherapyModalitiesSection>;
+  meetTheTeam?: Maybe<TherapyMeetTheTeam>;
   complaints?: Maybe<TherapyComplaints>;
+  crisisTeaser?: Maybe<TherapyCrisisTeaser>;
+  privacyTeaser?: Maybe<TherapyPrivacyTeaser>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -725,6 +849,14 @@ export type TherapyOneToOneTherapyFilter = {
   bodyParagraphs?: InputMaybe<StringFilter>;
 };
 
+export type TherapyConsultationInfoFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaHref?: InputMaybe<StringFilter>;
+};
+
 export type TherapyModalitiesSectionModalitiesFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
@@ -739,6 +871,14 @@ export type TherapyModalitiesSectionFilter = {
   modalities?: InputMaybe<TherapyModalitiesSectionModalitiesFilter>;
 };
 
+export type TherapyMeetTheTeamFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaHref?: InputMaybe<StringFilter>;
+};
+
 export type TherapyComplaintsFilter = {
   eyebrow?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
@@ -747,14 +887,44 @@ export type TherapyComplaintsFilter = {
   pdfHref?: InputMaybe<StringFilter>;
 };
 
+export type TherapyCrisisTeaserGroupsLinesFilter = {
+  name?: InputMaybe<StringFilter>;
+  detail?: InputMaybe<StringFilter>;
+  contact?: InputMaybe<StringFilter>;
+};
+
+export type TherapyCrisisTeaserGroupsFilter = {
+  region?: InputMaybe<StringFilter>;
+  lines?: InputMaybe<TherapyCrisisTeaserGroupsLinesFilter>;
+};
+
+export type TherapyCrisisTeaserFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  groups?: InputMaybe<TherapyCrisisTeaserGroupsFilter>;
+  viewAllLabel?: InputMaybe<StringFilter>;
+  viewAllHref?: InputMaybe<StringFilter>;
+};
+
+export type TherapyPrivacyTeaserFilter = {
+  text?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaHref?: InputMaybe<StringFilter>;
+};
+
 export type TherapyFilter = {
   title?: InputMaybe<StringFilter>;
   hero?: InputMaybe<TherapyHeroFilter>;
   stepsSection?: InputMaybe<TherapyStepsSectionFilter>;
   intakeTeaser?: InputMaybe<TherapyIntakeTeaserFilter>;
   oneToOneTherapy?: InputMaybe<TherapyOneToOneTherapyFilter>;
+  consultationInfo?: InputMaybe<TherapyConsultationInfoFilter>;
   modalitiesSection?: InputMaybe<TherapyModalitiesSectionFilter>;
+  meetTheTeam?: InputMaybe<TherapyMeetTheTeamFilter>;
   complaints?: InputMaybe<TherapyComplaintsFilter>;
+  crisisTeaser?: InputMaybe<TherapyCrisisTeaserFilter>;
+  privacyTeaser?: InputMaybe<TherapyPrivacyTeaserFilter>;
 };
 
 export type TherapyConnectionEdges = {
@@ -1205,6 +1375,380 @@ export type VolunteerConnection = Connection & {
   edges?: Maybe<Array<Maybe<VolunteerConnectionEdges>>>;
 };
 
+export type PrivacyHero = {
+  __typename?: 'PrivacyHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type PrivacySections = {
+  __typename?: 'PrivacySections';
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  linkLabel?: Maybe<Scalars['String']['output']>;
+  linkHref?: Maybe<Scalars['String']['output']>;
+};
+
+export type Privacy = Node & Document & {
+  __typename?: 'Privacy';
+  title: Scalars['String']['output'];
+  hero?: Maybe<PrivacyHero>;
+  sections?: Maybe<Array<Maybe<PrivacySections>>>;
+  footerNote?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PrivacyHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type PrivacySectionsFilter = {
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  linkLabel?: InputMaybe<StringFilter>;
+  linkHref?: InputMaybe<StringFilter>;
+};
+
+export type PrivacyFilter = {
+  title?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<PrivacyHeroFilter>;
+  sections?: InputMaybe<PrivacySectionsFilter>;
+  footerNote?: InputMaybe<StringFilter>;
+};
+
+export type PrivacyConnectionEdges = {
+  __typename?: 'PrivacyConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Privacy>;
+};
+
+export type PrivacyConnection = Connection & {
+  __typename?: 'PrivacyConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PrivacyConnectionEdges>>>;
+};
+
+export type MediaHero = {
+  __typename?: 'MediaHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type MediaPressOffice = {
+  __typename?: 'MediaPressOffice';
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  note?: Maybe<Scalars['String']['output']>;
+  emailLabel?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  responseNote?: Maybe<Scalars['String']['output']>;
+};
+
+export type MediaGuidelinesItems = {
+  __typename?: 'MediaGuidelinesItems';
+  title?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+};
+
+export type MediaGuidelines = {
+  __typename?: 'MediaGuidelines';
+  heading?: Maybe<Scalars['String']['output']>;
+  intro?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<MediaGuidelinesItems>>>;
+};
+
+export type MediaPressKit = {
+  __typename?: 'MediaPressKit';
+  heading?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+};
+
+export type MediaBackLink = {
+  __typename?: 'MediaBackLink';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type Media = Node & Document & {
+  __typename?: 'Media';
+  title: Scalars['String']['output'];
+  hero?: Maybe<MediaHero>;
+  pressOffice?: Maybe<MediaPressOffice>;
+  guidelines?: Maybe<MediaGuidelines>;
+  pressKit?: Maybe<MediaPressKit>;
+  backLink?: Maybe<MediaBackLink>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type MediaHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type MediaPressOfficeFilter = {
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  note?: InputMaybe<StringFilter>;
+  emailLabel?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  responseNote?: InputMaybe<StringFilter>;
+};
+
+export type MediaGuidelinesItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+};
+
+export type MediaGuidelinesFilter = {
+  heading?: InputMaybe<StringFilter>;
+  intro?: InputMaybe<StringFilter>;
+  items?: InputMaybe<MediaGuidelinesItemsFilter>;
+};
+
+export type MediaPressKitFilter = {
+  heading?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+};
+
+export type MediaBackLinkFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type MediaFilter = {
+  title?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<MediaHeroFilter>;
+  pressOffice?: InputMaybe<MediaPressOfficeFilter>;
+  guidelines?: InputMaybe<MediaGuidelinesFilter>;
+  pressKit?: InputMaybe<MediaPressKitFilter>;
+  backLink?: InputMaybe<MediaBackLinkFilter>;
+};
+
+export type MediaConnectionEdges = {
+  __typename?: 'MediaConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Media>;
+};
+
+export type MediaConnection = Connection & {
+  __typename?: 'MediaConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<MediaConnectionEdges>>>;
+};
+
+export type CrisisSupportHero = {
+  __typename?: 'CrisisSupportHero';
+  badge?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrisisSupportRegistryLines = {
+  __typename?: 'CrisisSupportRegistryLines';
+  name: Scalars['String']['output'];
+  number?: Maybe<Scalars['String']['output']>;
+  availability?: Maybe<Scalars['String']['output']>;
+  notes?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrisisSupportRegistry = {
+  __typename?: 'CrisisSupportRegistry';
+  country: Scalars['String']['output'];
+  lines?: Maybe<Array<Maybe<CrisisSupportRegistryLines>>>;
+};
+
+export type CrisisSupportInternational = {
+  __typename?: 'CrisisSupportInternational';
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaHref?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrisisSupportBackLink = {
+  __typename?: 'CrisisSupportBackLink';
+  label?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+};
+
+export type CrisisSupport = Node & Document & {
+  __typename?: 'CrisisSupport';
+  title: Scalars['String']['output'];
+  hero?: Maybe<CrisisSupportHero>;
+  registry?: Maybe<Array<Maybe<CrisisSupportRegistry>>>;
+  international?: Maybe<CrisisSupportInternational>;
+  backLink?: Maybe<CrisisSupportBackLink>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CrisisSupportHeroFilter = {
+  badge?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type CrisisSupportRegistryLinesFilter = {
+  name?: InputMaybe<StringFilter>;
+  number?: InputMaybe<StringFilter>;
+  availability?: InputMaybe<StringFilter>;
+  notes?: InputMaybe<StringFilter>;
+};
+
+export type CrisisSupportRegistryFilter = {
+  country?: InputMaybe<StringFilter>;
+  lines?: InputMaybe<CrisisSupportRegistryLinesFilter>;
+};
+
+export type CrisisSupportInternationalFilter = {
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaHref?: InputMaybe<StringFilter>;
+};
+
+export type CrisisSupportBackLinkFilter = {
+  label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
+};
+
+export type CrisisSupportFilter = {
+  title?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<CrisisSupportHeroFilter>;
+  registry?: InputMaybe<CrisisSupportRegistryFilter>;
+  international?: InputMaybe<CrisisSupportInternationalFilter>;
+  backLink?: InputMaybe<CrisisSupportBackLinkFilter>;
+};
+
+export type CrisisSupportConnectionEdges = {
+  __typename?: 'CrisisSupportConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<CrisisSupport>;
+};
+
+export type CrisisSupportConnection = Connection & {
+  __typename?: 'CrisisSupportConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CrisisSupportConnectionEdges>>>;
+};
+
+export type ForumHero = {
+  __typename?: 'ForumHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+};
+
+export type ForumSafetyNotice = {
+  __typename?: 'ForumSafetyNotice';
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  bullets?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type ForumCrisisTeaser = {
+  __typename?: 'ForumCrisisTeaser';
+  heading?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  ctaLabel?: Maybe<Scalars['String']['output']>;
+  ctaHref?: Maybe<Scalars['String']['output']>;
+};
+
+export type ForumThreads = {
+  __typename?: 'ForumThreads';
+  id?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  category?: Maybe<Scalars['String']['output']>;
+  replies?: Maybe<Scalars['Float']['output']>;
+  views?: Maybe<Scalars['Float']['output']>;
+  lastActive?: Maybe<Scalars['String']['output']>;
+  isPinned?: Maybe<Scalars['Boolean']['output']>;
+  author?: Maybe<Scalars['String']['output']>;
+};
+
+export type Forum = Node & Document & {
+  __typename?: 'Forum';
+  title: Scalars['String']['output'];
+  hero?: Maybe<ForumHero>;
+  safetyNotice?: Maybe<ForumSafetyNotice>;
+  crisisTeaser?: Maybe<ForumCrisisTeaser>;
+  threads?: Maybe<Array<Maybe<ForumThreads>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ForumHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type ForumSafetyNoticeFilter = {
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  bullets?: InputMaybe<StringFilter>;
+};
+
+export type ForumCrisisTeaserFilter = {
+  heading?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  ctaLabel?: InputMaybe<StringFilter>;
+  ctaHref?: InputMaybe<StringFilter>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type ForumThreadsFilter = {
+  id?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  category?: InputMaybe<StringFilter>;
+  replies?: InputMaybe<NumberFilter>;
+  views?: InputMaybe<NumberFilter>;
+  lastActive?: InputMaybe<StringFilter>;
+  isPinned?: InputMaybe<BooleanFilter>;
+  author?: InputMaybe<StringFilter>;
+};
+
+export type ForumFilter = {
+  title?: InputMaybe<StringFilter>;
+  hero?: InputMaybe<ForumHeroFilter>;
+  safetyNotice?: InputMaybe<ForumSafetyNoticeFilter>;
+  crisisTeaser?: InputMaybe<ForumCrisisTeaserFilter>;
+  threads?: InputMaybe<ForumThreadsFilter>;
+};
+
+export type ForumConnectionEdges = {
+  __typename?: 'ForumConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Forum>;
+};
+
+export type ForumConnection = Connection & {
+  __typename?: 'ForumConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ForumConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -1232,6 +1776,14 @@ export type Mutation = {
   createResources: Resources;
   updateVolunteer: Volunteer;
   createVolunteer: Volunteer;
+  updatePrivacy: Privacy;
+  createPrivacy: Privacy;
+  updateMedia: Media;
+  createMedia: Media;
+  updateCrisisSupport: CrisisSupport;
+  createCrisisSupport: CrisisSupport;
+  updateForum: Forum;
+  createForum: Forum;
 };
 
 
@@ -1387,6 +1939,54 @@ export type MutationCreateVolunteerArgs = {
   params: VolunteerMutation;
 };
 
+
+export type MutationUpdatePrivacyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PrivacyMutation;
+};
+
+
+export type MutationCreatePrivacyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PrivacyMutation;
+};
+
+
+export type MutationUpdateMediaArgs = {
+  relativePath: Scalars['String']['input'];
+  params: MediaMutation;
+};
+
+
+export type MutationCreateMediaArgs = {
+  relativePath: Scalars['String']['input'];
+  params: MediaMutation;
+};
+
+
+export type MutationUpdateCrisisSupportArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CrisisSupportMutation;
+};
+
+
+export type MutationCreateCrisisSupportArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CrisisSupportMutation;
+};
+
+
+export type MutationUpdateForumArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ForumMutation;
+};
+
+
+export type MutationCreateForumArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ForumMutation;
+};
+
 export type DocumentUpdateMutation = {
   clinicians?: InputMaybe<CliniciansMutation>;
   trustees?: InputMaybe<TrusteesMutation>;
@@ -1398,6 +1998,10 @@ export type DocumentUpdateMutation = {
   impact?: InputMaybe<ImpactMutation>;
   resources?: InputMaybe<ResourcesMutation>;
   volunteer?: InputMaybe<VolunteerMutation>;
+  privacy?: InputMaybe<PrivacyMutation>;
+  media?: InputMaybe<MediaMutation>;
+  crisisSupport?: InputMaybe<CrisisSupportMutation>;
+  forum?: InputMaybe<ForumMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1412,6 +2016,10 @@ export type DocumentMutation = {
   impact?: InputMaybe<ImpactMutation>;
   resources?: InputMaybe<ResourcesMutation>;
   volunteer?: InputMaybe<VolunteerMutation>;
+  privacy?: InputMaybe<PrivacyMutation>;
+  media?: InputMaybe<MediaMutation>;
+  crisisSupport?: InputMaybe<CrisisSupportMutation>;
+  forum?: InputMaybe<ForumMutation>;
 };
 
 export type CliniciansMutation = {
@@ -1538,6 +2146,14 @@ export type TherapyOneToOneTherapyMutation = {
   bodyParagraphs?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type TherapyConsultationInfoMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TherapyModalitiesSectionModalitiesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -1552,6 +2168,14 @@ export type TherapyModalitiesSectionMutation = {
   modalities?: InputMaybe<Array<InputMaybe<TherapyModalitiesSectionModalitiesMutation>>>;
 };
 
+export type TherapyMeetTheTeamMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TherapyComplaintsMutation = {
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
@@ -1560,14 +2184,44 @@ export type TherapyComplaintsMutation = {
   pdfHref?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type TherapyCrisisTeaserGroupsLinesMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  detail?: InputMaybe<Scalars['String']['input']>;
+  contact?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TherapyCrisisTeaserGroupsMutation = {
+  region?: InputMaybe<Scalars['String']['input']>;
+  lines?: InputMaybe<Array<InputMaybe<TherapyCrisisTeaserGroupsLinesMutation>>>;
+};
+
+export type TherapyCrisisTeaserMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  groups?: InputMaybe<Array<InputMaybe<TherapyCrisisTeaserGroupsMutation>>>;
+  viewAllLabel?: InputMaybe<Scalars['String']['input']>;
+  viewAllHref?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TherapyPrivacyTeaserMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type TherapyMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   hero?: InputMaybe<TherapyHeroMutation>;
   stepsSection?: InputMaybe<TherapyStepsSectionMutation>;
   intakeTeaser?: InputMaybe<TherapyIntakeTeaserMutation>;
   oneToOneTherapy?: InputMaybe<TherapyOneToOneTherapyMutation>;
+  consultationInfo?: InputMaybe<TherapyConsultationInfoMutation>;
   modalitiesSection?: InputMaybe<TherapyModalitiesSectionMutation>;
+  meetTheTeam?: InputMaybe<TherapyMeetTheTeamMutation>;
   complaints?: InputMaybe<TherapyComplaintsMutation>;
+  crisisTeaser?: InputMaybe<TherapyCrisisTeaserMutation>;
+  privacyTeaser?: InputMaybe<TherapyPrivacyTeaserMutation>;
 };
 
 export type ContributeHeroMutation = {
@@ -1738,6 +2392,148 @@ export type VolunteerMutation = {
   cpdPlacement?: InputMaybe<VolunteerCpdPlacementMutation>;
 };
 
+export type PrivacyHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PrivacySectionsMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  linkLabel?: InputMaybe<Scalars['String']['input']>;
+  linkHref?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PrivacyMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<PrivacyHeroMutation>;
+  sections?: InputMaybe<Array<InputMaybe<PrivacySectionsMutation>>>;
+  footerNote?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaPressOfficeMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  note?: InputMaybe<Scalars['String']['input']>;
+  emailLabel?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  responseNote?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaGuidelinesItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaGuidelinesMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  intro?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<MediaGuidelinesItemsMutation>>>;
+};
+
+export type MediaPressKitMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaBackLinkMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MediaMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<MediaHeroMutation>;
+  pressOffice?: InputMaybe<MediaPressOfficeMutation>;
+  guidelines?: InputMaybe<MediaGuidelinesMutation>;
+  pressKit?: InputMaybe<MediaPressKitMutation>;
+  backLink?: InputMaybe<MediaBackLinkMutation>;
+};
+
+export type CrisisSupportHeroMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CrisisSupportRegistryLinesMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  number?: InputMaybe<Scalars['String']['input']>;
+  availability?: InputMaybe<Scalars['String']['input']>;
+  notes?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CrisisSupportRegistryMutation = {
+  country?: InputMaybe<Scalars['String']['input']>;
+  lines?: InputMaybe<Array<InputMaybe<CrisisSupportRegistryLinesMutation>>>;
+};
+
+export type CrisisSupportInternationalMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CrisisSupportBackLinkMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CrisisSupportMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<CrisisSupportHeroMutation>;
+  registry?: InputMaybe<Array<InputMaybe<CrisisSupportRegistryMutation>>>;
+  international?: InputMaybe<CrisisSupportInternationalMutation>;
+  backLink?: InputMaybe<CrisisSupportBackLinkMutation>;
+};
+
+export type ForumHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ForumSafetyNoticeMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  bullets?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type ForumCrisisTeaserMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  ctaLabel?: InputMaybe<Scalars['String']['input']>;
+  ctaHref?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ForumThreadsMutation = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  replies?: InputMaybe<Scalars['Float']['input']>;
+  views?: InputMaybe<Scalars['Float']['input']>;
+  lastActive?: InputMaybe<Scalars['String']['input']>;
+  isPinned?: InputMaybe<Scalars['Boolean']['input']>;
+  author?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ForumMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  hero?: InputMaybe<ForumHeroMutation>;
+  safetyNotice?: InputMaybe<ForumSafetyNoticeMutation>;
+  crisisTeaser?: InputMaybe<ForumCrisisTeaserMutation>;
+  threads?: InputMaybe<Array<InputMaybe<ForumThreadsMutation>>>;
+};
+
 export type StringFilter = {
   startsWith?: string | null | undefined;
   eq?: string | null | undefined;
@@ -1876,6 +2672,14 @@ export type TherapyOneToOneTherapyFilter = {
   bodyParagraphs?: StringFilter | null | undefined;
 };
 
+export type TherapyConsultationInfoFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+  ctaHref?: StringFilter | null | undefined;
+};
+
 export type TherapyModalitiesSectionModalitiesFilter = {
   title?: StringFilter | null | undefined;
   description?: StringFilter | null | undefined;
@@ -1890,6 +2694,14 @@ export type TherapyModalitiesSectionFilter = {
   modalities?: TherapyModalitiesSectionModalitiesFilter | null | undefined;
 };
 
+export type TherapyMeetTheTeamFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+  ctaHref?: StringFilter | null | undefined;
+};
+
 export type TherapyComplaintsFilter = {
   eyebrow?: StringFilter | null | undefined;
   heading?: StringFilter | null | undefined;
@@ -1898,14 +2710,44 @@ export type TherapyComplaintsFilter = {
   pdfHref?: StringFilter | null | undefined;
 };
 
+export type TherapyCrisisTeaserGroupsLinesFilter = {
+  name?: StringFilter | null | undefined;
+  detail?: StringFilter | null | undefined;
+  contact?: StringFilter | null | undefined;
+};
+
+export type TherapyCrisisTeaserGroupsFilter = {
+  region?: StringFilter | null | undefined;
+  lines?: TherapyCrisisTeaserGroupsLinesFilter | null | undefined;
+};
+
+export type TherapyCrisisTeaserFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+  groups?: TherapyCrisisTeaserGroupsFilter | null | undefined;
+  viewAllLabel?: StringFilter | null | undefined;
+  viewAllHref?: StringFilter | null | undefined;
+};
+
+export type TherapyPrivacyTeaserFilter = {
+  text?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+  ctaHref?: StringFilter | null | undefined;
+};
+
 export type TherapyFilter = {
   title?: StringFilter | null | undefined;
   hero?: TherapyHeroFilter | null | undefined;
   stepsSection?: TherapyStepsSectionFilter | null | undefined;
   intakeTeaser?: TherapyIntakeTeaserFilter | null | undefined;
   oneToOneTherapy?: TherapyOneToOneTherapyFilter | null | undefined;
+  consultationInfo?: TherapyConsultationInfoFilter | null | undefined;
   modalitiesSection?: TherapyModalitiesSectionFilter | null | undefined;
+  meetTheTeam?: TherapyMeetTheTeamFilter | null | undefined;
   complaints?: TherapyComplaintsFilter | null | undefined;
+  crisisTeaser?: TherapyCrisisTeaserFilter | null | undefined;
+  privacyTeaser?: TherapyPrivacyTeaserFilter | null | undefined;
 };
 
 export type ContributeHeroFilter = {
@@ -2086,6 +2928,153 @@ export type VolunteerFilter = {
   cpdPlacement?: VolunteerCpdPlacementFilter | null | undefined;
 };
 
+export type PrivacyHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+};
+
+export type PrivacySectionsFilter = {
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  linkLabel?: StringFilter | null | undefined;
+  linkHref?: StringFilter | null | undefined;
+};
+
+export type PrivacyFilter = {
+  title?: StringFilter | null | undefined;
+  hero?: PrivacyHeroFilter | null | undefined;
+  sections?: PrivacySectionsFilter | null | undefined;
+  footerNote?: StringFilter | null | undefined;
+};
+
+export type MediaHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+};
+
+export type MediaPressOfficeFilter = {
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  note?: StringFilter | null | undefined;
+  emailLabel?: StringFilter | null | undefined;
+  email?: StringFilter | null | undefined;
+  responseNote?: StringFilter | null | undefined;
+};
+
+export type MediaGuidelinesItemsFilter = {
+  title?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
+
+export type MediaGuidelinesFilter = {
+  heading?: StringFilter | null | undefined;
+  intro?: StringFilter | null | undefined;
+  items?: MediaGuidelinesItemsFilter | null | undefined;
+};
+
+export type MediaPressKitFilter = {
+  heading?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+};
+
+export type MediaBackLinkFilter = {
+  label?: StringFilter | null | undefined;
+  href?: StringFilter | null | undefined;
+};
+
+export type MediaFilter = {
+  title?: StringFilter | null | undefined;
+  hero?: MediaHeroFilter | null | undefined;
+  pressOffice?: MediaPressOfficeFilter | null | undefined;
+  guidelines?: MediaGuidelinesFilter | null | undefined;
+  pressKit?: MediaPressKitFilter | null | undefined;
+  backLink?: MediaBackLinkFilter | null | undefined;
+};
+
+export type CrisisSupportHeroFilter = {
+  badge?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+};
+
+export type CrisisSupportRegistryLinesFilter = {
+  name?: StringFilter | null | undefined;
+  number?: StringFilter | null | undefined;
+  availability?: StringFilter | null | undefined;
+  notes?: StringFilter | null | undefined;
+};
+
+export type CrisisSupportRegistryFilter = {
+  country?: StringFilter | null | undefined;
+  lines?: CrisisSupportRegistryLinesFilter | null | undefined;
+};
+
+export type CrisisSupportInternationalFilter = {
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+  ctaHref?: StringFilter | null | undefined;
+};
+
+export type CrisisSupportBackLinkFilter = {
+  label?: StringFilter | null | undefined;
+  href?: StringFilter | null | undefined;
+};
+
+export type CrisisSupportFilter = {
+  title?: StringFilter | null | undefined;
+  hero?: CrisisSupportHeroFilter | null | undefined;
+  registry?: CrisisSupportRegistryFilter | null | undefined;
+  international?: CrisisSupportInternationalFilter | null | undefined;
+  backLink?: CrisisSupportBackLinkFilter | null | undefined;
+};
+
+export type ForumHeroFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  heading?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+};
+
+export type ForumSafetyNoticeFilter = {
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  bullets?: StringFilter | null | undefined;
+};
+
+export type ForumCrisisTeaserFilter = {
+  heading?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+  ctaLabel?: StringFilter | null | undefined;
+  ctaHref?: StringFilter | null | undefined;
+};
+
+export type BooleanFilter = {
+  eq?: boolean | null | undefined;
+  exists?: boolean | null | undefined;
+};
+
+export type ForumThreadsFilter = {
+  id?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  category?: StringFilter | null | undefined;
+  replies?: NumberFilter | null | undefined;
+  views?: NumberFilter | null | undefined;
+  lastActive?: StringFilter | null | undefined;
+  isPinned?: BooleanFilter | null | undefined;
+  author?: StringFilter | null | undefined;
+};
+
+export type ForumFilter = {
+  title?: StringFilter | null | undefined;
+  hero?: ForumHeroFilter | null | undefined;
+  safetyNotice?: ForumSafetyNoticeFilter | null | undefined;
+  crisisTeaser?: ForumCrisisTeaserFilter | null | undefined;
+  threads?: ForumThreadsFilter | null | undefined;
+};
+
 export type CliniciansPartsFragment = { __typename: 'Clinicians', slug: string, name: string, title: string | null, image: string | null, credentials: Array<string | null> | null, shortBio: string | null, bio: string | null, specialties: Array<string | null> | null };
 
 export type TrusteesPartsFragment = { __typename: 'Trustees', slug: string, name: string, role: string | null, shortBio: string | null };
@@ -2096,7 +3085,7 @@ export type HomePartsFragment = { __typename: 'Home', title: string, hero: { __t
 
 export type MissionPartsFragment = { __typename: 'Mission', title: string, hero: { __typename: 'MissionHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, whyWeExist: { __typename: 'MissionWhyWeExist', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null } | null };
 
-export type TherapyPartsFragment = { __typename: 'Therapy', title: string, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null };
+export type TherapyPartsFragment = { __typename: 'Therapy', title: string, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, consultationInfo: { __typename: 'TherapyConsultationInfo', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, meetTheTeam: { __typename: 'TherapyMeetTheTeam', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null, crisisTeaser: { __typename: 'TherapyCrisisTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, viewAllLabel: string | null, viewAllHref: string | null, groups: Array<{ __typename: 'TherapyCrisisTeaserGroups', region: string | null, lines: Array<{ __typename: 'TherapyCrisisTeaserGroupsLines', name: string | null, detail: string | null, contact: string | null } | null> | null } | null> | null } | null, privacyTeaser: { __typename: 'TherapyPrivacyTeaser', text: string | null, ctaLabel: string | null, ctaHref: string | null } | null };
 
 export type ContributePartsFragment = { __typename: 'Contribute', title: string, hero: { __typename: 'ContributeHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, fundraisingGoal: { __typename: 'ContributeFundraisingGoal', targetAmount: number | null, raisedAmount: number | null, bannerText: string | null } | null, tiersSection: { __typename: 'ContributeTiersSection', eyebrow: string | null, heading: string | null, subtitle: string | null, tiers: Array<{ __typename: 'ContributeTiersSectionTiers', name: string | null, amount: number | null, badge: string | null, features: Array<string | null> | null, ctaLabel: string | null, ctaHref: string | null } | null> | null } | null, transparencyNote: { __typename: 'ContributeTransparencyNote', heading: string | null, text: string | null } | null };
 
@@ -2105,6 +3094,14 @@ export type ImpactPartsFragment = { __typename: 'Impact', title: string, hero: {
 export type ResourcesPartsFragment = { __typename: 'Resources', title: string, hero: { __typename: 'ResourcesHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, categories: Array<{ __typename: 'ResourcesCategories', id: string | null, number: string | null, title: string | null, description: string | null, guides: Array<{ __typename: 'ResourcesCategoriesGuides', tag: string | null, title: string | null, description: string | null, readTimeOrType: string | null, href: string | null } | null> | null } | null> | null };
 
 export type VolunteerPartsFragment = { __typename: 'Volunteer', title: string, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null };
+
+export type PrivacyPartsFragment = { __typename: 'Privacy', title: string, footerNote: string | null, hero: { __typename: 'PrivacyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, sections: Array<{ __typename: 'PrivacySections', heading: string | null, body: string | null, linkLabel: string | null, linkHref: string | null } | null> | null };
+
+export type MediaPartsFragment = { __typename: 'Media', title: string, hero: { __typename: 'MediaHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, pressOffice: { __typename: 'MediaPressOffice', heading: string | null, body: string | null, note: string | null, emailLabel: string | null, email: string | null, responseNote: string | null } | null, guidelines: { __typename: 'MediaGuidelines', heading: string | null, intro: string | null, items: Array<{ __typename: 'MediaGuidelinesItems', title: string | null, body: string | null } | null> | null } | null, pressKit: { __typename: 'MediaPressKit', heading: string | null, description: string | null, ctaLabel: string | null } | null, backLink: { __typename: 'MediaBackLink', label: string | null, href: string | null } | null };
+
+export type CrisisSupportPartsFragment = { __typename: 'CrisisSupport', title: string, hero: { __typename: 'CrisisSupportHero', badge: string | null, heading: string | null, subtitle: string | null } | null, registry: Array<{ __typename: 'CrisisSupportRegistry', country: string, lines: Array<{ __typename: 'CrisisSupportRegistryLines', name: string, number: string | null, availability: string | null, notes: string | null } | null> | null } | null> | null, international: { __typename: 'CrisisSupportInternational', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, backLink: { __typename: 'CrisisSupportBackLink', label: string | null, href: string | null } | null };
+
+export type ForumPartsFragment = { __typename: 'Forum', title: string, hero: { __typename: 'ForumHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, safetyNotice: { __typename: 'ForumSafetyNotice', heading: string | null, body: string | null, bullets: Array<string | null> | null } | null, crisisTeaser: { __typename: 'ForumCrisisTeaser', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, threads: Array<{ __typename: 'ForumThreads', id: string | null, title: string | null, category: string | null, replies: number | null, views: number | null, lastActive: string | null, isPinned: boolean | null, author: string | null } | null> | null };
 
 export type CliniciansQueryVariables = Exact<{
   relativePath: string;
@@ -2206,7 +3203,7 @@ export type TherapyQueryVariables = Exact<{
 }>;
 
 
-export type TherapyQuery = { therapy: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } };
+export type TherapyQuery = { therapy: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, consultationInfo: { __typename: 'TherapyConsultationInfo', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, meetTheTeam: { __typename: 'TherapyMeetTheTeam', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null, crisisTeaser: { __typename: 'TherapyCrisisTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, viewAllLabel: string | null, viewAllHref: string | null, groups: Array<{ __typename: 'TherapyCrisisTeaserGroups', region: string | null, lines: Array<{ __typename: 'TherapyCrisisTeaserGroupsLines', name: string | null, detail: string | null, contact: string | null } | null> | null } | null> | null } | null, privacyTeaser: { __typename: 'TherapyPrivacyTeaser', text: string | null, ctaLabel: string | null, ctaHref: string | null } | null } };
 
 export type TherapyConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -2218,7 +3215,7 @@ export type TherapyConnectionQueryVariables = Exact<{
 }>;
 
 
-export type TherapyConnectionQuery = { therapyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null } | null } | null> | null } };
+export type TherapyConnectionQuery = { therapyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Therapy', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'TherapyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, stepsSection: { __typename: 'TherapyStepsSection', eyebrow: string | null, heading: string | null, steps: Array<{ __typename: 'TherapyStepsSectionSteps', stepNumber: string | null, title: string | null, description: string | null } | null> | null } | null, intakeTeaser: { __typename: 'TherapyIntakeTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, disclaimer: string | null } | null, oneToOneTherapy: { __typename: 'TherapyOneToOneTherapy', eyebrow: string | null, heading: string | null, bodyParagraphs: Array<string | null> | null } | null, consultationInfo: { __typename: 'TherapyConsultationInfo', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, modalitiesSection: { __typename: 'TherapyModalitiesSection', eyebrow: string | null, heading: string | null, subtitle: string | null, modalities: Array<{ __typename: 'TherapyModalitiesSectionModalities', title: string | null, description: string | null, linkText: string | null, linkHref: string | null } | null> | null } | null, meetTheTeam: { __typename: 'TherapyMeetTheTeam', eyebrow: string | null, heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, complaints: { __typename: 'TherapyComplaints', eyebrow: string | null, heading: string | null, body: string | null, pdfLabel: string | null, pdfHref: string | null } | null, crisisTeaser: { __typename: 'TherapyCrisisTeaser', eyebrow: string | null, heading: string | null, subtitle: string | null, viewAllLabel: string | null, viewAllHref: string | null, groups: Array<{ __typename: 'TherapyCrisisTeaserGroups', region: string | null, lines: Array<{ __typename: 'TherapyCrisisTeaserGroupsLines', name: string | null, detail: string | null, contact: string | null } | null> | null } | null> | null } | null, privacyTeaser: { __typename: 'TherapyPrivacyTeaser', text: string | null, ctaLabel: string | null, ctaHref: string | null } | null } | null } | null> | null } };
 
 export type ContributeQueryVariables = Exact<{
   relativePath: string;
@@ -2295,6 +3292,82 @@ export type VolunteerConnectionQueryVariables = Exact<{
 
 
 export type VolunteerConnectionQuery = { volunteerConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Volunteer', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'VolunteerHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, rolesSection: { __typename: 'VolunteerRolesSection', eyebrow: string | null, heading: string | null, description: string | null, roles: Array<{ __typename: 'VolunteerRolesSectionRoles', title: string | null, description: string | null, requirementText: string | null } | null> | null } | null, safeguarding: { __typename: 'VolunteerSafeguarding', heading: string | null, description: string | null } | null, otherWaysSection: { __typename: 'VolunteerOtherWaysSection', eyebrow: string | null, heading: string | null, ways: Array<{ __typename: 'VolunteerOtherWaysSectionWays', title: string | null, description: string | null, badgeText: string | null } | null> | null } | null, cpdPlacement: { __typename: 'VolunteerCpdPlacement', eyebrow: string | null, heading: string | null, paragraphs: Array<string | null> | null, ctaText: string | null, ctaHref: string | null, highlights: Array<{ __typename: 'VolunteerCpdPlacementHighlights', title: string | null, description: string | null } | null> | null } | null } | null } | null> | null } };
+
+export type PrivacyQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type PrivacyQuery = { privacy: { __typename: 'Privacy', id: string, title: string, footerNote: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'PrivacyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, sections: Array<{ __typename: 'PrivacySections', heading: string | null, body: string | null, linkLabel: string | null, linkHref: string | null } | null> | null } };
+
+export type PrivacyConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: PrivacyFilter | null | undefined;
+}>;
+
+
+export type PrivacyConnectionQuery = { privacyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Privacy', id: string, title: string, footerNote: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'PrivacyHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, sections: Array<{ __typename: 'PrivacySections', heading: string | null, body: string | null, linkLabel: string | null, linkHref: string | null } | null> | null } | null } | null> | null } };
+
+export type MediaQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type MediaQuery = { media: { __typename: 'Media', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MediaHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, pressOffice: { __typename: 'MediaPressOffice', heading: string | null, body: string | null, note: string | null, emailLabel: string | null, email: string | null, responseNote: string | null } | null, guidelines: { __typename: 'MediaGuidelines', heading: string | null, intro: string | null, items: Array<{ __typename: 'MediaGuidelinesItems', title: string | null, body: string | null } | null> | null } | null, pressKit: { __typename: 'MediaPressKit', heading: string | null, description: string | null, ctaLabel: string | null } | null, backLink: { __typename: 'MediaBackLink', label: string | null, href: string | null } | null } };
+
+export type MediaConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: MediaFilter | null | undefined;
+}>;
+
+
+export type MediaConnectionQuery = { mediaConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Media', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'MediaHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, pressOffice: { __typename: 'MediaPressOffice', heading: string | null, body: string | null, note: string | null, emailLabel: string | null, email: string | null, responseNote: string | null } | null, guidelines: { __typename: 'MediaGuidelines', heading: string | null, intro: string | null, items: Array<{ __typename: 'MediaGuidelinesItems', title: string | null, body: string | null } | null> | null } | null, pressKit: { __typename: 'MediaPressKit', heading: string | null, description: string | null, ctaLabel: string | null } | null, backLink: { __typename: 'MediaBackLink', label: string | null, href: string | null } | null } | null } | null> | null } };
+
+export type CrisisSupportQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type CrisisSupportQuery = { crisisSupport: { __typename: 'CrisisSupport', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'CrisisSupportHero', badge: string | null, heading: string | null, subtitle: string | null } | null, registry: Array<{ __typename: 'CrisisSupportRegistry', country: string, lines: Array<{ __typename: 'CrisisSupportRegistryLines', name: string, number: string | null, availability: string | null, notes: string | null } | null> | null } | null> | null, international: { __typename: 'CrisisSupportInternational', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, backLink: { __typename: 'CrisisSupportBackLink', label: string | null, href: string | null } | null } };
+
+export type CrisisSupportConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: CrisisSupportFilter | null | undefined;
+}>;
+
+
+export type CrisisSupportConnectionQuery = { crisisSupportConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'CrisisSupport', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'CrisisSupportHero', badge: string | null, heading: string | null, subtitle: string | null } | null, registry: Array<{ __typename: 'CrisisSupportRegistry', country: string, lines: Array<{ __typename: 'CrisisSupportRegistryLines', name: string, number: string | null, availability: string | null, notes: string | null } | null> | null } | null> | null, international: { __typename: 'CrisisSupportInternational', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, backLink: { __typename: 'CrisisSupportBackLink', label: string | null, href: string | null } | null } | null } | null> | null } };
+
+export type ForumQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type ForumQuery = { forum: { __typename: 'Forum', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ForumHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, safetyNotice: { __typename: 'ForumSafetyNotice', heading: string | null, body: string | null, bullets: Array<string | null> | null } | null, crisisTeaser: { __typename: 'ForumCrisisTeaser', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, threads: Array<{ __typename: 'ForumThreads', id: string | null, title: string | null, category: string | null, replies: number | null, views: number | null, lastActive: string | null, isPinned: boolean | null, author: string | null } | null> | null } };
+
+export type ForumConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: ForumFilter | null | undefined;
+}>;
+
+
+export type ForumConnectionQuery = { forumConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Forum', id: string, title: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, hero: { __typename: 'ForumHero', eyebrow: string | null, heading: string | null, subtitle: string | null } | null, safetyNotice: { __typename: 'ForumSafetyNotice', heading: string | null, body: string | null, bullets: Array<string | null> | null } | null, crisisTeaser: { __typename: 'ForumCrisisTeaser', heading: string | null, body: string | null, ctaLabel: string | null, ctaHref: string | null } | null, threads: Array<{ __typename: 'ForumThreads', id: string | null, title: string | null, category: string | null, replies: number | null, views: number | null, lastActive: string | null, isPinned: boolean | null, author: string | null } | null> | null } | null } | null> | null } };
 
 export const CliniciansPartsFragmentDoc = gql`
     fragment CliniciansParts on Clinicians {
@@ -2425,6 +3498,14 @@ export const TherapyPartsFragmentDoc = gql`
     heading
     bodyParagraphs
   }
+  consultationInfo {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   modalitiesSection {
     __typename
     eyebrow
@@ -2438,6 +3519,14 @@ export const TherapyPartsFragmentDoc = gql`
       linkHref
     }
   }
+  meetTheTeam {
+    __typename
+    eyebrow
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
   complaints {
     __typename
     eyebrow
@@ -2445,6 +3534,30 @@ export const TherapyPartsFragmentDoc = gql`
     body
     pdfLabel
     pdfHref
+  }
+  crisisTeaser {
+    __typename
+    eyebrow
+    heading
+    subtitle
+    groups {
+      __typename
+      region
+      lines {
+        __typename
+        name
+        detail
+        contact
+      }
+    }
+    viewAllLabel
+    viewAllHref
+  }
+  privacyTeaser {
+    __typename
+    text
+    ctaLabel
+    ctaHref
   }
 }
     `;
@@ -2600,6 +3713,139 @@ export const VolunteerPartsFragmentDoc = gql`
     }
     ctaText
     ctaHref
+  }
+}
+    `;
+export const PrivacyPartsFragmentDoc = gql`
+    fragment PrivacyParts on Privacy {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  sections {
+    __typename
+    heading
+    body
+    linkLabel
+    linkHref
+  }
+  footerNote
+}
+    `;
+export const MediaPartsFragmentDoc = gql`
+    fragment MediaParts on Media {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  pressOffice {
+    __typename
+    heading
+    body
+    note
+    emailLabel
+    email
+    responseNote
+  }
+  guidelines {
+    __typename
+    heading
+    intro
+    items {
+      __typename
+      title
+      body
+    }
+  }
+  pressKit {
+    __typename
+    heading
+    description
+    ctaLabel
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+    `;
+export const CrisisSupportPartsFragmentDoc = gql`
+    fragment CrisisSupportParts on CrisisSupport {
+  __typename
+  title
+  hero {
+    __typename
+    badge
+    heading
+    subtitle
+  }
+  registry {
+    __typename
+    country
+    lines {
+      __typename
+      name
+      number
+      availability
+      notes
+    }
+  }
+  international {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  backLink {
+    __typename
+    label
+    href
+  }
+}
+    `;
+export const ForumPartsFragmentDoc = gql`
+    fragment ForumParts on Forum {
+  __typename
+  title
+  hero {
+    __typename
+    eyebrow
+    heading
+    subtitle
+  }
+  safetyNotice {
+    __typename
+    heading
+    body
+    bullets
+  }
+  crisisTeaser {
+    __typename
+    heading
+    body
+    ctaLabel
+    ctaHref
+  }
+  threads {
+    __typename
+    id
+    title
+    category
+    replies
+    views
+    lastActive
+    isPinned
+    author
   }
 }
     `;
@@ -3173,6 +4419,234 @@ export const VolunteerConnectionDocument = gql`
   }
 }
     ${VolunteerPartsFragmentDoc}`;
+export const PrivacyDocument = gql`
+    query privacy($relativePath: String!) {
+  privacy(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PrivacyParts
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
+export const PrivacyConnectionDocument = gql`
+    query privacyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PrivacyFilter) {
+  privacyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PrivacyParts
+      }
+    }
+  }
+}
+    ${PrivacyPartsFragmentDoc}`;
+export const MediaDocument = gql`
+    query media($relativePath: String!) {
+  media(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...MediaParts
+  }
+}
+    ${MediaPartsFragmentDoc}`;
+export const MediaConnectionDocument = gql`
+    query mediaConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: MediaFilter) {
+  mediaConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...MediaParts
+      }
+    }
+  }
+}
+    ${MediaPartsFragmentDoc}`;
+export const CrisisSupportDocument = gql`
+    query crisisSupport($relativePath: String!) {
+  crisisSupport(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CrisisSupportParts
+  }
+}
+    ${CrisisSupportPartsFragmentDoc}`;
+export const CrisisSupportConnectionDocument = gql`
+    query crisisSupportConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CrisisSupportFilter) {
+  crisisSupportConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CrisisSupportParts
+      }
+    }
+  }
+}
+    ${CrisisSupportPartsFragmentDoc}`;
+export const ForumDocument = gql`
+    query forum($relativePath: String!) {
+  forum(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ForumParts
+  }
+}
+    ${ForumPartsFragmentDoc}`;
+export const ForumConnectionDocument = gql`
+    query forumConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ForumFilter) {
+  forumConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ForumParts
+      }
+    }
+  }
+}
+    ${ForumPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -3235,6 +4709,30 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     volunteerConnection(variables?: VolunteerConnectionQueryVariables, options?: C): Promise<{data: VolunteerConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: VolunteerConnectionQueryVariables, query: string}> {
         return requester<{data: VolunteerConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: VolunteerConnectionQueryVariables, query: string}, VolunteerConnectionQueryVariables>(VolunteerConnectionDocument, variables, options);
+      },
+    privacy(variables: PrivacyQueryVariables, options?: C): Promise<{data: PrivacyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyQueryVariables, query: string}> {
+        return requester<{data: PrivacyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyQueryVariables, query: string}, PrivacyQueryVariables>(PrivacyDocument, variables, options);
+      },
+    privacyConnection(variables?: PrivacyConnectionQueryVariables, options?: C): Promise<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}> {
+        return requester<{data: PrivacyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PrivacyConnectionQueryVariables, query: string}, PrivacyConnectionQueryVariables>(PrivacyConnectionDocument, variables, options);
+      },
+    media(variables: MediaQueryVariables, options?: C): Promise<{data: MediaQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MediaQueryVariables, query: string}> {
+        return requester<{data: MediaQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MediaQueryVariables, query: string}, MediaQueryVariables>(MediaDocument, variables, options);
+      },
+    mediaConnection(variables?: MediaConnectionQueryVariables, options?: C): Promise<{data: MediaConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MediaConnectionQueryVariables, query: string}> {
+        return requester<{data: MediaConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: MediaConnectionQueryVariables, query: string}, MediaConnectionQueryVariables>(MediaConnectionDocument, variables, options);
+      },
+    crisisSupport(variables: CrisisSupportQueryVariables, options?: C): Promise<{data: CrisisSupportQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CrisisSupportQueryVariables, query: string}> {
+        return requester<{data: CrisisSupportQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CrisisSupportQueryVariables, query: string}, CrisisSupportQueryVariables>(CrisisSupportDocument, variables, options);
+      },
+    crisisSupportConnection(variables?: CrisisSupportConnectionQueryVariables, options?: C): Promise<{data: CrisisSupportConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CrisisSupportConnectionQueryVariables, query: string}> {
+        return requester<{data: CrisisSupportConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CrisisSupportConnectionQueryVariables, query: string}, CrisisSupportConnectionQueryVariables>(CrisisSupportConnectionDocument, variables, options);
+      },
+    forum(variables: ForumQueryVariables, options?: C): Promise<{data: ForumQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ForumQueryVariables, query: string}> {
+        return requester<{data: ForumQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ForumQueryVariables, query: string}, ForumQueryVariables>(ForumDocument, variables, options);
+      },
+    forumConnection(variables?: ForumConnectionQueryVariables, options?: C): Promise<{data: ForumConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ForumConnectionQueryVariables, query: string}> {
+        return requester<{data: ForumConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ForumConnectionQueryVariables, query: string}, ForumConnectionQueryVariables>(ForumConnectionDocument, variables, options);
       }
     };
   }
@@ -3283,7 +4781,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/2.4/content/0bc6acd4-5c31-487f-ac41-fc4bfecd5003/github/main",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )
