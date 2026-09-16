@@ -12,12 +12,20 @@ export default async function ContributePage() {
   const result = await client.queries.contribute({
     relativePath: "contribute.json",
   });
+  const testimonials = await client.queries.shared({
+    relativePath: "testimonials.json",
+  });
 
   return (
     <ContributePageClient
       query={result.query}
       variables={result.variables}
       data={result.data}
+      testimonials={{
+        query: testimonials.query,
+        variables: testimonials.variables,
+        data: testimonials.data,
+      }}
     />
   );
 }
