@@ -1,0 +1,9 @@
+
+Do not cast away the props type. Do not pass a hand-built data object into `useTina`.
+
+---
+
+## 7. Content JSON
+
+Page singleton (`content/pages/home.json`):
+

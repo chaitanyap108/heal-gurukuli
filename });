@@ -1,0 +1,26 @@
+
+### Collection conventions
+
+| Kind | `name` | `path` | `match` | `ui.router` |
+| --- | --- | --- | --- | --- |
+| Page singleton | `home`, `mission`, `therapy` | `content/pages` | `{ include: "<filename-without-ext>" }` | `singletonUi("/route")` |
+| Document list | `clinicians`, `trustees` | `content/<folder>` | none | `({ document }) => /<folder>/${document._sys.filename}` |
+| Shared blocks | `shared` | `content/shared` | none | no router; create/delete off |
+
+Query names are derived from `name`:
+
+- singleton `home` → `client.queries.home({ relativePath: "home.json" })`
+- singleton `crisisSupport` with `match.include: "crisis-support"` → `client.queries.crisisSupport({ relativePath: "crisis-support.json" })`
+- list `clinicians` → `client.queries.clinicians({ relativePath: "${slug}.json" })`
+- list connection → `client.queries.cliniciansConnection()`
+
+`relativePath` is always the filename inside that collection’s `path`, including `.json`.
+
+---
+
+## 4. Static page — Server Component
+
+Default-import the generated client. A named import `{ client }` is wrong for this stack.
+
+Keep `metadata` on the server file. Do not move it into the client.
+
