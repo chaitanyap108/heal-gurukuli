@@ -22,6 +22,7 @@ interface ImpactPageClientProps {
   query: string;
   variables: ImpactQueryVariables;
   data: ImpactQuery;
+  testimonials: { query: string; variables: any; data: any };
 }
 
 export default function ImpactPageClient(props: ImpactPageClientProps) {

@@ -17,6 +17,7 @@ interface ContributePageClientProps {
   query: string;
   variables: ContributeQueryVariables;
   data: ContributeQuery;
+  testimonials: { query: string; variables: any; data: any };
 }
 
 const GOFUNDME_URL = "https://gofund.me/c49acb57b";
