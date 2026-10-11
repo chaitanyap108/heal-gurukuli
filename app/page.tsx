@@ -1,16 +1,8 @@
-import client from "@/tina/__generated__/client";
-import HomePageClient from "./HomePageClient";
-
-export default async function Home() {
-  const result = await client.queries.home({
-    relativePath: "home.json",
-  });
-
+export default function Maintenance() {
   return (
-    <HomePageClient
-      query={result.query}
-      variables={result.variables}
-      data={result.data}
-    />
-  );
+    <div className="flex h-screen flex-col items-center justify-center p-4 text-center font-sans">
+      <h1 className="text-2xl font-bold mb-4">Heal Gurukuli</h1>
+      <p>Official site currently under construction. Please check back later.</p>
+    </div>
+  )
 }
